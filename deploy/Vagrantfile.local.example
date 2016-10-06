@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # Provider-specific configuration
+  config.vm.provider :virtualbox do |vb|
+    #vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+
+  config.vm.synced_folder ".", "/home/vagrant/www/traugott/src"
+  config.vm.synced_folder "../log", "/home/vagrant/www/traugott/log"
+end

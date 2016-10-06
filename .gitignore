@@ -1,0 +1,8 @@
+*~
+
+.DS_Store
+.idea/
+.vagrant/
+
+app/node_modules/
+app/npm-debug.log
