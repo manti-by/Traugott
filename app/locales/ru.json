@@ -1,0 +1,20 @@
+{
+  "Name": "Название",
+  "Save": "Сохранить",
+  "Update": "Обновить",
+  "Cancel": "Отмена",
+  "Your cards": "Ваши карты",
+  "There are no cards": "Нет карт для отображения",
+  "Original %": "Крепость спирта",
+  "Original volume, ml": "Объем спирта, мл",
+  "Summary %": "Итоговая крепость",
+  "Summary volume, ml": "Итоговый объем, мл",
+  "Input is not a number!": "Введите число!",
+  "Thinner volume, ml": "Объем разбавителя, мл",
+  "Forecasted volume, ml": "Прогнозируемый объем, мл",
+  "Not enough original volume": "Не достаточно спирта",
+  "Water temp, *C": "Температура воды, *C",
+  "Spirit temp, *C": "Температура спирта, *C",
+  "Basic params": "Базовые пар-ы",
+  "Advanced": "Дополнительно"
+}
