@@ -44,6 +44,12 @@ $ npm install
 $ npm start
 ```
 
+Install ShipIt tool for deployment
+
+```
+$sudo npm install --global shipit-cli shipit-deploy
+```
+
 If you are working on windows, use following command to avoid binary links
 
 More info [there](http://perrymitchell.net/article/npm-symlinks-through-vagrant-windows/)
