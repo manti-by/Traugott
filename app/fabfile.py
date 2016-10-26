@@ -12,6 +12,15 @@ def set_defaults():
     if 'root_path' not in env.keys():
         env.root_path = '/home/%s/www/%s/src' % (env.user, env.app_name)
 
+@task
+def m53():
+    env.hosts = ['vagrant@127.0.0.1:2222']
+    env.target = 'vagrant'
+    env.user = 'vagrant'
+    env.passwords = {'vagrant@127.0.0.1:2222': 'vagrant'}
+
+    set_defaults()
+
 
 @task
 def m53():
@@ -34,14 +43,13 @@ def provision():
 
 @task
 def create_db():
-    if env.target == 'staging':
-        with settings(warn_only=True):
-            sudo('psql -c "CREATE DATABASE %s;"' % env.app_name, user='postgres')
-            sudo('psql -c "CREATE USER %s WITH PASSWORD \'pa$$word\';"' % env.app_name, user='postgres')
-            sudo('psql -c "ALTER ROLE %s SET client_encoding TO \'utf8\';"' % env.app_name, user='postgres')
-            sudo('psql -c "ALTER ROLE %s SET default_transaction_isolation TO \'read committed\';"' % env.app_name, user='postgres')
-            sudo('psql -c "ALTER ROLE %s SET timezone TO \'UTC\';"' % env.app_name, user='postgres')
-            sudo('psql -c "GRANT ALL PRIVILEGES ON DATABASE %s TO %s;"' % (env.app_name, env.app_name), user='postgres')
+    with settings(warn_only=True):
+        sudo('psql -c "CREATE DATABASE %s;"' % env.app_name, user='postgres')
+        sudo('psql -c "CREATE USER %s WITH PASSWORD \'pa$$word\';"' % env.app_name, user='postgres')
+        sudo('psql -c "ALTER ROLE %s SET client_encoding TO \'utf8\';"' % env.app_name, user='postgres')
+        sudo('psql -c "ALTER ROLE %s SET default_transaction_isolation TO \'read committed\';"' % env.app_name, user='postgres')
+        sudo('psql -c "ALTER ROLE %s SET timezone TO \'UTC\';"' % env.app_name, user='postgres')
+        sudo('psql -c "GRANT ALL PRIVILEGES ON DATABASE %s TO %s;"' % (env.app_name, env.app_name), user='postgres')
 
 
 @task
