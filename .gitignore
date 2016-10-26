@@ -1,8 +1,12 @@
 *~
+*.log
 
 .DS_Store
 .idea/
-.vagrant/
 
-app/node_modules/
-app/npm-debug.log
+*/settings/local.py
+*/static/
+*/media/
+
+deploy/Vagrantfile.local
+deploy/.vagrant/
