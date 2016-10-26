@@ -4,9 +4,9 @@
 .DS_Store
 .idea/
 
-*/settings/local.py
 */static/
 */media/
 
 deploy/Vagrantfile.local
+app/traugott/settings/local.py
 deploy/.vagrant/
