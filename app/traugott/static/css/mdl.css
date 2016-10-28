@@ -1,0 +1,27 @@
+.mdl-mini-footer {
+    background: transparent;
+}
+
+.mdl-mini-footer__link-list {
+    padding-top: 4em;
+}
+
+.mdl-mini-footer__link-list a {
+    padding-right: 1.5em;
+    text-transform: uppercase;
+}
+
+.mdl-card {
+    width: auto;
+}
+
+.mdl-card__media {
+    text-align: center;
+    background-color: transparent;
+}
+
+.mdl-card__actions {
+    display: flex;
+    box-sizing:border-box;
+    align-items: center;
+}
