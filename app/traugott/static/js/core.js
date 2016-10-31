@@ -3,13 +3,14 @@
     'use strict';
 
     $(document).ready(function () {
+
         $('form.ajax').on('submit', function(event) {
             event.preventDefault();
 
             var form = $(this);
             $.ajax({
-                url     : form.getAttribute('action'),
-                type    : form.getAttribute('method'),
+                url     : form.attr('action'),
+                type    : form.attr('method'),
                 data    : form.serialize(),
                 success : function(response){
                     if (response['status'] == 200) {
@@ -22,6 +23,8 @@
                     form.find('.error-holder').text(xhr.statusText);
                 }
             });
+
+            return false;
         });
     });
 })(jQuery);

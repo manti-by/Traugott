@@ -39,8 +39,8 @@ class ProfileResource(Rest):
             profile = Profile.get_or_create(request.POST.get('email'),
                                             request.POST.get('password'))
             if not profile:
-                return JsonResponse({'status': 401,
-                                     'message': 'Invalid password'}, status=401)
+                return self.response({'status': 401,
+                                      'message': 'Invalid password'})
             login(request, profile.user)
         except Exception as e:
             return self.response({'status': 500, 'message': e.message})

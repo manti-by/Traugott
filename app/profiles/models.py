@@ -26,5 +26,5 @@ class Profile(User):
             profile = Profile(user=user)
             profile.save()
         if user.check_password(password):
-            return user
+            return user.profiles
         return None
