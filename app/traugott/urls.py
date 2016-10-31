@@ -11,9 +11,9 @@ from profiles.views import ProfileResource
 urlpatterns = [
     url(r'^$', index, name='index'),
 
-    # Profile urls
-    url(r'^profiles/?$', ProfileResource.as_view()),
-    url(r'^profiles/(?P<id>[0-9]+)/?$', ProfileResource.as_view()),
+    # Profile API urls
+    url(r'^api/profiles/?$', ProfileResource.as_view(), name='api_profiles'),
+    url(r'^api/profiles/(?P<id>[0-9]+)/?$', ProfileResource.as_view(), name='api_profiles_item'),
 
     # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),

@@ -5,10 +5,15 @@ from django.contrib.auth.models import User
 
 
 class Profile(User):
-    user = models.ForeignKey(User, unique=True, related_name='profile')
-    image = models.ImageField(upload_to='avatar', blank=True, null=True)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='profiles',
+    )
+    image = models.ImageField(upload_to='profile', blank=True, null=True)
 
-    def __dict__(self):
+    def as_dict(self):
         return {'id': self.user.id, 'email': self.user.email, 'image': self.image.url}
 
     @staticmethod

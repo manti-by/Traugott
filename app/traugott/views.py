@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 
 from django.http import Http404, JsonResponse
 from django.shortcuts import render_to_response
-from django.contrib.auth.decorators import login_required
 
 from simple_rest import Resource
 
@@ -23,15 +22,17 @@ class Rest(Resource):
                              'message': data['message']}, status=data['status'])
 
 
-@login_required
 def index(request):
     try:
-        cards = []
-        for i in range(0, 10):
-            cards.append({
-                'date': random_date()
-            })
-        return render_to_response('index.html', {'cards': cards})
+        if request.user.is_authenticated:
+            cards = []
+            for i in range(0, 10):
+                cards.append({
+                    'date': random_date()
+                })
+            return render_to_response('index.html', {'cards': cards})
+        else:
+            return render_to_response('login.html')
     except Exception as e:
         logger.exception(e)
         raise Http404

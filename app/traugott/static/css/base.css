@@ -10,3 +10,15 @@ body {
     margin: 0 auto;
     padding: 0;
 }
+
+form.login {
+    min-height: 250px;
+}
+
+form .error-holder {
+    color: red;
+}
+
+.shot-image {
+    max-width: 100%;
+}
