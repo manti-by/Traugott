@@ -3,13 +3,27 @@ import logging
 from random import randrange
 from datetime import datetime, timedelta
 
+from django.http import Http404, JsonResponse
 from django.shortcuts import render_to_response
-from django.http import Http404
+from django.contrib.auth.decorators import login_required
 
+from simple_rest import Resource
 
 logger = logging.getLogger('app')
 
 
+class Rest(Resource):
+
+    def response(self, data):
+        if 299 < data['status'] < 500:
+            logger.warning(data['message'])
+        if data['status'] > 499:
+            logger.error(data['message'])
+        return JsonResponse({'status': data['status'],
+                             'message': data['message']}, status=data['status'])
+
+
+@login_required
 def index(request):
     try:
         cards = []

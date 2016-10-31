@@ -5,9 +5,17 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from traugott.views import index
+from profiles.views import ProfileResource
+
 
 urlpatterns = [
     url(r'^$', index, name='index'),
+
+    # Profile urls
+    url(r'^profiles/?$', ProfileResource.as_view()),
+    url(r'^profiles/(?P<id>[0-9]+)/?$', ProfileResource.as_view()),
+
+    # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
 ]
