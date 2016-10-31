@@ -17,7 +17,8 @@ class ProfileResource(Rest):
             try:
                 profile = Profile.objects.get(pk=profile_id)
                 return self.response({'status': 200,
-                                      'data': profile})
+                                      'message': 'OK',
+                                      'data': profile.as_dict()})
             except Profile.DoesNotExist:
                 return self.response({'status': 404,
                                       'message': 'Profile #%s not found' % profile_id})
@@ -26,9 +27,9 @@ class ProfileResource(Rest):
                                       'message': e.message})
         elif request.user.is_authenticated:
             return self.response({'status': 200,
-                                  'data': request.user.profile})
+                                  'data': request.user.profile.as_dict()})
         return self.response({'status': 403,
-                              'data': 'Invalid profile id or not loggined'})
+                              'message': 'Invalid profile id or not loggined'})
 
     def post(self, request):
         if request.user.is_authenticated:
