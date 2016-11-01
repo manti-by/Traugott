@@ -1,11 +1,35 @@
 {% extends 'common/layout.html' %}
 
-{% load static json_filters %}
+{% load static %}
 
 {% block content %}
-    <script type="text/javascript">
-        window.user = {{ user|jsonify|safe }};
-        window.data = {{ data|jsonify|safe }};
-    </script>
-    <div id="app"></div>
+    <div class="container">
+        <div class="mdl-grid">
+            <h2 class="mdl-cell mdl-cell--12-col">Your Latest shots</h2>
+            {% for shot in shots %}
+                <div class="mdl-cell mdl-cell--4-col">
+                    <div class="mdl-card mdl-shadow--4dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">{{ shot.date }}</h2>
+                        </div>
+                        <div class="mdl-card__media">
+                            <img src="{{ shot.image }}" class="shot-image">
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            {{ shot.text }}
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                Edit This Shot
+                            </a>
+                            <div class="mdl-layout-spacer"></div>
+                            <button class="mdl-button mdl-js-button mdl-button--icon">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
