@@ -35,7 +35,7 @@ class ShotTypeAdmin(admin.ModelAdmin):
 @admin.register(Shot)
 class ShotAdmin(admin.ModelAdmin):
 
-    list_display = ('thumb_image', 'created', 'title', 'volume', 'degree')
+    list_display = ('thumb_image', 'created', 'user', 'title', 'volume', 'degree')
     ordering = ('created',)
 
     def thumb_image(self, obj):
