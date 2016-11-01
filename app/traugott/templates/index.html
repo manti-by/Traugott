@@ -1,11 +1,11 @@
 {% extends 'common/layout.html' %}
 
-{% load static %}
+{% load static json_filters %}
 
 {% block content %}
     <script type="text/javascript">
-        window.user = {{ user|safe }};
-        window.data = {{ data|safe }};
+        window.user = {{ user|jsonify|safe }};
+        window.data = {{ data|jsonify|safe }};
     </script>
     <div id="app"></div>
 {% endblock %}

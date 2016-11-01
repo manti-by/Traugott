@@ -1,11 +1,9 @@
 import logging
 
-from django.http import HttpResponse, JsonResponse
-from django.core import serializers
 from django.contrib.auth import login, logout
 
 from profiles.models import Profile
-from traugott.views import Rest
+from traugott.resources import Rest
 
 logger = logging.getLogger('app')
 

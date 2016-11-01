@@ -4,12 +4,13 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from traugott.views import index
+from traugott.views import index, static
 from profiles.views import ProfileResource
 
 
 urlpatterns = [
     url(r'^$', index, name='index'),
+    url(r'^about$', static, {'page': 'about'}, name='about'),
 
     # Profile API urls
     url(r'^api/profiles/?$', ProfileResource.as_view(), name='api_profiles'),
