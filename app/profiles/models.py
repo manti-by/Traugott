@@ -4,15 +4,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
+from traugott.mixins import ImageMixin
 
-class Profile(models.Model):
+
+class Profile(ImageMixin, models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         primary_key=True,
         related_name='profiles',
     )
-    image = models.ImageField(upload_to='profile', blank=True, null=True)
 
     def __str__(self):
         return self.user.email
