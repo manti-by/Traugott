@@ -29,10 +29,6 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/mdl.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-        <script src="{% static 'js/core.js' %}"></script>
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -46,5 +42,15 @@
                 </footer>
             </main>
         </div>
+
+        {% include 'handlebars/login.html' %}
+        {% include 'handlebars/shots.html' %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.2.1/material.min.js"></script>
+
+        <script src="{% static 'js/library.js' %}"></script>
+        <script src="{% static 'js/index.js' %}"></script>
     </body>
 </html>

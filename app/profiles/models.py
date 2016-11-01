@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
 class Profile(User):
@@ -14,7 +15,11 @@ class Profile(User):
     image = models.ImageField(upload_to='profile', blank=True, null=True)
 
     def as_dict(self):
-        return {'id': self.user.id, 'email': self.user.email, 'image': self.image.url}
+        if self.image:
+            image_url = self.image.url
+        else:
+            image_url = static('img/user.png')
+        return {'id': self.user.id, 'email': self.user.email, 'image': image_url}
 
     @staticmethod
     def get_or_create(email, password):
