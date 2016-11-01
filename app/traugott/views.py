@@ -1,3 +1,4 @@
+import json
 import logging
 
 from random import randrange
@@ -5,6 +6,7 @@ from datetime import datetime, timedelta
 
 from django.http import Http404, JsonResponse
 from django.shortcuts import render_to_response
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from simple_rest import Resource
 
@@ -24,18 +26,26 @@ class Rest(Resource):
 
 def index(request):
     try:
+        user = {}
+        data = []
         if request.user.is_authenticated:
-            cards = []
+            user = request.user.profiles.as_dict()
             for i in range(0, 10):
-                cards.append({
-                    'date': random_date()
+                data.append({
+                    'date': random_date(),
+                    'text': '500ml',
+                    'image': static('img/beer.jpg')
                 })
-            return render_to_response('index.html', {'cards': cards})
-        else:
-            return render_to_response('login.html')
+
+        return render_to_response('index.html', {'user': json.dumps(user),
+                                                 'data': json.dumps(data, default=date_handler)})
     except Exception as e:
         logger.exception(e)
         raise Http404
+
+
+def date_handler(obj):
+    return obj.isoformat() if hasattr(obj, 'isoformat') else obj
 
 
 def random_date():
