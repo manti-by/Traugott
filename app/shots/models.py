@@ -6,9 +6,12 @@ from traugott.mixins import ImageMixin
 
 
 class ShotType(ImageMixin, models.Model):
-    title = models.CharField(max_length=10)
+    title = models.CharField(max_length=100)
     volume = models.IntegerField(default=100)
     degree = models.IntegerField(default=40)
+
+    def __str__(self):
+        return self.title
 
 
 class Shot(models.Model):
@@ -19,3 +22,7 @@ class Shot(models.Model):
         null=True,
     )
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s %s' % (self.created.strftime('%d/%m %H:%M'), self.type.title)
+
