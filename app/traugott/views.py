@@ -3,9 +3,8 @@ import logging
 from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
 
-from traugott.utils import random_date
+from shots.models import Shot
 
 logger = logging.getLogger('app')
 
@@ -15,12 +14,8 @@ def home_page(request):
     try:
         shots = []
         user = request.user.profiles.as_dict()
-        for i in range(0, 10):
-            shots.append({
-                'date': random_date(),
-                'text': '500ml',
-                'image': static_file('img/beer.jpg')
-            })
+        for shot in Shot.objects.filter(user=request.user):
+            shots.append(shot.as_dict())
         return render(request, 'index.html', {'user': user, 'shots': shots})
     except Exception as e:
         logger.exception(e)
