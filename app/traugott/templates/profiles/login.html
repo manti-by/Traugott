@@ -1,14 +1,18 @@
-<script id="t-login" type="text/x-handlebars-template">
+{% extends 'common/layout.html' %}
+
+{% load static %}
+
+{% block content %}
     <div class="container">
         <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--8-col mdl-cell--1-offset-tablet
                         mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-                <form class="login ajax" action="{% url 'api_profiles' %}" method="POST">
+                <form class="login" action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
                     <h3>Please login or register</h3>
                     <p class="info">
                         Your profile will be created automatically, if necessary
                     </p>
-                    <div class="error-holder"></div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input" type="text" id="email" name="email">
                         <label class="mdl-textfield__label" for="email">Email</label>
@@ -17,6 +21,7 @@
                         <input class="mdl-textfield__input" type="password" id="password" name="password">
                         <label class="mdl-textfield__label" for="password">Password</label>
                     </div>
+                    <div class="error-holder">{{ error }}</div>
                     <div class="buttons">
                         <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                             Let Me In
@@ -26,4 +31,4 @@
             </div>
         </div>
     </div>
-</script>
+{% endblock %}

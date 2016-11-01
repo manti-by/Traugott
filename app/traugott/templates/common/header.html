@@ -9,10 +9,25 @@
         <div class="mdl-layout-spacer"></div>
 
         <!-- Navigation. We hide it in small screens. -->
-        <div class="menu mdl-layout--large-screen-only"></div>
+        <div class="menu mdl-layout--large-screen-only">
+            {% if user.id %}
+                <a class="mdl-navigation__link" href="{% url 'index' %}">Home</a>
+                <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
+                <a class="mdl-navigation__link" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="mdl-navigation__link" href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
     </div>
 </header>
 <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Traugott</span>
-    <div class="menu mdl-layout--small-screen-only"></div>
+    <div class="menu">
+        {% if user.id %}
+            <a class="mdl-navigation__link" href="{% url 'index' %}">Home</a>
+            <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
+        {% else %}
+            <a class="mdl-navigation__link" href="{% url 'login' %}">About</a>
+        {% endif %}
+    </div>
 </div>

@@ -4,17 +4,17 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from traugott.views import index, static
-from profiles.views import ProfileResource
+from traugott.views import home_page, static_page
+from profiles.views import login_page, logout_page
 
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
-    url(r'^about$', static, {'page': 'about'}, name='about'),
+    url(r'^$', home_page, name='index'),
+    url(r'^about$', static_page, {'page': 'about'}, name='about'),
 
     # Profile API urls
-    url(r'^api/profiles/?$', ProfileResource.as_view(), name='api_profiles'),
-    url(r'^api/profiles/(?P<id>[0-9]+)/?$', ProfileResource.as_view(), name='api_profiles_item'),
+    url(r'^profiles/login/?$', login_page, name='login'),
+    url(r'^profiles/logout/?$', logout_page, name='logout'),
 
     # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),
