@@ -1,0 +1,14 @@
+<script id="t-menu" type="text/x-handlebars-template">
+    {% verbatim %}
+    <nav class="mdl-navigation">
+        {{#if user.id}}
+    {% endverbatim %}
+            <a class="mdl-navigation__link" href="{% url 'index' %}">Home</a>
+            <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
+    {% verbatim %}
+        {{else}}
+            <a class="mdl-navigation__link" href="/">Login</a>
+        {{/if}}
+    </nav>
+    {% endverbatim %}
+</script>

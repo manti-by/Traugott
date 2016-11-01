@@ -6,9 +6,9 @@
 
         // Check login state and render appropriate template
         if (window.user && window.user.id) {
-            $('#t-shots').render({ cards: window.data });
+            $('#t-shots').render({ cards: window.data }, true);
         } else {
-            $('#t-login').render();
+            $('#t-login').render({}, true);
         }
 
         // Form submissions
@@ -20,7 +20,7 @@
                 if (response['status'] == 200) {
                     window.user = response['data']['user'];
                     window.data = response['data']['data'];
-                    $('#t-shots').render({ cards: window.data });
+                    $('#t-shots').render({ cards: window.data }, true);
                 } else {
                     error.text(response['message']);
                 }
