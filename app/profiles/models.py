@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
-class Profile(User):
+class Profile(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -13,6 +13,9 @@ class Profile(User):
         related_name='profiles',
     )
     image = models.ImageField(upload_to='profile', blank=True, null=True)
+
+    def __str__(self):
+        return self.user.email
 
     def as_dict(self):
         if self.image:
