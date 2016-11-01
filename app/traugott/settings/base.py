@@ -129,4 +129,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
+# Login redirect url
+
 LOGIN_URL = '/profiles/login/'
+
+
+# Sorl thumbnailer settings
+
+THUMB_SIZE = '300x300'
+PREVIEW_SIZE = '800x600'
