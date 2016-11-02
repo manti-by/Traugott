@@ -22,6 +22,18 @@
 
 .mdl-card__actions {
     display: flex;
-    box-sizing:border-box;
+    box-sizing: border-box;
     align-items: center;
+}
+
+.mdl-list__item {
+    padding: 0 0 0 8px;
+}
+
+.mdl-list__item .mdl-list__item-secondary-content {
+    flex-flow: row;
+}
+
+.mdl-dialog__title {
+    font-size: 2rem;
 }
