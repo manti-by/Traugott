@@ -26,3 +26,24 @@ form .error-holder {
 .empty {
     padding: 1em 0;
 }
+
+#add-shot {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    z-index: 900;
+}
+
+#add-shot-dialog {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    width: calc(100% - 32px);
+    margin: auto;
+    background: #FFF;
+    z-index: 1000;
+}
