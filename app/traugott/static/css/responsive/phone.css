@@ -1,0 +1,5 @@
+@media only screen and (max-width: 480px) {
+    .container.static {
+        width: calc(100% - 32px);
+    }
+}

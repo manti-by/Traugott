@@ -8,7 +8,7 @@
             <h2 class="mdl-cell mdl-cell--12-col">Your Latest shots</h2>
             {% for shot in shots %}
                 <div class="mdl-cell mdl-cell--4-col">
-                    <div class="mdl-card mdl-shadow--4dp">
+                    <div class="mdl-card">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text">{{ shot.date }}</h2>
                         </div>
@@ -28,6 +28,10 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            {% empty %}
+                <div class="empty mdl-cell mdl-cell--12-col">
+                    You haven't added any shots yet.
                 </div>
             {% endfor %}
         </div>
