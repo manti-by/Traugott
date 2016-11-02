@@ -29,6 +29,12 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/mdl.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/phone.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/phablet.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/tablet.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/notebook.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/desktop.css' %}">
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -37,7 +43,7 @@
                 {% block content %}
                     404 Not Found
                 {% endblock %}
-                <footer class="mdl-mini-footer">
+                <footer class="mdl-mini-footer mdl-layout--large-screen-only">
                     {% include 'common/footer.html' %}
                 </footer>
             </main>

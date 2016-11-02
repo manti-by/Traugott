@@ -22,3 +22,7 @@ form .error-holder {
 .shot-image {
     max-width: 100%;
 }
+
+.empty {
+    padding: 1em 0;
+}
