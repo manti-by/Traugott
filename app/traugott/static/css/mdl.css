@@ -26,12 +26,24 @@
     align-items: center;
 }
 
+.mdl-list {
+    margin-bottom: 2em;
+    padding: 0;
+}
+
+.mdl-dialog__content .mdl-list:last-child {
+    margin-bottom: 0;
+}
+
 .mdl-list__item {
+    height: auto;
     padding: 0 0 0 8px;
 }
 
 .mdl-list__item .mdl-list__item-secondary-content {
     flex-flow: row;
+    position: relative;
+    top: 4px;
 }
 
 .mdl-dialog__title {

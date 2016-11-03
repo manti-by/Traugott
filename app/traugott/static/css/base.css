@@ -27,7 +27,7 @@ form .error-holder {
     padding: 1em 0;
 }
 
-#add-shot {
+#open-add-shot-dialog {
     position: fixed;
     display: block;
     right: 0;
@@ -49,13 +49,12 @@ form .error-holder {
     z-index: 1000;
 }
 
-.shot-title {
-    position: relative;
-    top: 8px;
+#add-shot-dialog h5 {
+    margin: 0;
 }
 
-.shot-quantity {
+.shot .quantity {
     position: relative;
-    top: -8px;
+    top: -6px;
     padding: 0 5px;
 }

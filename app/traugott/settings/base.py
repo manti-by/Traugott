@@ -137,5 +137,6 @@ LOGIN_URL = '/profiles/login/'
 
 # Sorl thumbnailer settings
 
-THUMB_SIZE = '300x300'
-PREVIEW_SIZE = '800x600'
+THUMB_SIZE = '50x50'
+PREVIEW_SIZE = '300x300'
+THUMBNAIL_FORMAT = 'PNG'
