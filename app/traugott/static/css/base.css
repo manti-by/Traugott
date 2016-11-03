@@ -53,8 +53,18 @@ form .error-holder {
     margin: 0;
 }
 
-.shot .quantity {
+.shot-type .quantity {
     position: relative;
     top: -6px;
     padding: 0 5px;
+}
+
+.shot {
+    min-height: 0;
+    border-bottom: 1px solid #CCC;
+}
+
+.shot .date {
+    float: right;
+    padding-top: 1em;
 }

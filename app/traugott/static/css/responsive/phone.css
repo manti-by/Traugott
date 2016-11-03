@@ -1,5 +1,13 @@
 @media only screen and (max-width: 480px) {
+    h2 {
+        font-size: 2em;
+    }
+
     .container.static {
         width: calc(100% - 32px);
+    }
+
+    .mdl-dialog__title {
+        font-size: 1.5em;
     }
 }

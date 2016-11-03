@@ -35,5 +35,18 @@
             value = value > 0 ? value - 1 : 0;
             quantity.text(value);
         });
+
+        $.fn.initShotActions = function () {
+            $('.shot').each(function() {
+                var shot = $(this),
+                    content = shot.find('.content'),
+                    actions = shot.find('.actions');
+
+                content.on('click', function () {
+                    actions.toggleClass('hidden');
+                });
+            });
+
+        }
     }
 })(jQuery);
