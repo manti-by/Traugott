@@ -1,0 +1,58 @@
+<button id="open-add-shot-dialog" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <i class="material-icons">add</i>
+</button>
+<div id="add-shot-dialog" class="mdl-dialog hidden">
+    <h4 class="mdl-dialog__title">Choose shot and quantity</h4>
+    <div class="mdl-dialog__content">
+        <h5>Mainly used shots</h5>
+        <ul class="mdl-list">
+            {% for shot_type in user_shot_types %}
+                <li class="shot-type mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content">
+                        <img src="{{ shot_type.image }}">
+                        <span class="shot-title">
+                            {{ shot_type.title }}
+                            ({{ shot_type.volume }}ml)
+                        </span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                        <button class="mdl-button mdl-js-button mdl-button--icon decrease">
+                            <i class="material-icons">remove_circle_outline</i>
+                        </button>
+                        <span class="quantity">0</span>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
+                            <i class="material-icons">add_circle_outline</i>
+                        </button>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+        <h5>Other shots</h5>
+        <ul class="mdl-list">
+            {% for shot_type in all_shot_types %}
+                <li class="shot-type mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content">
+                        <img src="{{ shot_type.image }}">
+                        <span class="shot-title">
+                            {{ shot_type.title }}
+                            ({{ shot_type.volume }}ml)
+                        </span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                        <button class="mdl-button mdl-js-button mdl-button--icon decrease">
+                            <i class="material-icons">remove_circle_outline</i>
+                        </button>
+                        <span class="quantity">0</span>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
+                            <i class="material-icons">add_circle_outline</i>
+                        </button>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button close">Close</button>
+        <button type="button" class="mdl-button mdl-button--primary add">Add</button>
+    </div>
+</div>

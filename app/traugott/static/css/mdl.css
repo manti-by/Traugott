@@ -26,6 +26,11 @@
     align-items: center;
 }
 
+.mdl-card__supporting-text {
+    width: 100%;
+    padding: 0.3em 0;
+}
+
 .mdl-list {
     margin-bottom: 2em;
     padding: 0;

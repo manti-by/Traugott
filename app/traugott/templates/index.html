@@ -8,105 +8,30 @@
             <h2 class="mdl-cell mdl-cell--12-col">Your Latest shots</h2>
             {% for shot in shots %}
                 <div class="mdl-cell mdl-cell--4-col">
-                    <div class="mdl-card">
-                        <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">{{ shot.date }}</h2>
-                        </div>
-                        <div class="mdl-card__media">
-                            <img src="{{ shot.image }}" class="shot-image">
-                        </div>
-                        <div class="mdl-card__supporting-text">
+                    <div class="mdl-card shot">
+                        <div class="mdl-card__supporting-text content">
+                            <img src="{{ shot.thumb }}" class="shot-image">
                             {{ shot.text }}
+                            <div class="date">
+                                {{ shot.date }}
+                            </div>
                         </div>
-                        <div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                                Edit This Shot
+                        <div class="mdl-card__actions actions hidden">
+                            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                                Edit
                             </a>
-                            <div class="mdl-layout-spacer"></div>
-                            <button class="mdl-button mdl-js-button mdl-button--icon">
-                                <i class="material-icons">delete</i>
-                            </button>
+                            <a class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                Delete
+                            </a>
                         </div>
                     </div>
                 </div>
-                {% empty %}
-                <div class="empty mdl-cell mdl-cell--12-col">
-                    You haven't added any shots yet.
-                </div>
-                <div class="empty mdl-cell mdl-cell--12-col">
-                    You haven't added any shots yet.
-                </div>
-                <div class="empty mdl-cell mdl-cell--12-col">
-                    You haven't added any shots yet.
-                </div>
-                <div class="empty mdl-cell mdl-cell--12-col">
-                    You haven't added any shots yet.
-                </div>
-                <div class="empty mdl-cell mdl-cell--12-col">
-                    You haven't added any shots yet.
-                </div>
+            {% empty %}
                 <div class="empty mdl-cell mdl-cell--12-col">
                     You haven't added any shots yet.
                 </div>
             {% endfor %}
         </div>
     </div>
-    <button id="open-add-shot-dialog" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-        <i class="material-icons">add</i>
-    </button>
-    <div id="add-shot-dialog" class="mdl-dialog hidden">
-        <h4 class="mdl-dialog__title">Choose shot and quantity</h4>
-        <div class="mdl-dialog__content">
-            <h5>Your mainly used shots</h5>
-            <ul class="mdl-list">
-                {% for shot_type in user_shot_types %}
-                    <li class="shot mdl-list__item mdl-list__item--two-line">
-                        <span class="mdl-list__item-primary-content">
-                            <img src="{{ shot_type.image }}">
-                            <span class="shot-title">
-                                {{ shot_type.title }}
-                                ({{ shot_type.volume }}ml)
-                            </span>
-                        </span>
-                        <span class="mdl-list__item-secondary-content">
-                            <button class="mdl-button mdl-js-button mdl-button--icon decrease">
-                                <i class="material-icons">remove_circle_outline</i>
-                            </button>
-                            <span class="quantity">0</span>
-                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
-                                <i class="material-icons">add_circle_outline</i>
-                            </button>
-                        </span>
-                    </li>
-                {% endfor %}
-            </ul>
-            <h5>Other shots</h5>
-            <ul class="mdl-list">
-                {% for shot_type in all_shot_types %}
-                    <li class="shot mdl-list__item mdl-list__item--two-line">
-                        <span class="mdl-list__item-primary-content">
-                            <img src="{{ shot_type.image }}">
-                            <span class="shot-title">
-                                {{ shot_type.title }}
-                                ({{ shot_type.volume }}ml)
-                            </span>
-                        </span>
-                        <span class="mdl-list__item-secondary-content">
-                            <button class="mdl-button mdl-js-button mdl-button--icon decrease">
-                                <i class="material-icons">remove_circle_outline</i>
-                            </button>
-                            <span class="quantity">0</span>
-                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
-                                <i class="material-icons">add_circle_outline</i>
-                            </button>
-                        </span>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button close">Close</button>
-            <button type="button" class="mdl-button mdl-button--primary add">Add</button>
-        </div>
-    </div>
+    {% include 'shots/add_form.html' %}
 {% endblock %}
