@@ -19,8 +19,14 @@ def shots_add(request):
                             type=ShotType.objects.get(id=item['type']),
                             quantity=item['quantity'])
                 shot.save()
+        user_types, all_types = ShotType.objects.get_splitted_for_user(request.user)
+        # @todo: add handlebars renderer for shot types
         return JsonResponse({'status': 200,
-                             'data': Shot.objects.get_for_response(request.user)}, status=200)
+                             'data': {
+                                 'shots': Shot.objects.get_for_response(request.user),
+                                 'user_types': user_types,
+                                 'all_types': all_types
+                             }}, status=200)
     except Exception as e:
         return JsonResponse({'status': 500,
                              'message': e}, status=200)
