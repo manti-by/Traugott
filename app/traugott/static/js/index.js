@@ -6,7 +6,10 @@
         // Add dialog
         $.fn.initAddDialog();
 
-        // Shots list
-        $.fn.initShotActions();
+        // Shot item events
+        $.fn.initShotItem();
+
+        // Shots list events
+        $.fn.initShotList();
     });
 })(jQuery);

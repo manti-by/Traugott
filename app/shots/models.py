@@ -1,23 +1,22 @@
 from __future__ import unicode_literals
 
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
 
 from traugott.mixins import ImageMixin
-
+from traugott.utils import utc
 
 class ShotTypeManager(models.Manager):
 
     def get_for_user(self, user):
-        return super(ShotTypeManager, self).get_queryset().filter(shots__user=user)
+        return super(ShotTypeManager, self).get_queryset().filter(shots__user=user).distinct()
 
     def get_for_response(self, user):
         result = []
-        for item in super(ShotTypeManager, self).get_queryset() \
-                .filter(shots__user=user).order_by('shots__created'):
+        for item in self.get_for_user(user):
             result.append(item.as_dict())
         return result
 
@@ -50,8 +49,7 @@ class ShotManager(models.Manager):
 
     def get_for_response(self, user):
         result = []
-        for item in super(ShotManager, self).get_queryset() \
-                .filter(user=user).order_by('-created'):
+        for item in self.get_for_user(user).order_by('-created'):
             result.append(item.as_dict())
         return result
 
@@ -76,7 +74,7 @@ class Shot(models.Model):
 
     @property
     def human_date(self):
-        delta = datetime.now().date() - self.created.date()
+        delta = datetime.now(utc) - self.created
         if delta.total_seconds() < 60 * 60:
             return 'just now'
         elif delta.total_seconds() < 60 * 60 * 5:
