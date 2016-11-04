@@ -52,3 +52,10 @@
 .mdl-dialog__title {
     font-size: 2rem;
 }
+
+.mdl-layout__header-row .mdl-menu__item .mdl-navigation__link {
+    padding: 0;
+    text-align: left;
+    line-height: 3.5em;
+    color: inherit;
+}

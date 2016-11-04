@@ -94,3 +94,31 @@ form .error-holder {
     text-align: right;
     background-color: rgba(0, 0, 0, 0.05);
 }
+
+.drawer-image {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.drawer-image img {
+    position: absolute;
+    top: -50%;
+    max-width: 100%;
+}
+
+.drawer .email {
+    padding: 0.5em 0;
+    font-size: 1.1em;
+}
+
+.drawer-menu .mdl-navigation__link {
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.drawer-menu .material-icons {
+    margin-right: 1em;
+}

@@ -14,6 +14,7 @@ class Profile(ImageMixin, models.Model):
         primary_key=True,
         related_name='profiles',
     )
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.email
