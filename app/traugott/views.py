@@ -13,10 +13,7 @@ logger = logging.getLogger('app')
 def home_page(request):
     try:
         user = request.user.profiles.as_dict()
-
-        shots = []
-        for shot in Shot.objects.filter(user=request.user):
-            shots.append(shot.as_dict())
+        shots = Shot.objects.get_for_response(request.user)
 
         user_shot_types = []
         user_shot_types_ids = []
