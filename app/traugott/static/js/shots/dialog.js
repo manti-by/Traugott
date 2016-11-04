@@ -35,8 +35,7 @@
                 },
                 success: function (response) {
                     if (response['status'] == 200) {
-                        window.data = response['data'];
-                        $('body').trigger('shots:updated');
+                        $('#shot-list').render('t-shot-list', response['data']);
                     } else {
                         alert(response['message']);
                     }
