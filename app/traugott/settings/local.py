@@ -23,12 +23,25 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
         },
+        'null': {
+            'class': 'logging.NullHandler',
+        },
     },
     'loggers': {
+        'app': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
         'django': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['null'],
+            'propagate': False,
+            'level':'DEBUG',
         },
     },
 }
