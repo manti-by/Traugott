@@ -53,10 +53,29 @@ form .error-holder {
     margin: 0;
 }
 
+.shot-type .image {
+    width: 50px;
+}
+
 .shot-type .quantity {
     position: relative;
-    top: -6px;
+    top: -3px;
+    margin: 0;
     padding: 0 5px;
+}
+
+.shot-type .quantity input {
+    width: 1em;
+    margin: 0;
+    padding: 0.2em 0;
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid #CCC;
+}
+
+.mdl-grid h2 {
+    border-bottom: 1px solid #CCC;
 }
 
 .shot {
@@ -66,5 +85,12 @@ form .error-holder {
 
 .shot .date {
     float: right;
-    padding-top: 1em;
+    padding: 1em 0.5em;
+}
+
+.shot .actions {
+    flex-direction: row-reverse;
+    padding: 0.3em;
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.05);
 }

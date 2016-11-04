@@ -2,6 +2,21 @@
 
     'use strict';
 
+    $.fn.getCookie = function(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = $.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    };
+
     $.fn.initAddDialog = function() {
         var open_button = $('#open-add-shot-dialog'),
             dialog = $('#add-shot-dialog'),
@@ -17,6 +32,35 @@
 
         add_button.on('click', function() {
             dialog.addClass('hidden');
+
+            var result = [];
+            dialog.find('.quantity input').each(function() {
+                result.push({
+                    type    : $(this).data('type-id'),
+                    quantity: $(this).val()
+                });
+            });
+
+            $.ajax({
+                url: '/shots/add/',
+                type: 'post',
+                data: JSON.stringify(result),
+                dataType: 'json',
+                headers: {
+                    'X-CSRFToken': $.fn.getCookie('csrftoken')
+                },
+                success: function (response) {
+                    if (response['status'] == 200) {
+                        window.data = response['data'];
+                        $('body').trigger('shots:updated');
+                    } else {
+                        alert(response['message']);
+                    }
+                },
+                error: function(jqXHR) {
+                    alert(jqXHR.responseText);
+                }
+            });
         });
 
         close_button.on('click', function() {
@@ -24,17 +68,24 @@
         });
 
         increase_button.on('click', function() {
-            var quantity = $(this).prev('.quantity'),
-                value = parseInt(quantity.text());
-            quantity.text(value + 1);
+            var quantity = $(this).prev('.quantity').find('input'),
+                value = parseInt(quantity.val());
+            quantity.val(value + 1);
         });
 
         decrease_button.on('click', function() {
-            var quantity = $(this).next('.quantity'),
-                value = parseInt(quantity.text());
+            var quantity = $(this).next('.quantity').find('input'),
+                value = parseInt(quantity.val());
             value = value > 0 ? value - 1 : 0;
-            quantity.text(value);
+            quantity.val(value);
         });
+
+        $.fn.initShotListActions = function () {
+            $('body').on('shots:updated', function() {
+                console.log('shots:updated');
+                console.log(window.data);
+            });
+        };
 
         $.fn.initShotActions = function () {
             $('.shot').each(function() {
@@ -46,7 +97,6 @@
                     actions.toggleClass('hidden');
                 });
             });
-
-        }
+        };
     }
 })(jQuery);

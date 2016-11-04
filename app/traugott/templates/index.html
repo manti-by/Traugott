@@ -11,17 +11,17 @@
                     <div class="mdl-card shot">
                         <div class="mdl-card__supporting-text content">
                             <img src="{{ shot.thumb }}" class="shot-image">
-                            {{ shot.text }}
+                            {{ shot.text|safe }}
                             <div class="date">
                                 {{ shot.date }}
                             </div>
                         </div>
                         <div class="mdl-card__actions actions hidden">
-                            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
-                                Edit
-                            </a>
                             <a class="mdl-button mdl-js-button mdl-js-ripple-effect">
                                 Delete
+                            </a>
+                            <a class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+                                Edit
                             </a>
                         </div>
                     </div>

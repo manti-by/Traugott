@@ -47,8 +47,6 @@
 
 .mdl-list__item .mdl-list__item-secondary-content {
     flex-flow: row;
-    position: relative;
-    top: 4px;
 }
 
 .mdl-dialog__title {

@@ -6,15 +6,19 @@ from django.contrib import admin
 
 from traugott.views import home_page, static_page
 from profiles.views import login_page, logout_page
+from shots.views import shots_add
 
 
 urlpatterns = [
     url(r'^$', home_page, name='index'),
     url(r'^about$', static_page, {'page': 'about'}, name='about'),
 
-    # Profile API urls
+    # Profile urls
     url(r'^profiles/login/?$', login_page, name='login'),
     url(r'^profiles/logout/?$', logout_page, name='logout'),
+
+    # Shot urls
+    url(r'^shots/add/?$', shots_add, name='shots_add'),
 
     # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),
