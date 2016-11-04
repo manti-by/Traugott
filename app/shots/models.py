@@ -9,16 +9,32 @@ from django.contrib.staticfiles.templatetags.staticfiles import static as static
 from traugott.mixins import ImageMixin
 from traugott.utils import utc
 
+
 class ShotTypeManager(models.Manager):
 
     def get_for_user(self, user):
-        return super(ShotTypeManager, self).get_queryset().filter(shots__user=user).distinct()
+        return super(ShotTypeManager, self).get_queryset() \
+            .filter(shots__user=user, shots__deleted=0).distinct()
 
     def get_for_response(self, user):
         result = []
         for item in self.get_for_user(user):
             result.append(item.as_dict())
         return result
+
+    def get_splitted_for_user(self, user):
+        user_shot_types = []
+        user_shot_types_ids = []
+        for shot_type in self.get_for_user(user):
+            user_shot_types.append(shot_type.as_dict())
+            user_shot_types_ids.append(shot_type.id)
+
+        all_shot_types = []
+        for shot_type in super(ShotTypeManager, self).get_queryset() \
+                .exclude(id__in=user_shot_types_ids):
+            all_shot_types.append(shot_type.as_dict())
+
+        return user_shot_types, all_shot_types
 
 
 class ShotType(ImageMixin, models.Model):

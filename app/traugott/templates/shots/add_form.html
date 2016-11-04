@@ -6,13 +6,13 @@
     <div class="mdl-dialog__content">
         <h5>Mainly used shots</h5>
         <ul class="mdl-list">
-            {% for shot_type in user_shot_types %}
+            {% for shot_type in user_types %}
                 {% include 'shots/shot_type.html' %}
             {% endfor %}
         </ul>
         <h5>Other shots</h5>
         <ul class="mdl-list">
-            {% for shot_type in all_shot_types %}
+            {% for shot_type in all_types %}
                 {% include 'shots/shot_type.html' %}
             {% endfor %}
         </ul>
