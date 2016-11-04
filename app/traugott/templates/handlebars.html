@@ -2,12 +2,12 @@
 <script id="t-shot-item" type="text/x-handlebars-template">
     <div class="mdl-card__supporting-text content">
         <img src="{{ thumb }}" class="shot-image">
-        {{ text }}
+        {{{ text }}}
         <div class="date">
             {{ date }}
         </div>
     </div>
-    <div class="mdl-card__actions actions hidden">
+    <div class="mdl-card__actions actions {{#if opened }}{{else}}hidden{{/if}}">
         <a class="mdl-button mdl-js-button mdl-js-ripple-effect delete" data-id="{{ id }}">
             Delete
         </a>
@@ -17,7 +17,8 @@
                 <i class="material-icons">add_circle_outline</i>
             </button>
             <span class="quantity">
-                <input type="text" name="quantity" value="{{ quantity }}" data-type-id="{{ type.id }}">
+                <input type="text" name="quantity" value="{{ quantity }}"
+                       data-id="{{ id }}" data-type-id="{{ type.id }}">
             </span>
             <button class="mdl-button mdl-js-button mdl-button--icon decrease">
                 <i class="material-icons">remove_circle_outline</i>
