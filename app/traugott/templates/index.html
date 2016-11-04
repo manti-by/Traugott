@@ -6,31 +6,7 @@
     <div class="container">
         <div class="mdl-grid">
             <h2 class="mdl-cell mdl-cell--12-col">Your Latest shots</h2>
-            {% for shot in shots %}
-                <div class="mdl-cell mdl-cell--4-col">
-                    <div class="mdl-card shot">
-                        <div class="mdl-card__supporting-text content">
-                            <img src="{{ shot.thumb }}" class="shot-image">
-                            {{ shot.text|safe }}
-                            <div class="date">
-                                {{ shot.date }}
-                            </div>
-                        </div>
-                        <div class="mdl-card__actions actions hidden">
-                            <a class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                                Delete
-                            </a>
-                            <a class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-                                Edit
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <div class="empty mdl-cell mdl-cell--12-col">
-                    You haven't added any shots yet.
-                </div>
-            {% endfor %}
+            {% include 'shots/list.html' %}
         </div>
     </div>
     {% include 'shots/add_form.html' %}

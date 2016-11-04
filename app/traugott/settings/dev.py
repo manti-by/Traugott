@@ -26,20 +26,25 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/var/log/traugott.log',
-        },
         'console': {
             'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['file', 'console'],
+        'app': {
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': [],
+            'propagate': False,
+            'level':'DEBUG',
         },
     },
 }

@@ -36,8 +36,8 @@
             var result = [];
             dialog.find('.quantity input').each(function() {
                 result.push({
-                    type    : $(this).data('type-id'),
-                    quantity: $(this).val()
+                    type    : parseInt($(this).data('type-id')),
+                    quantity: parseInt($(this).val())
                 });
             });
 
@@ -80,14 +80,7 @@
             quantity.val(value);
         });
 
-        $.fn.initShotListActions = function () {
-            $('body').on('shots:updated', function() {
-                console.log('shots:updated');
-                console.log(window.data);
-            });
-        };
-
-        $.fn.initShotActions = function () {
+        $.fn.initShotItem = function () {
             $('.shot').each(function() {
                 var shot = $(this),
                     content = shot.find('.content'),
@@ -96,6 +89,12 @@
                 content.on('click', function () {
                     actions.toggleClass('hidden');
                 });
+            });
+        };
+
+        $.fn.initShotList = function () {
+            $('body').on('shots:updated', function() {
+                location.reload();
             });
         };
     }
