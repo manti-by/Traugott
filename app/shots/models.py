@@ -45,7 +45,7 @@ class ShotType(ImageMixin, models.Model):
 class ShotManager(models.Manager):
 
     def get_for_user(self, user):
-        return super(ShotManager, self).get_queryset().filter(user=user)
+        return super(ShotManager, self).get_queryset().filter(user=user, deleted=0)
 
     def get_for_response(self, user):
         result = []
@@ -70,6 +70,7 @@ class Shot(models.Model):
         null=True,
     )
     created = models.DateTimeField(auto_now_add=True)
+    deleted = models.IntegerField(default=0)
     objects = ShotManager()
 
     @property
@@ -104,5 +105,5 @@ class Shot(models.Model):
             text = '%s, %d&times;%sml' % (self.type.title, self.quantity, self.type.volume)
         else:
             text = '%s, %sml' % (self.type.title, self.type.volume)
-        return {'id': self.id, 'date': self.human_date, 'text': text,
-                'image': image_url, 'thumb': thumb_url}
+        return {'id': self.id, 'date': self.human_date, 'text': text, 'quantity': self.quantity,
+                'image': image_url, 'thumb': thumb_url, 'type': self.type.as_dict()}

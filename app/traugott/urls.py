@@ -6,7 +6,7 @@ from django.contrib import admin
 
 from traugott.views import home_page, static_page
 from profiles.views import login_page, logout_page
-from shots.views import shots_add
+from shots.views import shots_add, shots_delete
 
 
 urlpatterns = [
@@ -19,6 +19,7 @@ urlpatterns = [
 
     # Shot urls
     url(r'^shots/add/?$', shots_add, name='shots_add'),
+    url(r'^shots/delete/?$', shots_delete, name='shots_delete'),
 
     # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),
