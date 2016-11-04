@@ -18,7 +18,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'app.log',
+            'filename': '/home/manti/Projects/traugott/log/app.log',
         },
         'console': {
             'class': 'logging.StreamHandler',

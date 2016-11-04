@@ -11,5 +11,8 @@
 
         // Shots list events
         $.fn.initShotList();
+
+        // Handlebars
+        $.fn.registerHandlebarHelpers();
     });
 })(jQuery);

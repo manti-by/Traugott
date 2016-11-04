@@ -2,29 +2,13 @@
 
     'use strict';
 
-    $.fn.getCookie = function(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = $.trim(cookies[i]);
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    };
-
     $.fn.initAddDialog = function() {
         var open_button = $('#open-add-shot-dialog'),
             dialog = $('#add-shot-dialog'),
             add_button = dialog.find('.add'),
             close_button = dialog.find('.close'),
             increase_button = dialog.find('.increase'),
-            decrease_button = dialog.find('.decrease'),
-            quantity = dialog.find('.quantity');
+            decrease_button = dialog.find('.decrease');
 
         open_button.on('click', function() {
             dialog.removeClass('hidden');
@@ -79,23 +63,5 @@
             value = value > 0 ? value - 1 : 0;
             quantity.val(value);
         });
-
-        $.fn.initShotItem = function () {
-            $('.shot').each(function() {
-                var shot = $(this),
-                    content = shot.find('.content'),
-                    actions = shot.find('.actions');
-
-                content.on('click', function () {
-                    actions.toggleClass('hidden');
-                });
-            });
-        };
-
-        $.fn.initShotList = function () {
-            $('body').on('shots:updated', function() {
-                location.reload();
-            });
-        };
     }
 })(jQuery);
