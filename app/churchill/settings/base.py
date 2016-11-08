@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'profiles',
     'shots',
-    'traugott',
+    'churchill',
 
     'taggit',
     'grappelli',
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
-ROOT_URLCONF = 'traugott.urls'
+ROOT_URLCONF = 'churchill.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'traugott.wsgi.application'
+WSGI_APPLICATION = 'churchill.wsgi.application'
 
 
 # Database
@@ -99,7 +99,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'traugott', 'locale'),
+    os.path.join(BASE_DIR, 'churchill', 'locale'),
 )
 
 TIME_ZONE = 'UTC'

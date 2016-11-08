@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import traugott.utils
+import churchill.utils
 
 
 class Migration(migrations.Migration):
@@ -16,16 +16,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='profile',
             name='preview',
-            field=models.ImageField(blank=True, null=True, upload_to=traugott.utils.preview_name, verbose_name='Preview Image'),
+            field=models.ImageField(blank=True, null=True, upload_to=churchill.utils.preview_name, verbose_name='Preview Image'),
         ),
         migrations.AddField(
             model_name='profile',
             name='thumb',
-            field=models.ImageField(blank=True, null=True, upload_to=traugott.utils.thumb_name, verbose_name='Thumbnail'),
+            field=models.ImageField(blank=True, null=True, upload_to=churchill.utils.thumb_name, verbose_name='Thumbnail'),
         ),
         migrations.AlterField(
             model_name='profile',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to=traugott.utils.image_name, verbose_name='Image'),
+            field=models.ImageField(blank=True, null=True, upload_to=churchill.utils.image_name, verbose_name='Image'),
         ),
     ]

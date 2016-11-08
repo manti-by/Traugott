@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext_lazy as _
 
-from traugott.utils import image_name, preview_name, thumb_name
+from churchill.utils import image_name, preview_name, thumb_name
 from sorl.thumbnail import get_thumbnail
 
 

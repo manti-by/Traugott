@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
-from traugott.mixins import ImageMixin
+from churchill.mixins import ImageMixin
 
 
 class Profile(ImageMixin, models.Model):

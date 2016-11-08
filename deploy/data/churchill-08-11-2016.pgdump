@@ -371,7 +371,8 @@ CREATE TABLE profiles_profile (
     user_id integer NOT NULL,
     image character varying(100),
     preview character varying(100),
-    thumb character varying(100)
+    thumb character varying(100),
+    created timestamp with time zone NOT NULL
 );
 
 
@@ -385,7 +386,9 @@ CREATE TABLE shots_shot (
     id integer NOT NULL,
     created timestamp with time zone NOT NULL,
     type_id integer,
-    user_id integer
+    user_id integer,
+    quantity integer NOT NULL,
+    deleted integer NOT NULL
 );
 
 
@@ -708,8 +711,8 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 36, true);
 --
 
 COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$30000$B3LWyehTkBUV$JFCK06t82Um1/jU1YAOL+mCTXIjzILNwJfcGhxPihWc=	2016-11-03 16:15:22.176528+03	t	admin			admin@test.com	t	t	2016-10-31 13:50:30.901298+03
-3	pbkdf2_sha256$30000$upOfD4ypMofi$sk7QCWR1iPHMii1p+WT86rbEK5oQD2cnbhmPwaJnfFg=	2016-11-03 17:06:58.005204+03	f	manti.by@gmail.com			manti.by@gmail.com	f	t	2016-11-01 15:31:54.516321+03
+1	pbkdf2_sha256$30000$B3LWyehTkBUV$JFCK06t82Um1/jU1YAOL+mCTXIjzILNwJfcGhxPihWc=	2016-11-04 11:22:56.42939+03	t	admin			admin@test.com	t	t	2016-10-31 13:50:30.901298+03
+3	pbkdf2_sha256$30000$upOfD4ypMofi$sk7QCWR1iPHMii1p+WT86rbEK5oQD2cnbhmPwaJnfFg=	2016-11-08 13:05:03.564952+03	f	manti.by@gmail.com			manti.by@gmail.com	f	t	2016-11-01 15:31:54.516321+03
 \.
 
 
@@ -773,6 +776,7 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 16	2016-11-03 17:03:39.946266+03	5	Whiskey	1	[{"added": {}}]	12	1
 17	2016-11-03 17:03:47.197985+03	5	Whiskey	2	[{"changed": {"fields": ["image"]}}]	12	1
 18	2016-11-03 17:04:10.515551+03	6	Wine	1	[{"added": {}}]	12	1
+19	2016-11-04 11:23:08.283173+03	1	Beer	2	[{"changed": {"fields": ["title"]}}]	12	1
 \.
 
 
@@ -780,7 +784,7 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: traugott
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 18, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 19, true);
 
 
 --
@@ -837,6 +841,10 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 21	shots	0002_auto_20161101_1320	2016-11-01 16:20:43.198002+03
 22	shots	0003_auto_20161101_1326	2016-11-01 16:26:11.1565+03
 23	shots	0004_shot_user	2016-11-01 16:46:29.154854+03
+24	shots	0005_shot_quantity	2016-11-04 11:50:07.072077+03
+25	shots	0006_auto_20161104_0915	2016-11-04 12:15:49.179103+03
+26	profiles	0003_profile_created	2016-11-04 14:18:07.131625+03
+27	shots	0007_shot_deleted	2016-11-04 16:09:17.765959+03
 \.
 
 
@@ -844,7 +852,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: traugott
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 23, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 27, true);
 
 
 --
@@ -853,7 +861,9 @@ SELECT pg_catalog.setval('django_migrations_id_seq', 23, true);
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
 ei8986eij6g44hmxsy3pdsohpemflcri	OTE5YWU5YTFjZDNmYmFkY2E4M2Y0ZWQ5ZGNmNWExODAxYmI5MzUxNTp7Il9hdXRoX3VzZXJfaGFzaCI6IjRjMDU1N2Y4MTc1N2VjMDg3M2I1NGU3OGFlZDM0OTllYmMyZDMyMmMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIzIn0=	2016-11-15 16:56:01.870875+03
-cb6e42yfks3czsyzcip8yo0q0umu67n1	OTE5YWU5YTFjZDNmYmFkY2E4M2Y0ZWQ5ZGNmNWExODAxYmI5MzUxNTp7Il9hdXRoX3VzZXJfaGFzaCI6IjRjMDU1N2Y4MTc1N2VjMDg3M2I1NGU3OGFlZDM0OTllYmMyZDMyMmMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIzIn0=	2016-11-17 17:06:58.086304+03
+mk19w6ikb71apxpct05h2tftgxhe6yzr	OGIyMTcwYjE0MDQ5NzUzZmMyNjQ3MTNmYTg2MzE2YWY3NTZiOGRiZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImY1Y2E5MzEyMzExYjU1YWU5NmY0OWM1ODhiMDU4OGEyODAyOGU1NTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-11-18 11:22:56.493035+03
+qh8byojdhaassw1boni42evml5tevo6g	OTE5YWU5YTFjZDNmYmFkY2E4M2Y0ZWQ5ZGNmNWExODAxYmI5MzUxNTp7Il9hdXRoX3VzZXJfaGFzaCI6IjRjMDU1N2Y4MTc1N2VjMDg3M2I1NGU3OGFlZDM0OTllYmMyZDMyMmMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIzIn0=	2016-11-18 14:32:37.422635+03
+4zonznoibzja08okyh1zgr079pt2fyxf	OTE5YWU5YTFjZDNmYmFkY2E4M2Y0ZWQ5ZGNmNWExODAxYmI5MzUxNTp7Il9hdXRoX3VzZXJfaGFzaCI6IjRjMDU1N2Y4MTc1N2VjMDg3M2I1NGU3OGFlZDM0OTllYmMyZDMyMmMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIzIn0=	2016-11-22 13:05:03.576913+03
 \.
 
 
@@ -861,8 +871,8 @@ cb6e42yfks3czsyzcip8yo0q0umu67n1	OTE5YWU5YTFjZDNmYmFkY2E4M2Y0ZWQ5ZGNmNWExODAxYmI
 -- Data for Name: profiles_profile; Type: TABLE DATA; Schema: public; Owner: traugott
 --
 
-COPY profiles_profile (user_id, image, preview, thumb) FROM stdin;
-3	profile/shizo.jpg	profile/preview/7884316135720823.jpg	profile/thumb/4765020200867472.jpg
+COPY profiles_profile (user_id, image, preview, thumb, created) FROM stdin;
+3	profile/shizo.jpg	profile/preview/7884316135720823.jpg	profile/thumb/4765020200867472.jpg	2016-11-04 14:18:07.005134+03
 \.
 
 
@@ -870,8 +880,25 @@ COPY profiles_profile (user_id, image, preview, thumb) FROM stdin;
 -- Data for Name: shots_shot; Type: TABLE DATA; Schema: public; Owner: traugott
 --
 
-COPY shots_shot (id, created, type_id, user_id) FROM stdin;
-1	2016-11-01 16:40:30.843244+03	1	3
+COPY shots_shot (id, created, type_id, user_id, quantity, deleted) FROM stdin;
+4	2016-10-27 12:16:04.985+03	2	3	2	0
+34	2016-11-04 16:13:36.647196+03	6	3	1	1
+32	2016-11-04 14:12:01.884445+03	4	3	1	1
+30	2016-11-04 14:11:09.056672+03	5	3	2	1
+29	2016-11-04 14:07:41.775135+03	4	3	1	1
+27	2016-11-04 14:05:40.203145+03	2	3	1	1
+31	2016-11-04 14:12:01.850693+03	1	3	1	1
+28	2016-11-04 14:07:11.271195+03	4	3	1	1
+33	2016-11-04 14:32:57.158289+03	6	3	1	1
+3	2016-11-01 12:16:04.943+03	1	3	3	0
+1	2016-11-01 16:40:30.843244+03	1	3	1	0
+7	2016-11-02 12:16:05.039+03	5	3	3	0
+36	2016-11-04 16:39:21.634402+03	6	3	1	1
+35	2016-11-04 16:13:44.540987+03	6	3	2	1
+6	2016-11-04 12:16:05.027074+03	4	3	1	0
+37	2016-11-04 16:41:08.110417+03	6	3	1	1
+38	2016-11-04 16:42:14.649872+03	4	3	3	1
+39	2016-11-04 16:53:11.111866+03	4	3	2	0
 \.
 
 
@@ -879,7 +906,7 @@ COPY shots_shot (id, created, type_id, user_id) FROM stdin;
 -- Name: shots_shot_id_seq; Type: SEQUENCE SET; Schema: public; Owner: traugott
 --
 
-SELECT pg_catalog.setval('shots_shot_id_seq', 1, true);
+SELECT pg_catalog.setval('shots_shot_id_seq', 39, true);
 
 
 --
@@ -887,12 +914,12 @@ SELECT pg_catalog.setval('shots_shot_id_seq', 1, true);
 --
 
 COPY shots_shottype (id, title, image, volume, degree, preview, thumb) FROM stdin;
-1	A glass of beer	shottype/image/7325552910629391.png	500	5	shottype/preview/2348481595970726.png	shottype/thumb/1514051360299900.png
 2	Cognac	shottype/image/4301909482339509.png	50	40	shottype/preview/7293953075203210.png	shottype/thumb/1347566837845845.png
 3	Martini	shottype/image/1633197346302185.png	100	15	shottype/preview/2710349287436863.png	shottype/thumb/5669109393682931.png
 4	Vodka	shottype/image/4732821154510959.png	50	40	shottype/preview/5290524443274804.png	shottype/thumb/5167495430811859.png
 5	Whiskey	shottype/image/1330740066843528.png	50	40	shottype/preview/6188363518555048.png	shottype/thumb/7881056078373098.png
 6	Wine	shottype/image/9473099734443855.png	200	7	shottype/preview/3954453078756859.png	shottype/thumb/8799184854628574.png
+1	Beer	shottype/image/7325552910629391.png	500	5	shottype/preview/2348481595970726.png	shottype/thumb/1514051360299900.png
 \.
 
 
@@ -1127,22 +1154,6 @@ ALTER TABLE ONLY profiles_profile
 
 ALTER TABLE ONLY shots_shot
     ADD CONSTRAINT shots_shot_pkey PRIMARY KEY (id);
-
-
---
--- Name: shots_shot_type_id_key; Type: CONSTRAINT; Schema: public; Owner: traugott; Tablespace: 
---
-
-ALTER TABLE ONLY shots_shot
-    ADD CONSTRAINT shots_shot_type_id_key UNIQUE (type_id);
-
-
---
--- Name: shots_shot_user_id_key; Type: CONSTRAINT; Schema: public; Owner: traugott; Tablespace: 
---
-
-ALTER TABLE ONLY shots_shot
-    ADD CONSTRAINT shots_shot_user_id_key UNIQUE (user_id);
 
 
 --

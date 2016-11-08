@@ -1,4 +1,4 @@
-Traugott
+Churchill
 ==========================================================
 
 Django application for calculation of alcohol consumption

@@ -6,8 +6,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
 
-from traugott.mixins import ImageMixin
-from traugott.utils import utc
+from churchill.mixins import ImageMixin
+from churchill.utils import utc
 
 
 class ShotTypeManager(models.Manager):

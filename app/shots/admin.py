@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
 
 from shots.models import ShotType, Shot
-from traugott.mixins import IMAGES_HELP_TEXT
+from churchill.mixins import IMAGES_HELP_TEXT
 
 
 @admin.register(ShotType)
