@@ -9,5 +9,5 @@
 */media/
 
 deploy/Vagrantfile.local
-app/traugott/settings/local.py
+app/churchill/settings/local.py
 deploy/.vagrant/

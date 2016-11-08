@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from traugott.views import home_page, static_page
+from churchill.views import home_page, static_page
 from profiles.views import login_page, logout_page
 from shots.views import shots_add, shots_update, shots_delete
 
