@@ -159,3 +159,8 @@ THUMBNAIL_FORMAT = 'PNG'
 
 COMPRESS_ENABLED = False
 
+
+# Default admin user id for foreign keys
+
+DEFAULT_ADMIN_USER_ID = 1
+

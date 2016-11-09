@@ -3,16 +3,12 @@
     'use strict';
 
     $(document).ready(function () {
-        // Add dialog
-        $.fn.initAddDialog();
-
-        // Shot item events
-        $.fn.initShotItem();
-
-        // Shots list events
-        $.fn.initShotList();
+        // Init shot view
+        $.shotView.init();
 
         // Handlebars
         $.fn.registerHandlebarHelpers();
+
+        // @todo: add handlebars renderer for shot types
     });
 })(jQuery);
