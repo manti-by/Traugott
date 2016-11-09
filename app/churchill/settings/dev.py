@@ -49,7 +49,13 @@ LOGGING = {
     },
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
 
+COMPRESS_ENABLED = False
 
 try:
     from .local import *

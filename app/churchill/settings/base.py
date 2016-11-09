@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'grappelli',
     'simple_rest',
     'sorl.thumbnail',
+    'compressor',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -88,6 +89,17 @@ DATABASES = {
 }
 
 
+# Cache backend
+# https://docs.djangoproject.com/en/1.10/topics/cache/
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -117,6 +129,7 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 ]
 
 STATICFILES_DIRS = [
@@ -140,3 +153,9 @@ LOGIN_URL = '/profiles/login/'
 THUMB_SIZE = '50x50'
 PREVIEW_SIZE = '300x300'
 THUMBNAIL_FORMAT = 'PNG'
+
+
+# Assets compressor
+
+COMPRESS_ENABLED = False
+
