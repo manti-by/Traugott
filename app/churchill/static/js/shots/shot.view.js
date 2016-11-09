@@ -9,41 +9,43 @@
 
             view.initAddDialog();
 
-            $('.shot').each(function(item) {
-                view.bindShotItemActions(item);
+            $.each($('.shot'), function() {
+                view.bindShotItemActions($(this));
             });
         },
 
         initAddDialog: function() {
             var open_button = $('#open-add-shot-dialog'),
-                dialog = $('#add-shot-dialog'),
-                add_button = dialog.find('.add'),
-                close_button = dialog.find('.close'),
-                increase_button = dialog.find('.increase'),
-                decrease_button = dialog.find('.decrease');
+                add_shot_dialog = $('#add-shot-dialog'),
+                add_button = add_shot_dialog.find('.add'),
+                close_button = add_shot_dialog.find('.close'),
+                increase_button = add_shot_dialog.find('.increase'),
+                decrease_button = add_shot_dialog.find('.decrease');
 
             open_button.on('click', function () {
-                dialog.removeClass('hidden');
+                add_shot_dialog.removeClass('hidden');
             });
 
             add_button.on('click', function () {
-                dialog.addClass('hidden');
+                add_shot_dialog.addClass('hidden');
 
                 var result = [];
-                dialog.find('.quantity input').each(function () {
-                    result.push({
-                        type: parseInt($(this).data('type-id')),
-                        quantity: parseInt($(this).val())
-                    });
+                add_shot_dialog.find('.quantity input').each(function () {
+                    if ($(this).val() > 0) {
+                        result.push({
+                            type: parseInt($(this).data('type-id')),
+                            quantity: parseInt($(this).val())
+                        });
+                    }
                 });
 
-                $.shotModel.add(result, function (data) {
-                    $('#shot-list').render('t-shot-list', response['data']);
+                $.shotModel.create(result, function (data) {
+                    $('#shot-list').render('t-shot-list', data);
                 });
             });
 
             close_button.on('click', function () {
-                dialog.addClass('hidden');
+                add_shot_dialog.addClass('hidden');
             });
 
             increase_button.on('click', function () {
@@ -73,7 +75,9 @@
             });
 
             delete_button.on('click', function() {
-                $.shotModel.delete({ id: $(this).data('id') }, shot.remove);
+                $.shotModel.remove({ id: $(this).data('id') }, function() {
+                    shot.remove();
+                });
             });
 
             increase_button.on('click', function() {
@@ -101,7 +105,6 @@
             $.shotModel.update(data, function(data) {
                 data['opened'] = 1;
                 shot.render('t-shot-item', data);
-                shot.bindShotItemActions();
             });
         }
     }

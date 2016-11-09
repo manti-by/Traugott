@@ -52,4 +52,4 @@ CACHES = {
     }
 }
 
-COMPRESS_ENABLED = True
+USE_COMPRESSOR = False

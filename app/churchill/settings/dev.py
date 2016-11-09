@@ -53,7 +53,7 @@ CACHES = {
     }
 }
 
-COMPRESS_ENABLED = False
+USE_COMPRESSOR = False
 
 try:
     from .local import *

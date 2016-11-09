@@ -28,7 +28,17 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto:300,400,700&subset=cyrillic">
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
 
-        {% compress css %}
+        {% if USE_COMPRESSOR %}
+            {% compress css %}
+                <link rel="stylesheet" type="text/css" href="{% static 'css/mdl.css' %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/phone.css' %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/phablet.css' %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/tablet.css' %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/notebook.css' %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/desktop.css' %}">
+            {% endcompress %}
+        {% else %}
             <link rel="stylesheet" type="text/css" href="{% static 'css/mdl.css' %}">
             <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
             <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/phone.css' %}">
@@ -36,7 +46,7 @@
             <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/tablet.css' %}">
             <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/notebook.css' %}">
             <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/desktop.css' %}">
-        {% endcompress %}
+        {% endif %}
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -55,7 +65,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.2.1/material.min.js"></script>
 
-        {% compress js %}
+        {% if USE_COMPRESSOR %}
+            {% compress js %}
+                <script src="{% static 'js/shots/shot.model.js' %}"></script>
+                <script src="{% static 'js/shots/shot.view.js' %}"></script>
+
+                <script src="{% static 'js/shots/shot-type.model.js' %}"></script>
+                <script src="{% static 'js/shots/shot-type.view.js' %}"></script>
+
+                <script src="{% static 'js/common.js' %}"></script>
+                <script src="{% static 'js/index.js' %}"></script>
+            {% endcompress %}
+        {% else %}
             <script src="{% static 'js/shots/shot.model.js' %}"></script>
             <script src="{% static 'js/shots/shot.view.js' %}"></script>
 
@@ -64,7 +85,7 @@
 
             <script src="{% static 'js/common.js' %}"></script>
             <script src="{% static 'js/index.js' %}"></script>
-        {% endcompress %}
+        {% endif %}
 
         {% include 'handlebars.html' %}
     </body>

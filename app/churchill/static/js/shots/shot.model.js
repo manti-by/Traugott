@@ -59,7 +59,7 @@
             this._dispatch('patch', data, success, error);
         },
 
-        delete: function(data, success, error) {
+        remove: function(data, success, error) {
             this._dispatch('delete', data, success, error);
         }
     };

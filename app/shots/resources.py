@@ -82,10 +82,10 @@ class ShotTypeResource(Resource):
             return JsonResponse({'status': 204,
                                  'message': 'Data is empty'}, status=200)
 
-        item = ShotType.objects.get(title=data['title'],
-                                    volume=data['volume'],
-                                    degree=data['degree'],
-                                    user=request.user)
+        item = ShotType(title=data['title'],
+                        volume=data['volume'],
+                        degree=data['degree'],
+                        user=request.user)
         item.save()
         return JsonResponse({'status': 200,
                              'data': item.as_dict()}, status=200)

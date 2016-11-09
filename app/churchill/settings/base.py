@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'churchill.context_processors.django_conf',
             ],
         },
     },
@@ -157,7 +158,7 @@ THUMBNAIL_FORMAT = 'PNG'
 
 # Assets compressor
 
-COMPRESS_ENABLED = False
+USE_COMPRESSOR = True
 
 
 # Default admin user id for foreign keys

@@ -27,6 +27,18 @@ form .error-holder {
     padding: 1em 0;
 }
 
+.dialog {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    width: calc(100% - 32px);
+    max-width: 968px;
+    margin: auto;
+    background: #FFF;
+    z-index: 1000;
+}
+
 #open-add-shot-dialog {
     position: fixed;
     display: block;
@@ -38,15 +50,6 @@ form .error-holder {
 }
 
 #add-shot-dialog {
-    position: absolute;
-    top: 16px;
-    left: 0;
-    right: 0;
-    width: calc(100% - 32px);
-    max-width: 968px;
-    margin: auto;
-    background: #FFF;
-    z-index: 1000;
 }
 
 #add-shot-dialog h5 {
