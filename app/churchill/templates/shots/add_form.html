@@ -1,7 +1,8 @@
-<button id="open-add-shot-dialog" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+<button id="open-add-shot-dialog"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
     <i class="material-icons">add</i>
 </button>
-<div id="add-shot-dialog" class="mdl-dialog hidden">
+<div id="add-shot-dialog" class="mdl-dialog dialog hidden">
     <h4 class="mdl-dialog__title">Choose shot and quantity</h4>
     <div class="mdl-dialog__content">
         <h5>Mainly used shots</h5>
@@ -16,6 +17,31 @@
                 {% include 'shots/shot_type.html' %}
             {% endfor %}
         </ul>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button close">Close</button>
+        <button type="button" class="mdl-button mdl-button--primary add">Add</button>
+        <div class="mdl-layout-spacer"></div>
+        <button id="open-add-shot-type-dialog" type="button" class="mdl-button">Add Option</button>
+    </div>
+</div>
+<div id="add-shot-type-dialog" class="mdl-dialog dialog hidden">
+    <h4 class="mdl-dialog__title">Add custom shot type</h4>
+    <div class="mdl-dialog__content">
+        <form>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="title">
+                <label class="mdl-textfield__label" for="title">Title</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="degree">
+                <label class="mdl-textfield__label" for="degree">Degree, %</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="volume">
+                <label class="mdl-textfield__label" for="volume">Volume, ml</label>
+            </div>
+        </form>
     </div>
     <div class="mdl-dialog__actions">
         <button type="button" class="mdl-button close">Close</button>

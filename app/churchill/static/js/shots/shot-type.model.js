@@ -52,14 +52,17 @@
         },
 
         create: function(data, success, error) {
-            this._dispatch('post', data, success, error);
+            var model = this;
+            this._dispatch('post', data, function() {
+                model._dispatch('get', {}, success, error);
+            }, error);
         },
 
         update: function(data, success, error) {
             this._dispatch('patch', data, success, error);
         },
 
-        delete: function(data, success, error) {
+        remove: function(data, success, error) {
             this._dispatch('delete', data, success, error);
         }
     };

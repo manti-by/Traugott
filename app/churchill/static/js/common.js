@@ -23,6 +23,11 @@
                 template = Handlebars.compile(source);
             return template(data);
         });
+        Handlebars.registerPartial('shot-type-item', function(data) {
+            var source = $('#t-shot-type-item').html(),
+                template = Handlebars.compile(source);
+            return template(data);
+        });
     };
 
     $.fn.render = function(template_name, data) {
