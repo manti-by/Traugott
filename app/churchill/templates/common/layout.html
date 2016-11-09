@@ -56,9 +56,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.2.1/material.min.js"></script>
 
         {% compress js %}
-            <script src="{% static 'js/shots/dialog.js' %}"></script>
-            <script src="{% static 'js/shots/item.js' %}"></script>
-            <script src="{% static 'js/shots/list.js' %}"></script>
+            <script src="{% static 'js/shots/shot.model.js' %}"></script>
+            <script src="{% static 'js/shots/shot.view.js' %}"></script>
+
+            <script src="{% static 'js/shots/shot-type.model.js' %}"></script>
+            <script src="{% static 'js/shots/shot-type.view.js' %}"></script>
 
             <script src="{% static 'js/common.js' %}"></script>
             <script src="{% static 'js/index.js' %}"></script>

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from datetime import datetime
 
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
 
@@ -14,7 +15,7 @@ class ShotTypeManager(models.Manager):
 
     def get_for_user(self, user):
         return super(ShotTypeManager, self).get_queryset() \
-            .filter(shots__user=user, shots__deleted=0).distinct()
+            .filter(deleted=0, shots__user=user, shots__deleted=0).distinct()
 
     def get_for_response(self, user):
         result = []
@@ -40,8 +41,17 @@ class ShotTypeManager(models.Manager):
 class ShotType(ImageMixin, models.Model):
 
     title = models.CharField(max_length=100)
-    volume = models.IntegerField(default=100)
-    degree = models.IntegerField(default=40)
+    volume = models.IntegerField(default=100, help_text='')
+    degree = models.IntegerField(default=40, help_text='Alcohol percentage or  ')
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='shot_types',
+        default=settings.DEFAULT_ADMIN_USER_ID,
+        null=True,
+    )
+    created = models.DateTimeField(auto_now_add=True)
+    deleted = models.IntegerField(default=0)
     objects = ShotTypeManager()
 
     def __str__(self):
@@ -61,7 +71,8 @@ class ShotType(ImageMixin, models.Model):
 class ShotManager(models.Manager):
 
     def get_for_user(self, user):
-        return super(ShotManager, self).get_queryset().filter(user=user, deleted=0)
+        return super(ShotManager, self).get_queryset() \
+            .filter(user=user, deleted=0, type__deleted=0)
 
     def get_for_response(self, user):
         result = []
@@ -77,6 +88,7 @@ class Shot(models.Model):
         User,
         on_delete=models.SET_NULL,
         related_name='shots',
+        default=settings.DEFAULT_ADMIN_USER_ID,
         null=True,
     )
     type = models.ForeignKey(

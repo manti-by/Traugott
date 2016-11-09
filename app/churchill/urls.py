@@ -6,7 +6,7 @@ from django.contrib import admin
 
 from churchill.views import home_page, static_page
 from profiles.views import login_page, logout_page
-from shots.views import shots_add, shots_update, shots_delete
+from shots.resources import ShotResource, ShotTypeResource
 
 
 urlpatterns = [
@@ -18,9 +18,8 @@ urlpatterns = [
     url(r'^profiles/logout/?$', logout_page, name='logout'),
 
     # Shot urls
-    url(r'^shots/add/?$', shots_add, name='shots_add'),
-    url(r'^shots/update/?$', shots_update, name='shots_update'),
-    url(r'^shots/delete/?$', shots_delete, name='shots_delete'),
+    url(r'^shots/?$', ShotResource.as_view()),
+    url(r'^shot_types/?$', ShotTypeResource.as_view()),
 
     # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),
