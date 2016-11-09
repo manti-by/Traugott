@@ -8,3 +8,5 @@ ipython>=5.1.0
 django-grappelli>=2.8,<2.9
 django-simple-rest>=1.4,<1.5
 django-taggit==0.21.3
+django_compressor>=2.1,<2.2
+python-memcached==1.58
