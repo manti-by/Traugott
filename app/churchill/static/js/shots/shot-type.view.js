@@ -30,7 +30,7 @@
                 };
 
                 $.shotTypeModel.create(result, function (data) {
-                    $('#add-shot-dialog').render('t-add-shot-dialog', data);
+                    $('#add-shot-dialog').renderTemplate('t-add-shot-dialog', data);
 
                     add_shot_dialog.removeClass('hidden');
                     add_shot_type_dialog.addClass('hidden');

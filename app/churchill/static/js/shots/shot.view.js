@@ -40,7 +40,7 @@
                 });
 
                 $.shotModel.create(result, function (data) {
-                    $('#shot-list').render('t-shot-list', data);
+                    $('#shot-list').renderTemplate('t-shot-list', data);
                 });
             });
 
@@ -104,7 +104,7 @@
         updateShotQuantity: function (shot, data) {
             $.shotModel.update(data, function(data) {
                 data['opened'] = 1;
-                shot.render('t-shot-item', data);
+                shot.renderTemplate('t-shot-item', data);
             });
         }
     }
