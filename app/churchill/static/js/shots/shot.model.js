@@ -44,7 +44,7 @@
         },
 
         _error: function(data) {
-            console.error(data);
+            $.fn.showError(message);
         },
 
         all: function(data, success, error) {

@@ -9,6 +9,9 @@ logger = logging.getLogger('app')
 
 def resource_wrapper(f):
     def wrapper(*args, **kwargs):
+        if not args[1].user.is_authenticated:
+            return JsonResponse({'status': 403,
+                                 'message': 'Please login first'}, status=200)
         try:
             return f(*args, **kwargs)
         except Shot.DoesNotExist as e:

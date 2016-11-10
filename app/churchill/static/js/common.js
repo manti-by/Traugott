@@ -30,10 +30,20 @@
         });
     };
 
-    $.fn.render = function(template_name, data) {
+    $.fn.renderTemplate = function(template_name, data) {
         var source   = $('#' + template_name).html(),
             template = Handlebars.compile(source);
         $(this).html(template(data));
+    };
+
+    $.fn.showError = function(message) {
+        var dialog = $('#dialog');
+
+        dialog.removeClass('hidden');
+        dialog.find('.content').html(message);
+        dialog.find('.close').on('click', function() {
+            dialog.addClass('hidden');
+        });
     };
 
 })(jQuery);
