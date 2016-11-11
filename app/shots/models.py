@@ -11,6 +11,27 @@ from churchill.mixins import ImageMixin
 from churchill.utils import utc
 
 
+MEASURE_CHOICES = (
+    ('ml', 'Milliliter'),
+    ('gr', 'Grams'),
+    ('pc', 'Piece'),
+)
+
+VOLUME_CHOICES = (
+    ('ml', (50, 100, 200, 330, 500, 750)),
+    ('gr', (0.5, 1, 2, 3, 5, 10, 20)),
+    ('pc', (1, 2, 3, 4, 5, 10, 20)),
+)
+
+
+class ShotIcon(ImageMixin, models.Model):
+
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+
 class ShotTypeManager(models.Manager):
 
     def get_for_user(self, user):
@@ -38,11 +59,12 @@ class ShotTypeManager(models.Manager):
         return user_shot_types, all_shot_types
 
 
-class ShotType(ImageMixin, models.Model):
+class ShotType(models.Model):
 
     title = models.CharField(max_length=100)
+    measure = models.CharField(max_length=2, choices=MEASURE_CHOICES, default='ml')
     volume = models.IntegerField(default=100, help_text='')
-    degree = models.IntegerField(default=40, help_text='Alcohol percentage or  ')
+    degree = models.IntegerField(default=40, help_text='Alcohol percentage or "strength"')
     user = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -50,6 +72,13 @@ class ShotType(ImageMixin, models.Model):
         default=settings.DEFAULT_ADMIN_USER_ID,
         null=True,
     )
+    icon = models.ForeignKey(
+        ShotIcon,
+        on_delete=models.SET_NULL,
+        related_name='shot_types',
+        null=True,
+    )
+    is_public = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     deleted = models.IntegerField(default=0)
     objects = ShotTypeManager()
