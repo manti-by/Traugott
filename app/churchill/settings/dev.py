@@ -14,7 +14,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'churchill',
         'USER': 'churchill',
-        'PASSWORD': 'pa$$word',
+        'PASSWORD': 'Dalt0nik',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -26,6 +26,9 @@ LOGGING = {
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+        },
+        'null': {
+            'class': 'logging.NullHandler',
         },
     },
     'loggers': {
@@ -40,16 +43,16 @@ LOGGING = {
             'propagate': True,
         },
         'django.db.backends': {
-            'handlers': [],
+            'handlers': ['null'],
             'propagate': False,
-            'level':'DEBUG',
+            'level': 'DEBUG',
         },
     },
 }
 
 CACHES = {
     'default': {
-
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
 

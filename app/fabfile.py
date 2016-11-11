@@ -8,7 +8,7 @@ from contextlib import contextmanager
 
 def set_defaults():
     if 'app_name' not in env.keys():
-        env.app_name = 'traugott'
+        env.app_name = 'churchill'
     if 'app_path' not in env.keys():
         env.app_path = '/home/%s/www/%s/src/app' % (env.user, env.app_name)
     if 'root_path' not in env.keys():
@@ -70,7 +70,7 @@ def pull(branch='master'):
         run('ssh-keyscan github.com >> ~/.ssh/known_hosts')
 
         run('mkdir %s' % env.root_path)
-        run('git clone git@github.com:manti-by/Traugott.git %s' % env.root_path)
+        run('git clone git@github.com:manti-by/Churchill.git %s' % env.root_path)
 
         with cd('../' % env.root_path):
             run('mkdir log')
@@ -94,7 +94,7 @@ def pip_install():
 def setup():
     with settings(warn_only=True):
         with cd(env.app_path):
-            run('cp -n traugott/settings/local.py.example traugott/settings/local.py')
+            run('cp -n churchill/settings/local.py.example churchill/settings/local.py')
 
         if env.target == 'staging':
             with cd('/etc/nginx/sites-enabled'):
