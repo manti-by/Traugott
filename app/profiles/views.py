@@ -9,6 +9,23 @@ from profiles.models import Profile
 logger = logging.getLogger('app')
 
 
+def profile_page(request):
+    try:
+        if not request.user.is_authenticated:
+            raise Http404
+
+        profile = Profile.get_logged(request)
+        if request.method == 'POST':
+            profile.email = request.POST.get('email', request.user.email)
+            profile.image = request.FILES.get('image')
+            profile.save()
+
+        return render(request, 'profiles/profile.html', {'user': profile.as_dict()})
+    except Exception as e:
+        logger.exception(e)
+        raise Http404
+
+
 def login_page(request):
     try:
         if request.user.is_authenticated:

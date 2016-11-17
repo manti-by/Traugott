@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
@@ -25,6 +23,20 @@ class Profile(ImageMixin, models.Model):
         else:
             image_url = static('img/user.png')
         return {'id': self.user.id, 'email': self.user.email, 'image': image_url}
+
+    @staticmethod
+    def get_logged(request):
+        if not request.user.is_authenticated:
+            return None
+        try:
+            user = User.objects.get(id=request.user.id)
+            if not user.profiles:
+                profile = Profile(user=user)
+                profile.save()
+            return user.profiles
+        except Exception as e:
+            pass
+        return None
 
     @staticmethod
     def get_or_create(email, password):

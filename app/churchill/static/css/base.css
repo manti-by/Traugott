@@ -144,3 +144,23 @@ form .error-holder {
 .drawer-menu .material-icons {
     margin-right: 1em;
 }
+
+.profile .image {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.profile .image img {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.profile .notice {
+    position: relative;
+    top: -18px;
+    font-size: 0.8em;
+    color: #999;
+}

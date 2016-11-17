@@ -5,7 +5,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from churchill.views import home_page, static_page
-from profiles.views import login_page, logout_page
+from profiles.views import profile_page, login_page, logout_page
 from shots.resources import ShotResource, ShotTypeResource
 
 
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^about$', static_page, {'page': 'about'}, name='about'),
 
     # Profile urls
+    url(r'^profiles/?$', profile_page, name='profile'),
     url(r'^profiles/login/?$', login_page, name='login'),
     url(r'^profiles/logout/?$', logout_page, name='logout'),
 
