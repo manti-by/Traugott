@@ -59,3 +59,7 @@
     line-height: 3.5em;
     color: inherit;
 }
+
+.mdl-layout__title, .mdl-layout-title {
+    font-size: 1em;
+}

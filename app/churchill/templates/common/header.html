@@ -17,7 +17,10 @@
             for="demo-menu-lower-right">
             {% if user.id %}
                 <li class="mdl-menu__item">
-                    <a class="mdl-navigation__link" href="{% url 'index' %}">Home</a>
+                    <a class="mdl-navigation__link" href="{% url 'index' %}">Timeline</a>
+                </li>
+                <li class="mdl-menu__item">
+                    <a class="mdl-navigation__link" href="{% url 'profile' %}">Profile</a>
                 </li>
                 <li class="mdl-menu__item">
                     <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
@@ -49,8 +52,12 @@
     <div class="drawer-menu mdl-navigation">
         {% if user.id %}
             <a class="mdl-navigation__link" href="{% url 'index' %}">
-                <i class="material-icons" role="presentation">home</i>
-                <span>Home</span>
+                <i class="material-icons" role="presentation">timeline</i>
+                <span>Timeline</span>
+            </a>
+            <a class="mdl-navigation__link" href="{% url 'profile' %}">
+                <i class="material-icons" role="presentation">account_circle</i>
+                <span>Profile</span>
             </a>
             <a class="mdl-navigation__link" href="{% url 'logout' %}">
                 <i class="material-icons">exit_to_app</i>
