@@ -24,12 +24,30 @@ VOLUME_CHOICES = (
 )
 
 
+class ShotIconManager(models.Manager):
+
+    def get_for_response(self):
+        result = []
+        for icon in super(ShotIconManager, self).get_queryset().all():
+            result.append(icon.as_dict())
+        return result
+
+
 class ShotIcon(ImageMixin, models.Model):
 
     title = models.CharField(max_length=100)
+    objects = ShotIconManager()
 
     def __str__(self):
         return self.title
+
+    def as_dict(self):
+        image_url = thumb_url = static_file('img/no-image.png')
+        if self.image:
+            image_url = self.image.url
+        if self.thumb:
+            thumb_url = self.thumb.url
+        return {'id': self.id, 'title': self.title, 'image': image_url, 'thumb': thumb_url  }
 
 
 class ShotTypeManager(models.Manager):
@@ -87,13 +105,13 @@ class ShotType(models.Model):
         return self.title
 
     def as_dict(self):
-        if self.thumb:
-            image_url = self.thumb.url
-        elif self.image:
-            image_url = self.image.url
-        else:
-            image_url = static_file('img/no-image.png')
-        return {'id': self.id, 'title': self.title, 'image': image_url,
+        image_url = thumb_url = static_file('img/no-image.png')
+        if self.icon:
+            if self.icon.image:
+                image_url = self.icon.image.url
+            if self.icon.thumb:
+                thumb_url = self.icon.thumb.url
+        return {'id': self.id, 'title': self.title, 'image': image_url, 'thumb': thumb_url,
                 'volume': self.volume, 'degree': self.degree}
 
 
@@ -148,15 +166,12 @@ class Shot(models.Model):
         return '%s %s' % (self.created.strftime('%b %d'), self.type.title)
 
     def as_dict(self):
-        if self.type.image:
-            image_url = self.type.image.url
-        else:
-            image_url = static_file('img/no-image.png')
-
-        if self.type.thumb:
-            thumb_url = self.type.thumb.url
-        else:
-            thumb_url = static_file('img/no-image.png')
+        image_url = thumb_url = static_file('img/no-image.png')
+        if self.type and self.type.icon:
+            if self.type.icon.image:
+                image_url = self.type.icon.image.url
+            if self.type.icon.thumb:
+                thumb_url = self.type.icon.thumb.url
 
         if self.quantity > 1:
             text = '%s, %d&times;%sml' % (self.type.title, self.quantity, self.type.volume)

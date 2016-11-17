@@ -41,6 +41,16 @@
                 <input class="mdl-textfield__input" type="text" id="volume">
                 <label class="mdl-textfield__label" for="volume">Volume, ml</label>
             </div>
+            <div class="icons">
+                {% for i in icons %}
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ i.id }}">
+                        <input type="radio" id="icon-{{ i.id }}" class="mdl-radio__button icon" name="icon" value="{{ i.id }}">
+                        <span class="mdl-radio__label">
+                            <img src="{{ i.thumb }}"> {{ i.title }}
+                        </span>
+                    </label>
+                {% endfor %}
+            </div>
         </form>
     </div>
     <div class="mdl-dialog__actions">

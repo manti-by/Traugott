@@ -20,7 +20,8 @@ form .error-holder {
 }
 
 .shot-image {
-    max-width: 100%;
+    width: 50px;
+    height: 50px;
 }
 
 .empty {
@@ -125,7 +126,8 @@ form .error-holder {
 
 .drawer-image img {
     position: absolute;
-    top: -50%;
+    top: -30%;
+    min-width: 100%;
     max-width: 100%;
 }
 
