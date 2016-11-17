@@ -15,59 +15,50 @@
         },
 
         initAddDialog: function() {
-            var view = this,
-                open_button = $('#open-add-shot-dialog'),
-                add_shot_dialog = $('#add-shot-dialog'),
-                add_button = add_shot_dialog.find('.add'),
-                close_button = add_shot_dialog.find('.close'),
-                increase_button = add_shot_dialog.find('.increase'),
-                decrease_button = add_shot_dialog.find('.decrease');
+            var view = this;
 
-            open_button.unbind('click');
-            open_button.on('click', function () {
-                add_shot_dialog.removeClass('hidden');
-            });
+            $('.open-dialog').on('click', function () {
+                $.shotTypeModel.all({}, function(data) {
+                    var html = $.fn.renderTemplate('t-add-shot-dialog', data, true),
+                        add_shot_dialog = $.fn.dialog(html);
 
-            add_button.unbind('click');
-            add_button.on('click', function () {
-                add_shot_dialog.addClass('hidden');
+                    add_shot_dialog.open();
 
-                var result = [];
-                add_shot_dialog.find('.quantity input').each(function () {
-                    if ($(this).val() > 0) {
-                        result.push({
-                            type: parseInt($(this).data('type-id')),
-                            quantity: parseInt($(this).val())
+                    add_shot_dialog.find('.close').on('click', add_shot_dialog.close);
+
+                    add_shot_dialog.find('.add').on('click', function () {
+                        var result = [];
+                        add_shot_dialog.find('.quantity input').each(function () {
+                            if ($(this).val() > 0) {
+                                result.push({
+                                    type    : parseInt($(this).data('type-id')),
+                                    quantity: parseInt($(this).val())
+                                });
+                            }
                         });
-                    }
-                });
 
-                $.shotModel.create(result, function (data) {
-                    $('#shot-list').renderTemplate('t-shot-list', data);
-                    $.each($('.shot'), function() {
-                        view.bindShotItemActions($(this));
+                        $.shotModel.create(result, function (data) {
+                            $('#shot-list').renderTemplate('t-shot-list', data);
+                            $.each($('.shot'), function() {
+                                view.bindShotItemActions($(this));
+                            });
+                            add_shot_dialog.close();
+                        });
+                    });
+
+                    add_shot_dialog.find('.increase').on('click', function () {
+                        var quantity = $(this).prev('.quantity').find('input'),
+                            value = parseInt(quantity.val());
+                        quantity.val(value + 1);
+                    });
+
+                    add_shot_dialog.find('.decrease').on('click', function () {
+                        var quantity = $(this).next('.quantity').find('input'),
+                            value = parseInt(quantity.val());
+                        value = value > 0 ? value - 1 : 0;
+                        quantity.val(value);
                     });
                 });
-            });
-
-            close_button.unbind('click');
-            close_button.on('click', function () {
-                add_shot_dialog.addClass('hidden');
-            });
-
-            increase_button.unbind('click');
-            increase_button.on('click', function () {
-                var quantity = $(this).prev('.quantity').find('input'),
-                    value = parseInt(quantity.val());
-                quantity.val(value + 1);
-            });
-
-            decrease_button.unbind('click');
-            decrease_button.on('click', function () {
-                var quantity = $(this).next('.quantity').find('input'),
-                    value = parseInt(quantity.val());
-                value = value > 0 ? value - 1 : 0;
-                quantity.val(value);
             });
         },
 

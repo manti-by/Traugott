@@ -68,8 +68,13 @@
 </script>
 
 <script id="t-add-shot-dialog" type="text/x-handlebars-template">
-    <h4 class="mdl-dialog__title">Choose shot and quantity</h4>
-    <div class="mdl-dialog__content">
+    <h4 class="mdl-dialog__title header">
+        Choose shot and quantity
+        <span class="close">
+            <i class="material-icons">close</i>
+        </span>
+    </h4>
+    <div class="mdl-dialog__content content">
         <h5>Mainly used shots</h5>
         <ul class="mdl-list">
             {{#each user_types }}
@@ -83,11 +88,51 @@
             {{/each}}
         </ul>
     </div>
-    <div class="mdl-dialog__actions">
+    <div class="mdl-dialog__actions actions">
         <button type="button" class="mdl-button close">Close</button>
         <button type="button" class="mdl-button mdl-button--primary add">Add</button>
         <div class="mdl-layout-spacer"></div>
         <button id="open-add-shot-type-dialog" type="button" class="mdl-button">Add Option</button>
     </div>
 </script>
+
+<script id="t-add-shot-type-dialog" type="text/x-handlebars-template">
+    <h4 class="mdl-dialog__title header">
+        Add custom shot type
+        <span class="close">
+            <i class="material-icons">close</i>
+        </span>
+    </h4>
+    <div class="mdl-dialog__content content">
+        <form>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="title">
+                <label class="mdl-textfield__label" for="title">Title</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="degree">
+                <label class="mdl-textfield__label" for="degree">Degree, %</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="volume">
+                <label class="mdl-textfield__label" for="volume">Volume, ml</label>
+            </div>
+            <div class="icons">
+                {{#each icons }}
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ id }}">
+                        <input type="radio" id="icon-{{ id }}" class="mdl-radio__button icon" name="icon" value="{{ id }}">
+                        <span class="mdl-radio__label">
+                            <img src="{{ thumb }}"> {{ title }}
+                        </span>
+                    </label>
+                {{/each}}
+            </div>
+        </form>
+    </div>
+    <div class="mdl-dialog__actions actions">
+        <button type="button" class="mdl-button close">Close</button>
+        <button type="button" class="mdl-button mdl-button--primary add">Add</button>
+    </div>
+</script>
+
 {% endverbatim %}
