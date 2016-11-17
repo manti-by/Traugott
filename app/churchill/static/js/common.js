@@ -30,10 +30,15 @@
         });
     };
 
-    $.fn.renderTemplate = function(template_name, data) {
+    $.fn.renderTemplate = function(template_name, data, ret) {
         var source   = $('#' + template_name).html(),
             template = Handlebars.compile(source);
-        $(this).html(template(data));
+
+        if (ret) {
+            return template(data);
+        } else {
+            $(this).html(template(data));
+        }
     };
 
     $.fn.showError = function(message) {
