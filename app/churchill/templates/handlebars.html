@@ -28,8 +28,8 @@
 </script>
 
 <script id="t-shot-list" type="text/x-handlebars-template">
-    <div class="mdl-grid">
-        <h2 class="mdl-cell mdl-cell--12-col">Your Latest shots</h2>
+    <h2>Your Latest shots</h2>
+    <div class="mdl-grid mobile-container">
         {{#each shots}}
             <div class="mdl-cell mdl-cell--4-col">
                 <div class="mdl-card shot">
@@ -55,44 +55,79 @@
         </span>
         <span class="mdl-list__item-secondary-content">
             <button class="mdl-button mdl-js-button mdl-button--icon decrease">
-                <i class="material-icons">remove_circle_outline</i>
+                <i class="material-icons">remove</i>
             </button>
             <span class="quantity">
                 <input type="text" name="quantity" value="0" data-type-id="{{ id }}">
             </span>
             <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
-                <i class="material-icons">add_circle_outline</i>
+                <i class="material-icons">add</i>
             </button>
         </span>
     </li>
 </script>
 
 <script id="t-add-shot-dialog" type="text/x-handlebars-template">
-    <h4 class="mdl-dialog__title header">
-        Choose shot and quantity
-        <span class="close">
-            <i class="material-icons">close</i>
-        </span>
-    </h4>
+    <div class="mdl-layout__header is-casting-shadow">
+        <div class="mdl-layout__drawer-button close">
+            <i class="material-icons">arrow_back</i>
+        </div>
+        <div id="add-shot-header" class="mdl-layout__header-row header">
+            <span class="mdl-layout-title">Add shot</span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="shot-type-button" class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <ul id="shot-type-menu" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="shot-type-button">
+              <li class="mdl-menu__item">Add new shot type</li>
+              <li class="mdl-menu__item">Edit catalog</li>
+            </ul>
+        </div>
+    </div>
     <div class="mdl-dialog__content content">
-        <h5>Mainly used shots</h5>
-        <ul class="mdl-list">
-            {{#each user_types }}
-                {{>shot-type-item}}
-            {{/each}}
-        </ul>
-        <h5>Other shots</h5>
-        <ul class="mdl-list">
-            {{#each all_types }}
-                {{>shot-type-item}}
-            {{/each}}
-        </ul>
+        <div id="shot-type-tabs" class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+            <div class="mdl-tabs__tab-bar">
+                <a href="#popular-panel" class="mdl-tabs__tab is-active">
+                    <i class="material-icons">view_carousel</i>
+                </a>
+                <a href="#library-panel" class="mdl-tabs__tab">
+                    <i class="material-icons">view_agenda</i>
+                </a>
+            </div>
+            <div class="mdl-tabs__panel is-active" id="popular-panel">
+                <div class="mobile-container">
+                    {{#popular}}
+                        <div class="image"><img src="{{ image }}"></div>
+                        <div class="name">{{ title }}</div>
+                        <div class="quantity">
+                            <i class="material-icons">remove</i>
+                            <input type="text" name="quantity" value="{{ volume }}" data-id="{{ id }}"> {{ measure }}
+                            <i class="material-icons">add</i>
+                        </div>
+                    {{/popular}}
+                </div>
+            </div>
+            <div class="mdl-tabs__panel" id="library-panel">
+                <div class="mobile-container">
+                    <h5>Mainly used shots</h5>
+                    <ul class="mdl-list">
+                        {{#each user_types }}
+                            {{>shot-type-item}}
+                        {{/each}}
+                    </ul>
+                    <h5>Other shots</h5>
+                    <ul class="mdl-list">
+                        {{#each all_types }}
+                            {{>shot-type-item}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+         </div>
     </div>
     <div class="mdl-dialog__actions actions">
         <button type="button" class="mdl-button close">Close</button>
-        <button type="button" class="mdl-button mdl-button--primary add">Add</button>
-        <div class="mdl-layout-spacer"></div>
-        <button id="open-add-shot-type-dialog" type="button" class="mdl-button">Add Option</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored add">Add</button>
     </div>
 </script>
 

@@ -4,7 +4,7 @@
 
     $.fn.dialog = function(html) {
         var open = $('.open-dialog'),
-            dialog = $('<div class="dialog"></div>');
+            dialog = $('<div class="dialog gradient"></div>');
 
         dialog.open = function() {
             open.addClass('hidden');

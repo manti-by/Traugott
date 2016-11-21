@@ -17,7 +17,7 @@
         initAddDialog: function() {
             var view = this;
 
-            $('.open-dialog').on('click', function () {
+            $('.add-shot').on('click', function () {
                 $.shotTypeModel.all({}, function(data) {
                     var html = $.fn.renderTemplate('t-add-shot-dialog', data, true),
                         add_shot_dialog = $.fn.dialog(html);
@@ -58,6 +58,20 @@
                         value = value > 0 ? value - 1 : 0;
                         quantity.val(value);
                     });
+
+                    // Rebind MLD events
+                    componentHandler.upgradeElement(
+                        document.getElementById('shot-type-button'),
+                        'MaterialButton'
+                    );
+                    componentHandler.upgradeElement(
+                        document.getElementById('shot-type-menu'),
+                        'MaterialMenu'
+                    );
+                    componentHandler.upgradeElement(
+                        document.getElementById('shot-type-tabs'),
+                        'MaterialTabs'
+                    );
                 });
             });
         },

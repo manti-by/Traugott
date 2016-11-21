@@ -3,12 +3,8 @@
 {% load static %}
 
 {% block content %}
-    <div class="window">
-        <div class="main">
-            {% include 'shots/list.html' %}
-            <button class="open-dialog mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                <i class="material-icons">add</i>
-            </button>
-        </div>
-    </div>
+    {% include 'shots/list.html' %}
+    <button class="add-shot mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+        <i class="material-icons">add</i>
+    </button>
 {% endblock %}

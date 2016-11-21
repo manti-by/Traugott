@@ -1,14 +1,24 @@
 @media only screen and (max-width: 480px) {
     h1 {
-        font-size: 2.5em;
+        margin: 0.5em 0;
+        font-size: 2em;
     }
 
     h2 {
-        font-size: 2em;
+        margin: 0.5em 0 5px 0;
+        font-size: 1.5em;
+    }
+
+    h5 {
+        margin: 0.5em 0;
     }
 
     .container.static {
         width: calc(100% - 32px);
+    }
+
+    .mdl-layout__content {
+        padding: 0 0.5em;
     }
 
     .mdl-dialog__title {
@@ -17,7 +27,7 @@
     }
 
     .mdl-dialog__content {
-        padding: 1em;
+        padding: 1em 0 0 0;
     }
 
     .mdl-list__item {
@@ -25,7 +35,8 @@
     }
 
     .mdl-cell {
-        margin: 0 8px;
+        margin: 0;
+        width: 100%;
     }
 
     .shot-type .image {
@@ -34,5 +45,10 @@
 
     .shot-type .quantity {
         padding: 0;
+    }
+
+    .mobile-container {
+        padding: 0.5em;
+        background: #FFF;
     }
 }
