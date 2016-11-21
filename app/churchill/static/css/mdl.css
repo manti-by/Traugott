@@ -11,6 +11,22 @@
     text-transform: uppercase;
 }
 
+.mdl-button--primary.mdl-button--primary {
+    color: #8021ba;
+}
+
+.mdl-button--raised.mdl-button--colored {
+    background: #8021ba;
+}
+
+.mdl-button--fab.mdl-button--colored {
+    background: #8021ba;
+}
+
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
+    background: #FFF;
+}
+
 .mdl-card {
     width: auto;
 }
@@ -60,6 +76,10 @@
     color: inherit;
 }
 
-.mdl-layout__title, .mdl-layout-title {
-    font-size: 1em;
+.mdl-layout__header {
+    background-color: transparent;
+}
+
+.dialog .mdl-layout__header {
+    display: flex;
 }

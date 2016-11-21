@@ -31,9 +31,12 @@ class ShotResource(Resource):
                             quantity=item['quantity'])
                 shot.save()
         user_types, all_types = ShotType.objects.get_splitted_for_user(request.user)
+        popular = user_types[0]
+        del user_types[0]
         return JsonResponse({'status': 200,
                              'data': {
                                  'shots': Shot.objects.get_for_response(request.user),
+                                 'popular': popular,
                                  'user_types': user_types,
                                  'all_types': all_types
                              }}, status=200)
@@ -69,8 +72,11 @@ class ShotTypeResource(Resource):
     @resource_wrapper
     def get(self, request):
         user_types, all_types = ShotType.objects.get_splitted_for_user(request.user)
+        popular = user_types[0]
+        del user_types[0]
         return JsonResponse({'status': 200,
                              'data': {
+                                 'popular': popular,
                                  'user_types': user_types,
                                  'all_types': all_types
                              }}, status=200)
