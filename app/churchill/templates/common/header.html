@@ -2,54 +2,61 @@
 
 <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-        <!-- Title -->
         <span class="mdl-layout-title">Churchill</span>
-
-        <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
 
-        <!-- Navigation. We hide it in small screens. -->
-        <button id="demo-menu-lower-right"
-                class="mdl-button mdl-js-button mdl-button--icon mdl-layout--large-screen-only">
-            <i class="material-icons">more_vert</i>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-            for="demo-menu-lower-right">
+        <div class="top-menu mdl-layout--large-screen-only">
             {% if user.id %}
-                <li class="mdl-menu__item">
-                    <a class="mdl-navigation__link" href="{% url 'index' %}">Timeline</a>
-                </li>
-                <li class="mdl-menu__item">
-                    <a class="mdl-navigation__link" href="{% url 'profile' %}">Profile</a>
-                </li>
-                <li class="mdl-menu__item">
-                    <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
-                </li>
-                <li class="mdl-menu__item">
-                    <a class="mdl-navigation__link" href="{% url 'logout' %}">Logout</a>
-                </li>
+                <div class="image">
+                    <img src="{{ user.image }}">
+                </div>
+                <div class="email">{{ user.email }}</div>
+
+                <button id="show-top-menu" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="show-top-menu">
+                    <li class="mdl-menu__item">
+                        <a class="mdl-navigation__link" href="{% url 'index' %}">Timeline</a>
+                    </li>
+                    <li class="mdl-menu__item">
+                        <a class="mdl-navigation__link" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="mdl-menu__item">
+                        <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="mdl-menu__item">
+                        <a class="mdl-navigation__link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
             {% else %}
-                <li class="mdl-menu__item">
-                    <a class="mdl-navigation__link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="mdl-menu__item">
-                    <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
-                </li>
+                <button id="show-top-menu" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="show-top-menu">
+                    <li class="mdl-menu__item">
+                        <a class="mdl-navigation__link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="mdl-menu__item">
+                        <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
+                    </li>
+                </ul>
             {% endif %}
-        </ul>
+        </div>
     </div>
 </header>
-<div class="mdl-layout__drawer">
+
+<div class="drawer mdl-layout__drawer">
     {% if user.id %}
-        <div class="drawer-image">
+        <div class="image">
             <img src="{{ user.image }}">
         </div>
-        <span class="mdl-layout-title">{{ user.email }}</span>
+        <div class="mdl-layout-title email">{{ user.email }}</div>
     {% else %}
-        <span class="mdl-layout-title">Not loggined</span>
+        <div class="mdl-layout-title email">Not loggined</div>
     {% endif %}
 
-    <div class="drawer-menu mdl-navigation">
+    <div class="menu mdl-navigation">
         {% if user.id %}
             <a class="mdl-navigation__link" href="{% url 'index' %}">
                 <i class="material-icons" role="presentation">timeline</i>
@@ -69,6 +76,7 @@
                 <span>Login</span>
             </a>
         {% endif %}
+
         <a class="mdl-navigation__link" href="{% url 'about' %}">
             <i class="material-icons">help_outline</i>
             <span class="visuallyhidden">About</span>

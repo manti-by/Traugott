@@ -1,0 +1,257 @@
+body {
+    position: relative;
+    font-family: Roboto, Arial, Helvetica, serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.dialog {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    background: #FFF;
+    z-index: 1000;
+
+    .actions {
+        position: absolute;
+        padding: 1em;
+        bottom: 0;
+    }
+}
+
+.add-shot {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    z-index: 900;
+}
+
+form {
+    &.login {
+        min-height: 250px;
+    }
+
+    .error-holder {
+        color: red;
+    }
+}
+
+.shot-image {
+    width: 50px;
+    height: 50px;
+}
+
+.empty {
+    padding: 1em 0;
+    color: #333;
+}
+
+#add-shot-dialog h5 {
+    margin: 0;
+}
+
+#popular-panel {
+    text-align: center;
+
+    .image {
+        width: 250px;
+        height: 250px;
+        margin: 1em auto;
+        overflow: hidden;
+
+        img {
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .quantity {
+        padding-bottom: 1em;
+
+        input {
+            width: 20%;
+            padding: 0.2em;
+            font-size: 1.2em;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #CCC;
+        }
+    }
+}
+
+.shot-type {
+    .image {
+        width: 50px;
+    }
+
+    .quantity {
+        position: relative;
+        top: -3px;
+        margin: 0;
+        padding: 0 5px;
+
+        input {
+            width: 1em;
+            margin: 0;
+            padding: 0.2em 0;
+            font-size: 1em;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #CCC;
+        }
+    }
+}
+
+.shot {
+    min-height: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #CCC;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .date {
+        float: right;
+        padding: 1em 0.5em;
+    }
+
+    .actions {
+        flex-direction: row-reverse;
+        padding: 0.3em;
+        text-align: right;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .quantity {
+        position: relative;
+        top: 2px;
+        margin: 0;
+        padding: 0;
+        input {
+            width: 1em;
+            margin: 0;
+            padding: 0;
+            font-size: 1em;
+            text-align: center;
+            border: none;
+            background: transparent;
+        }
+    }
+}
+
+#shot-type-tabs {
+    width: calc(100% - 1em);
+    margin: 0 auto;
+
+    .mdl-tabs__tab {
+        width: 50%;
+        color: #FFF;
+    }
+}
+
+.top-menu {
+    .image {
+        display: inline-block;
+        position: relative;
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .email {
+        display: inline-block;
+        position: relative;
+        top: 2px;
+        padding: 0 0.2em;
+    }
+}
+
+.drawer {
+    .image {
+        position: relative;
+        width: 100%;
+        height: 150px;
+        vertical-align: middle;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            top: -30%;
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .email {
+        padding: 0.5em 1em;
+        font-size: 1.1em;
+        line-height: 1;
+    }
+
+    .menu {
+        .mdl-navigation__link {
+            align-items: center;
+            font-size: 1.1em;
+        }
+
+        .material-icons {
+            margin-right: 1em;
+        }
+    }
+}
+
+.profile {
+    .image {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+        text-align: center;
+        overflow: hidden;
+
+        img {
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .notice {
+        position: relative;
+        top: -18px;
+        font-size: 0.8em;
+        color: #999;
+    }
+}
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#330838+0,0d818e+100 */
+.gradient {
+    /* Old browsers */
+    background: #330838;
+    /* FF3.6-15 */
+    background: -moz-linear-gradient(-45deg, #330838 0%, #0d818e 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: -webkit-linear-gradient(-45deg, #330838 0%, #0d818e 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient(135deg, #330838 0%, #0d818e 100%);
+    /* IE6-9 fallback on horizontal gradient */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#330838', endColorstr='#0d818e', GradientType=1);
+}

@@ -10,3 +10,5 @@ django-simple-rest>=1.4,<1.5
 django-taggit==0.21.3
 django_compressor>=2.1,<2.2
 python-memcached==1.58
+django-static-precompiler==1.5
+lessc==0.1.2
