@@ -1,4 +1,4 @@
-@media only screen and (max-width: 480px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
     h1 {
         margin: 0.5em 0;
         font-size: 2em;
@@ -17,8 +17,9 @@
         width: calc(100% - 1em);
     }
 
-    .container.static {
-        width: calc(100% - 1em);
+    .mobile-container {
+        padding: 0.5em;
+        background: #FFF;
     }
 
     .mdl-layout__content {
@@ -43,16 +44,13 @@
         width: 100%;
     }
 
-    .shot-type .image {
-        width: 35px;
-    }
+    .shot-type {
+        .image {
+            width: 35px;
+        }
 
-    .shot-type .quantity {
-        padding: 0;
-    }
-
-    .mobile-container {
-        padding: 0.5em;
-        background: #FFF;
+        .quantity {
+            padding: 0;
+        }
     }
 }

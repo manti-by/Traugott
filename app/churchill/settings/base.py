@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'simple_rest',
     'sorl.thumbnail',
     'compressor',
+    'static_precompiler',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -131,6 +132,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    'static_precompiler.finders.StaticPrecompilerFinder',
 ]
 
 STATICFILES_DIRS = [
@@ -154,6 +156,17 @@ LOGIN_URL = '/profiles/login/'
 THUMB_SIZE = '50x50'
 PREVIEW_SIZE = '300x300'
 THUMBNAIL_FORMAT = 'PNG'
+
+
+# Less compiler
+
+STATIC_PRECOMPILER_COMPILERS = (
+    ('static_precompiler.compilers.LESS', {
+        'executable': '/usr/bin/lessc'
+    }),
+)
+
+STATIC_PRECOMPILER_OUTPUT_DIR = ''
 
 
 # Assets compressor
