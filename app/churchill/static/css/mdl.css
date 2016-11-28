@@ -11,16 +11,22 @@
     text-transform: uppercase;
 }
 
-.mdl-button--primary.mdl-button--primary {
+.mdl-js-button.mdl-button--primary {
     color: #8021ba;
 }
-
-.mdl-button--raised.mdl-button--colored {
-    background: #8021ba;
+.mdl-js-button.mdl-button--primary:hover {
+    color: #0d818e;
 }
 
-.mdl-button--fab.mdl-button--colored {
+.mdl-button--fab.mdl-button--colored,
+.mdl-button--raised.mdl-button--colored {
+    color: #FFF;
     background: #8021ba;
+}
+.mdl-button--fab.mdl-button--colored:hover,
+.mdl-button--raised.mdl-button--colored:hover {
+    color: #FFF;
+    background: #0d818e;
 }
 
 .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
@@ -82,4 +88,17 @@
 
 .dialog .mdl-layout__header {
     display: flex;
+}
+
+.mdl-textfield__label,
+.mdl-textfield__input {
+    color: #FFF;
+}
+
+.mdl-textfield__input {
+    border-bottom: 1px solid #FFF;
+}
+
+.mdl-textfield__label:after {
+    background-color: #0d818e;
 }

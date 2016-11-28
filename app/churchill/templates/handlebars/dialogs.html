@@ -1,71 +1,4 @@
 {% verbatim %}
-<script id="t-shot-item" type="text/x-handlebars-template">
-    <div class="mdl-card__supporting-text content">
-        <img src="{{ thumb }}" class="shot-image">
-        {{{ text }}}
-        <div class="date">
-            {{ date }}
-        </div>
-    </div>
-    <div class="mdl-card__actions actions {{#if opened }}{{else}}hidden{{/if}}">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect delete" data-id="{{ id }}">
-            Delete
-        </a>
-        <div class="mdl-layout-spacer"></div>
-        <div>
-            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
-                <i class="material-icons">add_circle_outline</i>
-            </button>
-            <span class="quantity">
-                <input type="text" name="quantity" value="{{ quantity }}"
-                       data-id="{{ id }}" data-type-id="{{ type.id }}">
-            </span>
-            <button class="mdl-button mdl-js-button mdl-button--icon decrease">
-                <i class="material-icons">remove_circle_outline</i>
-            </button>
-        </div>
-    </div>
-</script>
-
-<script id="t-shot-list" type="text/x-handlebars-template">
-    <h2>Your Latest shots</h2>
-    <div class="mdl-grid mobile-container">
-        {{#each shots}}
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card shot">
-                    {{>shot-item}}
-                </div>
-            </div>
-        {{else}}
-            <div class="empty mdl-cell mdl-cell--12-col">
-                You haven't added any shots yet.
-            </div>
-        {{/each}}
-    </div>
-</script>
-
-<script id="t-shot-type-item" type="text/x-handlebars-template">
-    <li class="shot-type mdl-list__item mdl-list__item--two-line">
-        <span class="mdl-list__item-primary-content">
-            <img src="{{ image }}" class="image">
-            <span class="shot-title">
-                {{ title }}
-                ({{ volume }}ml)
-            </span>
-        </span>
-        <span class="mdl-list__item-secondary-content">
-            <button class="mdl-button mdl-js-button mdl-button--icon decrease">
-                <i class="material-icons">remove</i>
-            </button>
-            <span class="quantity">
-                <input type="text" name="quantity" value="0" data-type-id="{{ id }}">
-            </span>
-            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
-                <i class="material-icons">add</i>
-            </button>
-        </span>
-    </li>
-</script>
 
 <script id="t-add-shot-dialog" type="text/x-handlebars-template">
     <div class="mdl-layout__header is-casting-shadow">
@@ -100,22 +33,34 @@
                         <div class="image"><img src="{{ image }}"></div>
                         <div class="name">{{ title }}</div>
                         <div class="quantity">
-                            <i class="material-icons">remove</i>
-                            <input type="text" name="quantity" value="{{ volume }}" data-id="{{ id }}"> {{ measure }}
-                            <i class="material-icons">add</i>
+                            <button class="mdl-button mdl-js-button mdl-button--icon decrease popular">
+                                <i class="material-icons">remove</i>
+                            </button>
+                            <span class="quantity">
+                                <input type="text" name="quantity" value="{{ volume }}"
+                                       data-type-id="{{ id }}" data-step="{{ volume }}">
+                                {{ measure }}
+                            </span>
+                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase popular">
+                                <i class="material-icons">add</i>
+                            </button>
                         </div>
                     {{/popular}}
                 </div>
             </div>
             <div class="mdl-tabs__panel" id="library-panel">
                 <div class="mobile-container">
-                    <h5>Mainly used shots</h5>
-                    <ul class="mdl-list">
-                        {{#each user_types }}
-                            {{>shot-type-item}}
-                        {{/each}}
-                    </ul>
-                    <h5>Other shots</h5>
+                    {{#if user_types }}
+                        <h5>Your favorite shots</h5>
+                        <ul class="mdl-list">
+                            {{#each user_types }}
+                                {{>shot-type-item}}
+                            {{/each}}
+                        </ul>
+                        <h5>Other shots</h5>
+                    {{else}}
+                        <h5>Popular shots</h5>
+                    {{/if}}
                     <ul class="mdl-list">
                         {{#each all_types }}
                             {{>shot-type-item}}

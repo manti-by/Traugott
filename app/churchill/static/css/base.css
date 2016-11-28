@@ -53,6 +53,7 @@ form .error-holder {
 
 .empty {
     padding: 1em 0;
+    color: #333;
 }
 
 
@@ -89,12 +90,6 @@ form .error-holder {
     border-bottom: 1px solid #CCC;
 }
 
-#popular-panel .quantity .material-icons {
-    position: relative;
-    top: 5px;
-    padding: 1em;
-}
-
 .shot-type .image {
     width: 50px;
 }
@@ -119,6 +114,10 @@ form .error-holder {
 .shot {
     min-height: 0;
     border-bottom: 1px solid #CCC;
+}
+
+.shot:last-child {
+    border-bottom: none;
 }
 
 .shot .date {

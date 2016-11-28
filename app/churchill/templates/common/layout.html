@@ -51,7 +51,7 @@
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header gradient">
             {% include 'common/header.html' %}
-            <main class="mdl-layout__content">
+            <main class="mdl-layout__content container">
                 {% block content %}
                     404 Not Found
                 {% endblock %}
@@ -91,6 +91,8 @@
             <script src="{% static 'js/index.js' %}"></script>
         {% endif %}
 
-        {% include 'handlebars.html' %}
+        {% include 'handlebars/shot.html' %}
+        {% include 'handlebars/shot-type.html' %}
+        {% include 'handlebars/dialogs.html' %}
     </body>
 </html>
