@@ -72,8 +72,10 @@ class ShotTypeResource(Resource):
     @resource_wrapper
     def get(self, request):
         user_types, all_types = ShotType.objects.get_splitted_for_user(request.user)
-        popular = user_types[0]
-        del user_types[0]
+        popular = all_types[0]
+        if len(user_types):
+            popular = user_types[0]
+            del user_types[0]
         return JsonResponse({'status': 200,
                              'data': {
                                  'popular': popular,

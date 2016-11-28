@@ -8,12 +8,12 @@
 
         dialog.open = function() {
             open.addClass('hidden');
-            dialog.css('height', $(window).height()).animate({ left: 0 });
+            dialog.css('height', $(window).height()).animate({ left: 0 }, 250);
         };
 
         dialog.close = function() {
             open.removeClass('hidden');
-            dialog.animate({ left: '100%' }, 400, function() {
+            dialog.animate({ left: '100%' }, 250, function() {
                 dialog.remove();
             });
         };

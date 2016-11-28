@@ -13,8 +13,12 @@
         margin: 0.5em 0;
     }
 
+    .container {
+        width: calc(100% - 1em);
+    }
+
     .container.static {
-        width: calc(100% - 32px);
+        width: calc(100% - 1em);
     }
 
     .mdl-layout__content {

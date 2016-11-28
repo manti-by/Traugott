@@ -1,0 +1,26 @@
+{% verbatim %}
+
+<script id="t-shot-type-item" type="text/x-handlebars-template">
+    <li class="shot-type mdl-list__item mdl-list__item--two-line">
+        <span class="mdl-list__item-primary-content">
+            <img src="{{ image }}" class="image">
+            <span class="shot-title">
+                {{ title }}
+                ({{ volume }}ml)
+            </span>
+        </span>
+        <span class="mdl-list__item-secondary-content">
+            <button class="mdl-button mdl-js-button mdl-button--icon decrease">
+                <i class="material-icons">remove</i>
+            </button>
+            <span class="quantity">
+                <input type="text" name="quantity" value="0" data-type-id="{{ id }}" data-step="1">
+            </span>
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
+                <i class="material-icons">add</i>
+            </button>
+        </span>
+    </li>
+</script>
+
+{% endverbatim %}

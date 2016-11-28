@@ -28,13 +28,14 @@
 
                     add_shot_dialog.find('.add').on('click', function () {
                         var result = [];
-                        add_shot_dialog.find('.quantity input').each(function () {
-                            if ($(this).val() > 0) {
-                                result.push({
-                                    type    : parseInt($(this).data('type-id')),
-                                    quantity: parseInt($(this).val())
-                                });
-                            }
+                        add_shot_dialog.find('.mdl-tabs__panel.is-active')
+                            .find('.quantity input').each(function () {
+                                if ($(this).val() > 0) {
+                                    result.push({
+                                        type    : parseInt($(this).data('type-id')),
+                                        quantity: parseInt($(this).val())
+                                    });
+                                }
                         });
 
                         $.shotModel.create(result, function (data) {
@@ -48,14 +49,18 @@
 
                     add_shot_dialog.find('.increase').on('click', function () {
                         var quantity = $(this).prev('.quantity').find('input'),
-                            value = parseInt(quantity.val());
-                        quantity.val(value + 1);
+                            value = parseInt(quantity.val()),
+                            step = parseInt(quantity.data('step'));
+
+                        quantity.val(value + step);
                     });
 
                     add_shot_dialog.find('.decrease').on('click', function () {
                         var quantity = $(this).next('.quantity').find('input'),
-                            value = parseInt(quantity.val());
-                        value = value > 0 ? value - 1 : 0;
+                            value = parseInt(quantity.val()),
+                            step = parseInt(quantity.data('step'));
+
+                        value = value - step > 0 ? value - step : 0;
                         quantity.val(value);
                     });
 
