@@ -15,8 +15,8 @@
 
             open_button.unbind('click');
             open_button.on('click', function () {
-                $.shotTypeModel.all({}, function(data) {
-                    var html = $.fn.renderTemplate('t-add-shot-type-dialog', data, true),
+                $.shotIconModel.all({}, function(data) {
+                    var html = $.fn.renderTemplate('t-add-shot-type-dialog', { icons: data }, true),
                         add_shot_type_dialog = $.fn.dialog(html);
 
                     add_shot_type_dialog.open();
@@ -25,6 +25,24 @@
                     add_shot_type_dialog.find('.add').on('click', function () {
                         add_shot_type_dialog.close();
                     });
+
+                    // Rebind MLD events
+                    componentHandler.upgradeElement(
+                        document.getElementById('title'),
+                        'MaterialTextfield'
+                    );
+                    componentHandler.upgradeElement(
+                        document.getElementById('degree'),
+                        'MaterialTextfield'
+                    );
+                    componentHandler.upgradeElement(
+                        document.getElementById('volume'),
+                        'MaterialTextfield'
+                    );
+                    componentHandler.upgradeElement(
+                        document.getElementById('cost'),
+                        'MaterialTextfield'
+                    );
                 });
             });
         }
