@@ -34,7 +34,7 @@ class ShotIconAdmin(admin.ModelAdmin):
 @admin.register(ShotType)
 class ShotTypeAdmin(admin.ModelAdmin):
 
-    list_display = ('icon_image', 'title', 'volume', 'measure', 'degree', 'user', 'is_public')
+    list_display = ('icon_image', 'title', 'volume', 'measure', 'degree', 'user', 'is_public', 'is_deleted')
     ordering = ('title',)
 
     fieldsets = (
@@ -53,11 +53,15 @@ class ShotTypeAdmin(admin.ModelAdmin):
         return mark_safe('<img src="%s" width="50" />' % icon)
     icon_image.short_description = _('Icon')
 
+    def is_deleted(self, obj):
+        return obj.deleted == 0
+    is_deleted.boolean = True
+
 
 @admin.register(Shot)
 class ShotAdmin(admin.ModelAdmin):
 
-    list_display = ('icon_image', 'created', 'user', 'title', 'volume', 'measure', 'degree', 'deleted')
+    list_display = ('icon_image', 'created', 'user', 'title', 'volume', 'measure', 'degree', 'is_deleted')
     ordering = ('created',)
 
     def icon_image(self, obj):
@@ -78,3 +82,7 @@ class ShotAdmin(admin.ModelAdmin):
 
     def degree(self, obj):
         return obj.type.degree
+
+    def is_deleted(self, obj):
+        return obj.deleted == 0
+    is_deleted.boolean = True
