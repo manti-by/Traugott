@@ -79,41 +79,49 @@
 </script>
 
 <script id="t-add-shot-type-dialog" type="text/x-handlebars-template">
-    <h4 class="mdl-dialog__title header">
-        Add custom shot type
-        <span class="close">
-            <i class="material-icons">close</i>
-        </span>
-    </h4>
-    <div class="mdl-dialog__content content">
-        <form>
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="title">
-                <label class="mdl-textfield__label" for="title">Title</label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="degree">
-                <label class="mdl-textfield__label" for="degree">Degree, %</label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="volume">
-                <label class="mdl-textfield__label" for="volume">Volume, ml</label>
-            </div>
-            <div class="icons">
-                {{#each icons }}
-                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ id }}">
-                        <input type="radio" id="icon-{{ id }}" class="mdl-radio__button icon" name="icon" value="{{ id }}">
-                        <span class="mdl-radio__label">
-                            <img src="{{ thumb }}"> {{ title }}
-                        </span>
-                    </label>
-                {{/each}}
-            </div>
-        </form>
+    <div class="mdl-layout__header is-casting-shadow">
+        <div class="mdl-layout__drawer-button close">
+            <i class="material-icons">arrow_back</i>
+        </div>
+        <div id="add-shot-header" class="mdl-layout__header-row header">
+            <span class="mdl-layout-title">Add shot type</span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="mdl-dialog__content content">
+            <form id="add-shot-type-form">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="title">
+                    <label class="mdl-textfield__label" for="title">Title</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="degree">
+                    <label class="mdl-textfield__label" for="degree">Degree, %</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="volume">
+                    <label class="mdl-textfield__label" for="volume">Volume, ml</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="cost">
+                    <label class="mdl-textfield__label" for="cost">Average Cost, USD</label>
+                </div>
+                <div class="icons">
+                    {{#each icons }}
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ id }}">
+                            <input type="radio" id="icon-{{ id }}" class="mdl-radio__button icon" name="icon" value="{{ id }}">
+                            <span class="mdl-radio__label">
+                                <img src="{{ thumb }}"> {{ title }}
+                            </span>
+                        </label>
+                    {{/each}}
+                </div>
+            </form>
+        </div>
     </div>
     <div class="mdl-dialog__actions actions">
         <button type="button" class="mdl-button close">Close</button>
-        <button type="button" class="mdl-button mdl-button--primary add">Add</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored add">Add</button>
     </div>
 </script>
 
