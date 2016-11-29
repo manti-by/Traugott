@@ -25,10 +25,10 @@ class ShotResource(Resource):
             return JsonResponse({'status': 204,
                                  'message': 'Data is empty'}, status=200)
         for item in data:
-            if item['quantity'] > 0:
+            if item['volume'] > 0:
                 shot = Shot(user=request.user,
                             type=ShotType.objects.get(id=item['type']),
-                            quantity=item['quantity'])
+                            volume=item['volume'])
                 shot.save()
         user_types, all_types = ShotType.objects.get_splitted_for_user(request.user)
         popular = user_types[0]
@@ -49,7 +49,7 @@ class ShotResource(Resource):
                                  'message': 'Data is empty'}, status=200)
 
         shot = Shot.objects.get(id=data['id'], user=request.user)
-        shot.quantity = data['quantity']
+        shot.volume = data['volume']
         shot.save()
         return JsonResponse({'status': 200,
                              'data': shot.as_dict()}, status=200)

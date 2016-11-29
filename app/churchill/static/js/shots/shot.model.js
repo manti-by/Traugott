@@ -43,7 +43,7 @@
             console.info(data);
         },
 
-        _error: function(data) {
+        _error: function(message) {
             $.fn.showError(message);
         },
 
