@@ -12,10 +12,10 @@
 
 .mdl-button {
     &.mdl-button--primary {
-        color: #8021ba;
+        color: @color-primary;
 
         &:hover {
-            color: #0d818e;
+            color: @color-accent;
         }
     }
 
@@ -23,11 +23,11 @@
     &.mdl-button--raised {
         &.mdl-button--colored {
             color: #FFF;
-            background: #8021ba;
+            background: @color-primary;
 
             &:hover {
                 color: #FFF;
-                background: #0d818e;
+                background: @color-accent;
             }
         }
     }
@@ -36,13 +36,39 @@
         color: #666;
 
         &.mdl-button--colored {
-            color: #8021ba;
+            color: @color-accent;
         }
     }
 }
 
-.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
-    background: #FFF;
+.mdl-layout__header {
+    display: flex;
+    background-color: transparent;
+
+    .mdl-layout__header-row {
+        .mdl-menu__item {
+            .mdl-navigation__link {
+                padding: 0;
+                text-align: left;
+                line-height: 3.5em;
+                color: inherit;
+            }
+        }
+    }
+
+    .mdl-button {
+        &.mdl-button--icon {
+            color: #FFF;
+        }
+    }
+}
+
+.mdl-grid {
+    .mdl-cell:last-child {
+        .mdl-card {
+            border-bottom: 0;
+        }
+    }
 }
 
 .mdl-card {
@@ -79,40 +105,22 @@
 }
 
 .mdl-dialog {
-    .mdl-dialog__content .mdl-list:last-child {
-        margin-bottom: 0;
-    }
-
     .mdl-dialog__title {
         font-size: 2rem;
     }
+
+    .mdl-dialog__content {
+        .mdl-list:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
-.mdl-layout__header-row .mdl-menu__item .mdl-navigation__link {
-    padding: 0;
-    text-align: left;
-    line-height: 3.5em;
-    color: inherit;
-}
-
-.mdl-layout__header {
-    background-color: transparent;
-}
-
-.dialog .mdl-layout__header {
-    display: flex;
-}
-
-.mdl-textfield__input {
-    color: #FFF;
-    border-bottom: 1px solid #FFF;
-}
-
-.mdl-textfield__label {
-    color: #FFF;
-
-    &:after {
-        background-color: #0d818e;
+.mdl-tabs {
+    &.is-upgraded {
+        .mdl-tabs__tab.is-active:after {
+            background: #FFF;
+        }
     }
 }
 
@@ -121,10 +129,28 @@
     background: #FFF;
 }
 
-.mdl-grid {
-    .mdl-cell:last-child {
-        .mdl-card {
-            border-bottom: 0;
+.mdl-textfield {
+    .mdl-textfield__input {
+        color: #FFF;
+        border-bottom: 1px solid #FFF;
+    }
+
+    .mdl-textfield__label {
+        color: #FFF;
+
+        &:after {
+            background-color: @color-accent;
         }
+    }
+}
+
+.mdl-radio.is-checked {
+
+    .mdl-radio__inner-circle {
+        background: @color-accent;
+    }
+
+    .mdl-radio__outer-circle {
+        border: 2px solid @color-accent;
     }
 }

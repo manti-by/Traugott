@@ -27,22 +27,7 @@
                     });
 
                     // Rebind MLD events
-                    componentHandler.upgradeElement(
-                        document.getElementById('title'),
-                        'MaterialTextfield'
-                    );
-                    componentHandler.upgradeElement(
-                        document.getElementById('degree'),
-                        'MaterialTextfield'
-                    );
-                    componentHandler.upgradeElement(
-                        document.getElementById('volume'),
-                        'MaterialTextfield'
-                    );
-                    componentHandler.upgradeElement(
-                        document.getElementById('cost'),
-                        'MaterialTextfield'
-                    );
+                    componentHandler.upgradeDom();
                 });
             });
         }

@@ -255,15 +255,16 @@ form {
 
 
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#330838+0,0d818e+100 */
+
 .gradient {
     /* Old browsers */
-    background: #330838;
+    background: @color-primary-dark;
     /* FF3.6-15 */
-    background: -moz-linear-gradient(-45deg, #330838 0%, #0d818e 100%);
+    background: -moz-linear-gradient(-45deg, @color-primary-dark 0%, @color-accent 100%);
     /* Chrome10-25,Safari5.1-6 */
-    background: -webkit-linear-gradient(-45deg, #330838 0%, #0d818e 100%);
+    background: -webkit-linear-gradient(-45deg, @color-primary-dark 0%, @color-accent 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    background: linear-gradient(135deg, #330838 0%, #0d818e 100%);
+    background: linear-gradient(135deg, @color-primary-dark 0%, @color-accent 100%);
     /* IE6-9 fallback on horizontal gradient */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#330838', endColorstr='#0d818e', GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@color-primary-dark, endColorstr=@color-accent, GradientType=1);
 }
