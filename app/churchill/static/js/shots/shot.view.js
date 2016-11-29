@@ -8,9 +8,17 @@
             var view = this;
 
             view.initAddDialog();
+            view.initShotList();
+        },
 
-            $.each($('.shot'), function() {
-                view.bindShotItemActions($(this));
+        initShotList: function() {
+            var view = this;
+
+            $.shotModel.all({}, function (data) {
+                $('#shot-list').renderTemplate('t-shot-list', { shots: data });
+                $.each($('.shot'), function() {
+                    view.bindShotItemActions($(this));
+                });
             });
         },
 
@@ -29,11 +37,11 @@
                     add_shot_dialog.find('.add').on('click', function () {
                         var result = [];
                         add_shot_dialog.find('.mdl-tabs__panel.is-active')
-                            .find('.quantity input').each(function () {
+                            .find('.volume input').each(function () {
                                 if ($(this).val() > 0) {
                                     result.push({
                                         type    : parseInt($(this).data('type-id')),
-                                        quantity: parseInt($(this).val())
+                                        volume  : parseInt($(this).val())
                                     });
                                 }
                         });
@@ -48,20 +56,20 @@
                     });
 
                     add_shot_dialog.find('.increase').on('click', function () {
-                        var quantity = $(this).prev('.quantity').find('input'),
-                            value = parseInt(quantity.val()),
-                            step = parseInt(quantity.data('step'));
+                        var volume = $(this).prev('.volume').find('input'),
+                            value = parseInt(volume.val()),
+                            step = parseInt(volume.data('step'));
 
-                        quantity.val(value + step);
+                        volume.val(value + step);
                     });
 
                     add_shot_dialog.find('.decrease').on('click', function () {
-                        var quantity = $(this).next('.quantity').find('input'),
-                            value = parseInt(quantity.val()),
-                            step = parseInt(quantity.data('step'));
+                        var volume = $(this).next('.volume').find('input'),
+                            value = parseInt(volume.val()),
+                            step = parseInt(volume.data('step'));
 
                         value = value - step > 0 ? value - step : 0;
-                        quantity.val(value);
+                        volume.val(value);
                     });
 
                     // Rebind MLD events
@@ -103,32 +111,36 @@
 
             increase_button.unbind('click');
             increase_button.on('click', function() {
-                var quantity = $(this).next('.quantity').find('input'),
-                    value = parseInt(quantity.val());
+                var volume = $(this).next('.volume').find('input'),
+                    value = parseInt(volume.val()),
+                    step = parseInt(volume.data('step'));
 
-                value += 1;
-                quantity.val(value);
+                value = value + step;
+                volume.val(value);
 
-                view.updateShotQuantity(shot, { id: quantity.data('id'), quantity: value });
+                view.updateShotVolume(shot, { id: volume.data('type-id'), volume: value });
             });
 
             decrease_button.unbind('click');
             decrease_button.on('click', function() {
-                var quantity = $(this).prev('.quantity').find('input'),
-                    value = parseInt(quantity.val());
+                var volume = $(this).prev('.volume').find('input'),
+                    value = parseInt(volume.val()),
+                    step = parseInt(volume.data('step'));
 
-                value = value > 1 ? value - 1 : 1;
-                quantity.val(value);
+                value = value - step > 0 ? value - step : 0;
+                volume.val(value);
 
-                view.updateShotQuantity(shot, { id: quantity.data('id'), quantity: value });
+                view.updateShotVolume(shot, { id: volume.data('type-id'), volume: value });
             });
         },
 
-        updateShotQuantity: function (shot, data) {
-            var self = this;
+        updateShotVolume: function (shot, data) {
+            var view = this;
+
             $.shotModel.update(data, function(data) {
                 data['opened'] = 1;
                 shot.renderTemplate('t-shot-item', data);
+                view.bindShotItemActions(shot);
             });
         }
     }

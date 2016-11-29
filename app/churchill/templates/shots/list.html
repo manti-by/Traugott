@@ -1,40 +1,4 @@
 <div class="mobile-container">
     <h2>Your Latest shots</h2>
-    <div id="shot-list" class="mdl-grid">
-        {% for shot in shots %}
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card shot">
-                    <div class="mdl-card__supporting-text content">
-                        <img src="{{ shot.thumb }}" class="shot-image">
-                        {{ shot.text|safe }}
-                        <div class="date">
-                            {{ shot.date }}
-                        </div>
-                    </div>
-                    <div class="mdl-card__actions actions hidden">
-                        <a class="mdl-button mdl-js-button mdl-js-ripple-effect delete" data-id="{{ shot.id }}">
-                            Delete
-                        </a>
-                        <div class="mdl-layout-spacer"></div>
-                        <div>
-                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase">
-                                <i class="material-icons">add_circle_outline</i>
-                            </button>
-                            <span class="quantity">
-                                <input type="text" name="quantity" value="{{ shot.quantity }}"
-                                       data-id="{{ shot.id }}" data-type-id="{{ shot.type.id }}">
-                            </span>
-                            <button class="mdl-button mdl-js-button mdl-button--icon decrease">
-                                <i class="material-icons">remove_circle_outline</i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% empty %}
-            <div class="empty mdl-cell mdl-cell--12-col">
-                You haven't added any shots yet.
-            </div>
-        {% endfor %}
-    </div>
+    <div id="shot-list" class="mdl-grid"></div>
 </div>

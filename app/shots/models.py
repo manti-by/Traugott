@@ -130,7 +130,7 @@ class ShotManager(models.Manager):
 
 class Shot(models.Model):
 
-    quantity = models.IntegerField(default=1)
+    volume = models.IntegerField(default=0)
     user = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -172,10 +172,8 @@ class Shot(models.Model):
                 image_url = self.type.icon.image.url
             if self.type.icon.thumb:
                 thumb_url = self.type.icon.thumb.url
-
-        if self.quantity > 1:
-            text = '%s, %d&times;%sml' % (self.type.title, self.quantity, self.type.volume)
-        else:
-            text = '%s, %sml' % (self.type.title, self.type.volume)
-        return {'id': self.id, 'date': self.human_date, 'text': text, 'quantity': self.quantity,
+        text = '%s, %d&times;%sml' % (self.type.title, (self.volume / self.type.volume), self.type.volume)
+        return {'id': self.id, 'date': self.human_date, 'text': text,
+                'volume': self.volume, 'step': self.type.volume,
                 'image': image_url, 'thumb': thumb_url, 'type': self.type.as_dict()}
+

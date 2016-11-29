@@ -78,7 +78,7 @@ form {
         }
     }
 
-    .quantity {
+    .volume {
         padding-bottom: 1em;
 
         input {
@@ -97,14 +97,14 @@ form {
         width: 50px;
     }
 
-    .quantity {
+    .volume {
         position: relative;
         top: -3px;
         margin: 0;
         padding: 0 5px;
 
         input {
-            width: 1em;
+            width: 3em;
             margin: 0;
             padding: 0.2em 0;
             font-size: 1em;
@@ -120,10 +120,6 @@ form {
     border-radius: 0;
     border-bottom: 1px solid #CCC;
 
-    &:last-child {
-        border-bottom: none;
-    }
-
     .date {
         float: right;
         padding: 1em 0.5em;
@@ -136,13 +132,14 @@ form {
         background-color: rgba(0, 0, 0, 0.05);
     }
 
-    .quantity {
+    .volume {
         position: relative;
         top: 2px;
         margin: 0;
         padding: 0;
+
         input {
-            width: 1em;
+            width: 3em;
             margin: 0;
             padding: 0;
             font-size: 1em;
@@ -154,7 +151,6 @@ form {
 }
 
 #shot-type-tabs {
-    width: calc(100% - 1em);
     margin: 0 auto;
 
     .mdl-tabs__tab {

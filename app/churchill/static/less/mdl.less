@@ -10,21 +10,34 @@
     }
 }
 
-.mdl-button.mdl-button--primary {
-    color: #8021ba;
-    &:hover {
-        color: #0d818e;
+.mdl-button {
+    &.mdl-button--primary {
+        color: #8021ba;
+
+        &:hover {
+            color: #0d818e;
+        }
     }
-}
 
-.mdl-button--fab.mdl-button--colored,
-.mdl-button--raised.mdl-button--colored {
-    color: #FFF;
-    background: #8021ba;
+    &.mdl-button--fab,
+    &.mdl-button--raised {
+        &.mdl-button--colored {
+            color: #FFF;
+            background: #8021ba;
 
-    &:hover {
-        color: #FFF;
-        background: #0d818e;
+            &:hover {
+                color: #FFF;
+                background: #0d818e;
+            }
+        }
+    }
+
+    &.mdl-button--icon {
+        color: #666;
+
+        &.mdl-button--colored {
+            color: #8021ba;
+        }
     }
 }
 
@@ -65,12 +78,14 @@
     }
 }
 
-.mdl-dialog__content .mdl-list:last-child {
-    margin-bottom: 0;
-}
+.mdl-dialog {
+    .mdl-dialog__content .mdl-list:last-child {
+        margin-bottom: 0;
+    }
 
-.mdl-dialog__title {
-    font-size: 2rem;
+    .mdl-dialog__title {
+        font-size: 2rem;
+    }
 }
 
 .mdl-layout__header-row .mdl-menu__item .mdl-navigation__link {
@@ -104,4 +119,12 @@
 .mdl-tabs__panel {
     padding: 0.1em 1em 1em 1em;
     background: #FFF;
+}
+
+.mdl-grid {
+    .mdl-cell:last-child {
+        .mdl-card {
+            border-bottom: 0;
+        }
+    }
 }
