@@ -64,10 +64,12 @@
 
                     add_shot_dialog.find('.decrease').on('click', function () {
                         var volume = $(this).next('.volume').find('input'),
+                            nullable = !$(this).next('.volume').hasClass('non-nullable'),
                             value = parseInt(volume.val()),
                             step = parseInt(volume.data('step'));
 
-                        value = value - step > 0 ? value - step : 0;
+                        value = value - step > 0 ? value - step :
+                            nullable ? 0 : value;
                         volume.val(value);
                     });
 
@@ -75,18 +77,7 @@
                     $.shotTypeView.init();
 
                     // Rebind MLD events
-                    componentHandler.upgradeElement(
-                        document.getElementById('shot-type-button'),
-                        'MaterialButton'
-                    );
-                    componentHandler.upgradeElement(
-                        document.getElementById('shot-type-menu'),
-                        'MaterialMenu'
-                    );
-                    componentHandler.upgradeElement(
-                        document.getElementById('shot-type-tabs'),
-                        'MaterialTabs'
-                    );
+                    componentHandler.upgradeDom();
                 });
             });
         },
@@ -129,7 +120,7 @@
                     value = parseInt(volume.val()),
                     step = parseInt(volume.data('step'));
 
-                value = value - step > 0 ? value - step : 0;
+                value = value - step > 0 ? value - step : value;
                 volume.val(value);
 
                 view.updateShotVolume(shot, { id: volume.data('type-id'), volume: value });

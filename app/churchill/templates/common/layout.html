@@ -11,31 +11,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
         <link rel="manifest" href="{% static 'manifest.json' %}">
+        <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
 
-        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="theme-color" content="#0d818e">
         <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="Churchill">
         <link rel="icon" sizes="192x192" href="{% static 'img/android-desktop.png' %}">
 
-        <!-- Add to homescreen for Safari on iOS -->
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="iOS Title">
+        <meta name="apple-mobile-web-app-title" content="Churchill">
         <link rel="apple-touch-icon-precomposed" href="{% static 'img/ios-desktop.png' %}">
 
-        <!-- Tile Icon for Windows -->
+        <meta name="msapplication-TileColor" content="#0d818e">
         <meta name="msapplication-TileImage" content="{% static 'img/ms-desktop.png' %}">
-        <meta name="msapplication-TileColor" content="#2F3BA2">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto:300,400,700&subset=cyrillic">
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
 
-        <link rel="stylesheet" type="text/css" href="{% static 'less/base.less'|compile %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'less/mdl.less'|compile %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/phone.less'|compile %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/phablet.less'|compile %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/tablet.less'|compile %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/notebook.less'|compile %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/desktop.less'|compile %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'less/index.less'|compile %}">
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button gradient">

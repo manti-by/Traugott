@@ -1,9 +1,20 @@
 {
-  "name": "Traugott",
-  "short_name": "Traugott",
+  "manifest_version": 2,
+  "name": "Churchill",
+  "short_name": "Churchill",
+  "author": "Alexander Chaika <manti.by@gmail.com>",
+  "version": "0.1.4",
   "icons": [{
-    "src": "static/img/icons/icon-128x128.png",
-      "sizes": "128x128",
+      "src": "static/img/icons/icon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }, {
+      "src": "static/img/icons/icon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }, {
+      "src": "static/img/icons/icon-128x128.png",
+      "sizes": "144x144",
       "type": "image/png"
     }, {
       "src": "static/img/icons/icon-144x144.png",
@@ -21,9 +32,5 @@
       "src": "static/img/icons/icon-256x256.png",
       "sizes": "256x256",
       "type": "image/png"
-    }],
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#3E4EB8",
-  "theme_color": "#2F3BA2"
+    }]
 }
