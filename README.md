@@ -18,7 +18,8 @@ Setup:
 
         $ sudo apt-get update && sudo apt-get upgrade -y
         $ sudo apt-get install -y git zip nginx supervisor postgresql
-        $ sudo apt-get install -y python-pip python-dev python-virtualenv libpq-dev libjpeg-dev libjpeg8-dev node-less
+        $ sudo apt-get install -y python-pip python-dev python-virtualenv libpq-dev libjpeg-dev libjpeg8-dev
+        $ sudo npm install -g less
 
 4. Install app requirements
 

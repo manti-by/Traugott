@@ -34,7 +34,7 @@ class ShotIconAdmin(admin.ModelAdmin):
 @admin.register(ShotType)
 class ShotTypeAdmin(admin.ModelAdmin):
 
-    list_display = ('icon_image', 'title', 'volume', 'measure', 'degree')
+    list_display = ('icon_image', 'title', 'volume', 'measure', 'degree', 'user', 'is_public')
     ordering = ('title',)
 
     fieldsets = (
@@ -57,7 +57,7 @@ class ShotTypeAdmin(admin.ModelAdmin):
 @admin.register(Shot)
 class ShotAdmin(admin.ModelAdmin):
 
-    list_display = ('icon_image', 'created', 'user', 'title', 'volume', 'measure', 'degree')
+    list_display = ('icon_image', 'created', 'user', 'title', 'volume', 'measure', 'degree', 'deleted')
     ordering = ('created',)
 
     def icon_image(self, obj):
