@@ -1,10 +1,8 @@
-import os
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'traugott',
-        'USER': 'traugott',
+        'NAME': 'churchill,
+        'USER': 'churchill',
         'PASSWORD': 'Dalt0nik',
         'HOST': 'localhost',
         'PORT': '',
@@ -18,7 +16,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'app.log',
+            'filename': '/var/log/churchill.log',
         },
         'console': {
             'class': 'logging.StreamHandler',
