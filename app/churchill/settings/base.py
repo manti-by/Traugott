@@ -178,3 +178,7 @@ USE_COMPRESSOR = True
 
 DEFAULT_ADMIN_USER_ID = 1
 
+
+# Allowed hosts
+ALLOWED_HOSTS = ['127.0.0.1', 'c.m53.by']
+
