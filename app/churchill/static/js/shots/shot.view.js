@@ -31,7 +31,6 @@
                         add_shot_dialog = $.fn.dialog(html);
 
                     add_shot_dialog.open();
-
                     add_shot_dialog.find('.close').on('click', add_shot_dialog.close);
 
                     add_shot_dialog.find('.add').on('click', function () {
@@ -71,6 +70,9 @@
                         value = value - step > 0 ? value - step : 0;
                         volume.val(value);
                     });
+
+                    // Bind shot type actions
+                    $.shotTypeView.init();
 
                     // Rebind MLD events
                     componentHandler.upgradeElement(

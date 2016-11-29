@@ -11,39 +11,21 @@
         },
 
         initAddDialog: function() {
-            var open_button = $('#open-add-shot-type-dialog'),
-                add_shot_dialog = $('#add-shot-dialog'),
-                add_shot_type_dialog = $('#add-shot-type-dialog'),
-                add_button = add_shot_type_dialog.find('.add'),
-                close_button = add_shot_type_dialog.find('.close');
+            var open_button = $('.add-shot-type');
 
             open_button.unbind('click');
             open_button.on('click', function () {
-                add_shot_dialog.addClass('hidden');
-                add_shot_type_dialog.removeClass('hidden');
-            });
+                $.shotTypeModel.all({}, function(data) {
+                    var html = $.fn.renderTemplate('t-add-shot-type-dialog', data, true),
+                        add_shot_type_dialog = $.fn.dialog(html);
 
-            add_button.unbind('click');
-            add_button.on('click', function () {
-                var result = {
-                    title: add_shot_type_dialog.find('#title').val(),
-                    volume: parseInt(add_shot_type_dialog.find('#volume').val()),
-                    degree: parseInt(add_shot_type_dialog.find('#degree').val()),
-                    icon: parseInt(add_shot_type_dialog.find('.icon:checked').val())
-                };
+                    add_shot_type_dialog.open();
+                    add_shot_type_dialog.find('.close').on('click', add_shot_type_dialog.close);
 
-                $.shotTypeModel.create(result, function (data) {
-                    $('#add-shot-dialog').renderTemplate('t-add-shot-dialog', data);
-
-                    add_shot_dialog.removeClass('hidden');
-                    add_shot_type_dialog.addClass('hidden');
-                    $.shotView.initAddDialog();
+                    add_shot_type_dialog.find('.add').on('click', function () {
+                        add_shot_type_dialog.close();
+                    });
                 });
-            });
-
-            close_button.unbind('click');
-            close_button.on('click', function () {
-                add_shot_type_dialog.addClass('hidden');
             });
         }
     }

@@ -4,7 +4,7 @@ import logging
 from simple_rest import Resource
 from django.http import JsonResponse
 
-from shots.models import Shot, ShotType
+from shots.models import Shot, ShotType, ShotIcon
 from shots.utils import resource_wrapper
 
 logger = logging.getLogger('app')
@@ -124,3 +124,12 @@ class ShotTypeResource(Resource):
         item.deleted = 1
         item.save()
         return JsonResponse({'status': 200}, status=200)
+
+
+class ShotIconResource(Resource):
+
+    @resource_wrapper
+    def get(self, request):
+        icons = ShotIcon.objects.get_for_response(request.user)
+        return JsonResponse({'status': 200,
+                             'data': icons }, status=200)

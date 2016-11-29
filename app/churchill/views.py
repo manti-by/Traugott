@@ -15,7 +15,7 @@ def home_page(request):
     try:
         user = Profile.get_logged(request).as_dict()
         shots = Shot.objects.get_for_response(request.user)
-        shot_icons = ShotIcon.objects.get_for_response()
+        shot_icons = ShotIcon.objects.get_for_response(request.user)
         user_types, all_types = ShotType.objects.get_splitted_for_user(request.user)
         return render_to_response('index.html', {'user': user, 'shots': shots, 'icons': shot_icons,
                                                  'user_types': user_types, 'all_types': all_types })

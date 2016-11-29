@@ -3,20 +3,17 @@
     'use strict';
 
     $.fn.dialog = function(html) {
-        var open = $('.open-dialog'),
-            dialog = $('<div class="dialog gradient"></div>');
+        var dialog = $('<div class="dialog gradient"></div>');
 
         dialog.open = function() {
-            open.addClass('hidden');
             if ($(window).width() < 769) {
-                dialog.css('height', $(window).height()).animate({left: 0}, 250);
+                dialog.css('height', $(window).height()).animate({ left: 0 }, 250);
             } else {
                 dialog.animate({opacity: 1}, 250);
             }
         };
 
         dialog.close = function() {
-            open.removeClass('hidden');
             if ($(window).width() < 769) {
                 dialog.animate({left: '100%'}, 250, function () {
                     dialog.remove();
@@ -29,7 +26,7 @@
         };
 
         dialog.html(html);
-        dialog.prependTo('body');
+        dialog.appendTo('body');
 
         return dialog;
     }
