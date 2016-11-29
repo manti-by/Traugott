@@ -26,7 +26,7 @@ VOLUME_CHOICES = (
 
 class ShotIconManager(models.Manager):
 
-    def get_for_response(self):
+    def get_for_response(self, user):
         result = []
         for icon in super(ShotIconManager, self).get_queryset().all():
             result.append(icon.as_dict())

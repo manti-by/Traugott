@@ -6,7 +6,7 @@ from django.contrib import admin
 
 from churchill.views import home_page, static_page
 from profiles.views import profile_page, login_page, logout_page
-from shots.resources import ShotResource, ShotTypeResource
+from shots.resources import ShotResource, ShotTypeResource, ShotIconResource
 
 
 urlpatterns = [
@@ -21,11 +21,13 @@ urlpatterns = [
     # Shot urls
     url(r'^shots/?$', ShotResource.as_view()),
     url(r'^shot_types/?$', ShotTypeResource.as_view()),
+    url(r'^shot_icons/?$', ShotIconResource.as_view()),
 
     # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
 ]
+
 
 if settings.DEBUG:
     from django.conf.urls.static import static
