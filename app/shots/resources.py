@@ -69,13 +69,18 @@ class ShotResource(Resource):
 
 class ShotTypeResource(Resource):
 
-    @resource_wrapper
-    def get(self, request):
-        user_types, all_types = ShotType.objects.get_splitted_for_user(request.user)
+    @staticmethod
+    def get_for_user(user):
+        user_types, all_types = ShotType.objects.get_splitted_for_user(user)
         popular = all_types[0]
         if len(user_types):
             popular = user_types[0]
             del user_types[0]
+        return popular, user_types, all_types
+
+    @resource_wrapper
+    def get(self, request):
+        popular, user_types, all_types = self.get_for_user(request.user)
         return JsonResponse({'status': 200,
                              'data': {
                                  'popular': popular,
@@ -89,14 +94,24 @@ class ShotTypeResource(Resource):
         if not data['title']:
             return JsonResponse({'status': 204,
                                  'message': 'Data is empty'}, status=200)
-
         item = ShotType(title=data['title'],
                         volume=data['volume'],
                         degree=data['degree'],
+                        cost=data['cost'],
                         user=request.user)
+        try:
+            item.icon = ShotIcon.objects.get(id=data['icon'])
+        except ShotIcon.DoesNotExist:
+            pass
         item.save()
+
+        popular, user_types, all_types = self.get_for_user(request.user)
         return JsonResponse({'status': 200,
-                             'data': item.as_dict()}, status=200)
+                             'data': {
+                                 'popular': popular,
+                                 'user_types': user_types,
+                                 'all_types': all_types
+                             }}, status=200)
 
     @resource_wrapper
     def patch(self, request):

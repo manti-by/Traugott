@@ -56,8 +56,6 @@ CACHES = {
     }
 }
 
-STATIC_PRECOMPILER_USE_CACHE = False
-
 USE_COMPRESSOR = False
 
 try:

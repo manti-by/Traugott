@@ -25,6 +25,10 @@
             }
         };
 
+        dialog.setHtml = function(html) {
+            dialog.html(html);
+        };
+
         dialog.html(html);
         dialog.appendTo('body');
 
