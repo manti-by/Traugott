@@ -32,7 +32,7 @@
                     <div class="mobile-container">
                         {{#popular}}
                             <div class="image"><img src="{{ image }}"></div>
-                            <div class="name">{{ title }}</div>
+                            <div class="name">{{ title }} ({{ degree }}%)</div>
                             <div class="quantity">
                                 <button class="mdl-button mdl-js-button mdl-button--icon decrease popular">
                                     <i class="material-icons">remove</i>
@@ -107,14 +107,21 @@
                     <label class="mdl-textfield__label" for="cost">Average Cost, USD</label>
                 </div>
                 <div class="icons">
-                    {{#each icons }}
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ id }}">
-                            <input type="radio" id="icon-{{ id }}" class="mdl-radio__button icon" name="icon" value="{{ id }}">
-                            <span class="mdl-radio__label">
-                                <img src="{{ thumb }}"> {{ title }}
-                            </span>
-                        </label>
-                    {{/each}}
+                    <span class="mdl-layout-title">Choose shot icon</span>
+                    <div class="mdl-grid icons-grid">
+                        {{#each icons }}
+                            <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ id }}">
+                                    <input type="radio" id="icon-{{ id }}" class="mdl-radio__button icon" name="icon" value="{{ id }}">
+                                    <span class="mdl-radio__label icon-title">
+                                        <span class="icon-image">
+                                            <img src="{{ thumb }}" title="{{ title }}">
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        {{/each}}
+                    </div>
                 </div>
             </form>
         </div>

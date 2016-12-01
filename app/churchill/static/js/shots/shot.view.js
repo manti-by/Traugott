@@ -26,60 +26,66 @@
             var view = this;
 
             $('.add-shot').on('click', function () {
-                $.shotTypeModel.all({}, function(data) {
+                $.shotTypeModel.all({}, function (data) {
                     var html = $.fn.renderTemplate('t-add-shot-dialog', data, true),
-                        add_shot_dialog = $.fn.dialog(html);
+                        dialog = $.fn.dialog(html);
 
-                    add_shot_dialog.open();
-                    add_shot_dialog.find('.close').on('click', add_shot_dialog.close);
-
-                    add_shot_dialog.find('.add').on('click', function () {
-                        var result = [];
-                        add_shot_dialog.find('.mdl-tabs__panel.is-active')
-                            .find('.volume input').each(function () {
-                                if ($(this).val() > 0) {
-                                    result.push({
-                                        type    : parseInt($(this).data('type-id')),
-                                        volume  : parseInt($(this).val())
-                                    });
-                                }
-                        });
-
-                        $.shotModel.create(result, function (data) {
-                            $('#shot-list').renderTemplate('t-shot-list', data);
-                            $.each($('.shot'), function() {
-                                view.bindShotItemActions($(this));
-                            });
-                            add_shot_dialog.close();
-                        });
-                    });
-
-                    add_shot_dialog.find('.increase').on('click', function () {
-                        var volume = $(this).prev('.volume').find('input'),
-                            value = parseInt(volume.val()),
-                            step = parseInt(volume.data('step'));
-
-                        volume.val(value + step);
-                    });
-
-                    add_shot_dialog.find('.decrease').on('click', function () {
-                        var volume = $(this).next('.volume').find('input'),
-                            nullable = !$(this).next('.volume').hasClass('non-nullable'),
-                            value = parseInt(volume.val()),
-                            step = parseInt(volume.data('step'));
-
-                        value = value - step > 0 ? value - step :
-                            nullable ? 0 : value;
-                        volume.val(value);
-                    });
-
-                    // Bind shot type actions
-                    $.shotTypeView.init();
-
-                    // Rebind MLD events
-                    componentHandler.upgradeDom();
+                    view.bindAddDialogActions(dialog);
+                    dialog.open();
                 });
             });
+        },
+
+        bindAddDialogActions: function(dialog) {
+            var view = this;
+
+            dialog.find('.close').on('click', dialog.close);
+
+            dialog.find('.add').on('click', function () {
+                var result = [];
+                dialog.find('.mdl-tabs__panel.is-active')
+                    .find('.volume input').each(function () {
+                        if ($(this).val() > 0) {
+                            result.push({
+                                type    : parseInt($(this).data('type-id')),
+                                volume  : parseInt($(this).val())
+                            });
+                        }
+                });
+
+                $.shotModel.create(result, function (data) {
+                    $('#shot-list').renderTemplate('t-shot-list', data);
+                    $.each($('.shot'), function() {
+                        view.bindShotItemActions($(this));
+                    });
+                    dialog.close();
+                });
+            });
+
+            dialog.find('.increase').on('click', function () {
+                var volume = $(this).prev('.volume').find('input'),
+                    value = parseInt(volume.val()),
+                    step = parseInt(volume.data('step'));
+
+                volume.val(value + step);
+            });
+
+            dialog.find('.decrease').on('click', function () {
+                var volume = $(this).next('.volume').find('input'),
+                    nullable = !$(this).next('.volume').hasClass('non-nullable'),
+                    value = parseInt(volume.val()),
+                    step = parseInt(volume.data('step'));
+
+                value = value - step > 0 ? value - step :
+                    nullable ? 0 : value;
+                volume.val(value);
+            });
+
+            // Bind shot type actions
+            $.shotTypeView.init(dialog);
+
+            // Rebind MLD events
+            componentHandler.upgradeDom();
         },
 
         bindShotItemActions: function(shot) {

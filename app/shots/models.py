@@ -83,6 +83,7 @@ class ShotType(models.Model):
     measure = models.CharField(max_length=2, choices=MEASURE_CHOICES, default='ml')
     volume = models.IntegerField(default=100, help_text='')
     degree = models.IntegerField(default=40, help_text='Alcohol percentage or "strength"')
+    cost = models.DecimalField(default=0.0, max_digits=5, decimal_places=2)
     user = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
