@@ -28,7 +28,27 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto:300,400,700&subset=cyrillic">
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
 
-        <link rel="stylesheet" type="text/css" href="{% static 'less/index.less'|compile %}">
+        {% if debug %}
+            <link rel="stylesheet" type="text/css" href="{% static 'less/base.less'|compile %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'less/mdl.less'|compile %}">
+
+            <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/desktop.less'|compile %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/notebook.less'|compile %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/phablet.less'|compile %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/phone.less'|compile %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/tablet.less'|compile %}">
+        {% else %}
+            {% compress css %}
+                <link rel="stylesheet" type="text/css" href="{% static 'less/base.less'|compile %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'less/mdl.less'|compile %}">
+
+                <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/desktop.less'|compile %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/notebook.less'|compile %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/phablet.less'|compile %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/phone.less'|compile %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'less/responsive/tablet.less'|compile %}">
+            {% endcompress %}
+        {% endif %}
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button gradient">
@@ -44,17 +64,33 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.2.1/material.min.js"></script>
 
-        <script src="{% static 'js/shots/shot.model.js' %}"></script>
-        <script src="{% static 'js/shots/shot.view.js' %}"></script>
-        <script src="{% static 'js/shots/shot-type.model.js' %}"></script>
-        <script src="{% static 'js/shots/shot-type.view.js' %}"></script>
-        <script src="{% static 'js/shots/shot-icon.model.js' %}"></script>
+        {% if debug %}
+            <script src="{% static 'js/shots/shot.model.js' %}"></script>
+            <script src="{% static 'js/shots/shot.view.js' %}"></script>
+            <script src="{% static 'js/shots/shot-type.model.js' %}"></script>
+            <script src="{% static 'js/shots/shot-type.view.js' %}"></script>
+            <script src="{% static 'js/shots/shot-icon.model.js' %}"></script>
 
-        <script src="{% static 'js/plugins/dialog.js' %}"></script>
-        <script src="{% static 'js/plugins/error.js' %}"></script>
+            <script src="{% static 'js/plugins/dialog.js' %}"></script>
+            <script src="{% static 'js/plugins/error.js' %}"></script>
 
-        <script src="{% static 'js/common.js' %}"></script>
-        <script src="{% static 'js/index.js' %}"></script>
+            <script src="{% static 'js/common.js' %}"></script>
+            <script src="{% static 'js/index.js' %}"></script>
+        {% else %}
+            {% compress js %}
+                <script src="{% static 'js/shots/shot.model.js' %}"></script>
+                <script src="{% static 'js/shots/shot.view.js' %}"></script>
+                <script src="{% static 'js/shots/shot-type.model.js' %}"></script>
+                <script src="{% static 'js/shots/shot-type.view.js' %}"></script>
+                <script src="{% static 'js/shots/shot-icon.model.js' %}"></script>
+
+                <script src="{% static 'js/plugins/dialog.js' %}"></script>
+                <script src="{% static 'js/plugins/error.js' %}"></script>
+
+                <script src="{% static 'js/common.js' %}"></script>
+                <script src="{% static 'js/index.js' %}"></script>
+            {% endcompress %}
+        {% endif %}
 
         {% include 'handlebars/shot.html' %}
         {% include 'handlebars/shot-type.html' %}

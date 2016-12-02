@@ -56,8 +56,6 @@ CACHES = {
     }
 }
 
-USE_COMPRESSOR = False
-
 try:
     from .local import *
 except ImportError:
