@@ -1,4 +1,10 @@
-@import 'vars';
+@color-primary      : #8021ba;
+@color-primary-dark : #330838;
+@color-accent       : #0d818e;
+@color-accent-dark  : #0d323f;
+
+
+/*** Base page elements ***/
 
 body {
     position: relative;
@@ -6,6 +12,16 @@ body {
     font-size: 16px;
     font-weight: 400;
     color: #FFF;
+}
+
+form {
+    &.login {
+        min-height: 250px;
+    }
+
+    .error-holder {
+        color: red;
+    }
 }
 
 .container {
@@ -65,137 +81,8 @@ body {
     }
 }
 
-.open-add-shot-form,
-.add-shot {
-    position: fixed;
-    display: block;
-    right: 0;
-    bottom: 0;
-    margin-right: 16px;
-    margin-bottom: 16px;
-    z-index: 900;
-}
 
-.add-shot {
-    left: 50%;
-    margin-left: -28px;
-}
-
-form {
-    &.login {
-        min-height: 250px;
-    }
-
-    .error-holder {
-        color: red;
-    }
-}
-
-.shot-image {
-    width: 50px;
-    height: 50px;
-}
-
-.empty {
-    padding: 1em 0;
-    color: #333;
-}
-
-#popular-panel {
-    text-align: center;
-
-    .image {
-        width: 250px;
-        height: 250px;
-        margin: 1em auto;
-        overflow: hidden;
-
-        img {
-            min-width: 100%;
-            max-width: 100%;
-        }
-    }
-
-    .volume {
-        padding-bottom: 1em;
-
-        input {
-            width: 20%;
-            padding: 0.2em;
-            font-size: 1.2em;
-            text-align: center;
-            border: none;
-            border-bottom: 1px solid #CCC;
-        }
-    }
-}
-
-.shot-type {
-    .image {
-        width: 50px;
-    }
-
-    .volume {
-        position: relative;
-        top: -3px;
-        margin: 0;
-        padding: 0 5px;
-
-        input {
-            width: 3em;
-            margin: 0;
-            padding: 0.2em 0;
-            font-size: 1em;
-            text-align: center;
-            border: none;
-            border-bottom: 1px solid #CCC;
-        }
-    }
-}
-
-.shot {
-    min-height: 0;
-    border-radius: 0;
-    border-bottom: 1px solid #CCC;
-
-    .date {
-        float: right;
-        padding: 1em 0.5em;
-    }
-
-    .actions {
-        flex-direction: row-reverse;
-        padding: 0.3em;
-        text-align: right;
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .volume {
-        position: relative;
-        top: 2px;
-        margin: 0;
-        padding: 0;
-
-        input {
-            width: 3em;
-            margin: 0;
-            padding: 0;
-            font-size: 1em;
-            text-align: center;
-            border: none;
-            background: transparent;
-        }
-    }
-}
-
-#shot-type-tabs {
-    margin: 0 auto;
-
-    .mdl-tabs__tab {
-        width: 50%;
-        color: #FFF;
-    }
-}
+/*** Top menu and drawer ***/
 
 .top-menu {
     .image {
@@ -255,6 +142,9 @@ form {
     }
 }
 
+
+/*** User profile page ***/
+
 .profile {
     .image {
         width: 250px;
@@ -277,6 +167,73 @@ form {
     }
 }
 
+
+/*** Shot elements ***/
+
+.open-add-shot-form,
+.add-shot {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    z-index: 900;
+}
+
+.add-shot {
+    left: 50%;
+    margin-left: -28px;
+}
+
+.shot {
+    min-height: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #CCC;
+
+    .shot-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    .date {
+        float: right;
+        padding: 1em 0.5em;
+    }
+
+    .actions {
+        flex-direction: row-reverse;
+        padding: 0.3em;
+        text-align: right;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .volume {
+        position: relative;
+        top: 2px;
+        margin: 0;
+        padding: 0;
+
+        input {
+            width: 3em;
+            margin: 0;
+            padding: 0;
+            font-size: 1em;
+            text-align: center;
+            border: none;
+            background: transparent;
+        }
+    }
+}
+
+.empty {
+    padding: 1em 0;
+    color: #333;
+}
+
+
+/*** Shot types ***/
+
 #add-shot-type-form {
     padding: 0 1em;
     background: #FFF;
@@ -288,6 +245,67 @@ form {
 
     .mdl-textfield__label {
         color: rgba(0, 0, 0, 0.26);
+    }
+}
+
+#popular-panel {
+    text-align: center;
+
+    .image {
+        width: 250px;
+        height: 250px;
+        margin: 1em auto;
+        overflow: hidden;
+
+        img {
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .volume {
+        padding-bottom: 1em;
+
+        input {
+            width: 20%;
+            padding: 0.2em;
+            font-size: 1.2em;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #CCC;
+        }
+    }
+}
+
+.shot-type {
+    .image {
+        width: 50px;
+    }
+
+    .volume {
+        position: relative;
+        top: -3px;
+        margin: 0;
+        padding: 0 5px;
+
+        input {
+            width: 3em;
+            margin: 0;
+            padding: 0.2em 0;
+            font-size: 1em;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #CCC;
+        }
+    }
+}
+
+#shot-type-tabs {
+    margin: 0 auto;
+
+    .mdl-tabs__tab {
+        width: 50%;
+        color: #FFF;
     }
 }
 
@@ -314,6 +332,45 @@ form {
         }
     }
 }
+
+.notice {
+    padding: 1em 1em 0 1em;
+    font-size: 0.9em;
+    color: #999;
+}
+
+.my-shots {
+    width: 92%;
+    margin: 1em auto;
+
+    li.mdl-list__item {
+        padding: 0.5em 0;
+        border-bottom: 1px solid #CCC;
+
+        &:last-child {
+            border: none;
+        }
+
+        .avatar {
+            margin-right: 0.5em;
+            background-color: transparent;
+        }
+
+        .public {
+            color: #999;
+
+            &.active,
+            &:hover {
+                color: #2B6FB6;
+            }
+        }
+
+        .enable {
+            min-width: 2.5em;
+        }
+    }
+}
+
 
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#330838+0,0d818e+100 */
 

@@ -138,22 +138,30 @@
     </div>
     <div class="mdl-layout__content content">
         <div class="white-plate">
-            <div class="mdl-list">
-                {{#each shots }}
-                    <div class="mdl-list__item">
-                        <span class="mdl-list__item-primary-content">
-                            <i class="material-icons  mdl-list__item-avatar">
-                                <img src="{{ thumb }}">
-                            </i>
-                            {{ title }}
-                        </span>
-                        <span class="mdl-list__item-secondary-action">
-                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-                                <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
-                            </label>
-                        </span>
-                    </div>
-                {{/each}}
+            <div>
+                <div class="notice">
+                    You can drag and drop items to reorder it.
+                </div>
+                <ul class="mdl-list my-shots">
+                    {{#each shots }}
+                        <li class="mdl-list__item my-shot-item">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons  mdl-list__item-avatar avatar">
+                                    <img src="{{ thumb }}">
+                                </i>
+                                {{ title }}, {{ volume }}{{ measure }} ({{ degree }}%)
+                            </span>
+                            <span class="mdl-list__item-secondary-content public{{#if is_public}} active{{/if}}">
+                                <i class="material-icons">public</i>
+                            </span>
+                            <span class="mdl-list__item-secondary-content enable">
+                                <label class="mdl-switch mdl-js-switch" for="shot-type-{{@index}}">
+                                    <input type="checkbox" id="shot-type-{{@index}}" class="mdl-switch__input" checked />
+                                </label>
+                            </span>
+                        </li>
+                    {{/each}}
+                </ul>
             </div>
         </div>
     </div>

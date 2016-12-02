@@ -61,6 +61,12 @@
 
                     // Rebind MLD events
                     componentHandler.upgradeDom();
+
+                    $.each(edit_my_shots_dialog.find('.my-shot-item'), function() {
+                        $(this).find('.public').on('click', function() {
+                            $(this).toggleClass('active');
+                        });
+                    });
                 });
             });
         }
