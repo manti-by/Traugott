@@ -49,5 +49,3 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
-
-USE_COMPRESSOR = False
