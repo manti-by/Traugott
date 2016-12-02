@@ -117,11 +117,8 @@ LOCALE_PATHS = (
 )
 
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -159,7 +156,9 @@ PREVIEW_SIZE = '300x300'
 THUMBNAIL_FORMAT = 'PNG'
 
 
-# Less compiler
+# Compressor and less compiler
+
+STATIC_PRECOMPILER_OUTPUT_DIR = ''
 
 STATIC_PRECOMPILER_COMPILERS = (
     ('static_precompiler.compilers.LESS', {
@@ -167,15 +166,13 @@ STATIC_PRECOMPILER_COMPILERS = (
     }),
 )
 
-STATIC_PRECOMPILER_OUTPUT_DIR = ''
-
 
 # Default admin user id for foreign keys
 
 DEFAULT_ADMIN_USER_ID = 1
 
 
-# Allowed hosts
+# Allowed hosts (uses for template debugging)
 
 INTERNAL_IPS = ['127.0.0.1']
 ALLOWED_HOSTS = ['127.0.0.1', 'c.m53.by']

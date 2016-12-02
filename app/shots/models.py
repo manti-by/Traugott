@@ -113,7 +113,7 @@ class ShotType(models.Model):
             if self.icon.thumb:
                 thumb_url = self.icon.thumb.url
         return {'id': self.id, 'title': self.title, 'image': image_url, 'thumb': thumb_url,
-                'volume': self.volume, 'degree': self.degree, 'measure': self.measure }
+                'volume': self.volume, 'degree': self.degree, 'measure': self.measure, 'is_public': self.is_public }
 
 
 class ShotManager(models.Manager):
