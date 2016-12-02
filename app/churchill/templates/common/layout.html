@@ -33,13 +33,10 @@
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button gradient">
             {% include 'common/header.html' %}
-            <main class="mdl-layout__content container">
+            <main class="mdl-layout__content">
                 {% block content %}
                     404 Not Found
                 {% endblock %}
-                <footer class="mdl-mini-footer mdl-layout--large-screen-only">
-                    {% include 'common/footer.html' %}
-                </footer>
             </main>
         </div>
 

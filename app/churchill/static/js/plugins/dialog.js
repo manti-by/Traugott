@@ -6,20 +6,24 @@
         var dialog = $('<div class="dialog gradient"></div>');
 
         dialog.open = function() {
-            if ($(window).width() < 769) {
-                dialog.css('height', $(window).height()).animate({ left: 0 }, 250);
+            var width = $(window).width(),
+                height = $(window).height();
+
+            if (height < 769) {
+                dialog.find('.content').css('width', width).css('height', height - 56);
+                dialog.css('height', height).animate({ left: 0 }, 250);
             } else {
-                dialog.animate({opacity: 1}, 250);
+                dialog.animate({ opacity: 1 }, 250);
             }
         };
 
         dialog.close = function() {
             if ($(window).width() < 769) {
-                dialog.animate({left: '100%'}, 250, function () {
+                dialog.animate({ left: '100%' }, 250, function () {
                     dialog.remove();
                 });
             } else {
-                dialog.animate({opacity: 0}, 250, function () {
+                dialog.animate({ opacity: 0 }, 250, function () {
                     dialog.remove();
                 });
             }
