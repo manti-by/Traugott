@@ -13,7 +13,8 @@
 
         initAddDialog: function() {
             var view = this,
-                add_button = $('.add-shot-type');
+                add_button = $('.add-shot-type'),
+                edit_button = $('.edit-my-shots');
 
             add_button.unbind('click');
             add_button.on('click', function () {
@@ -43,6 +44,20 @@
                             add_shot_type_dialog.close();
                         });
                     });
+
+                    // Rebind MLD events
+                    componentHandler.upgradeDom();
+                });
+            });
+
+            edit_button.unbind('click');
+            edit_button.on('click', function () {
+                $.shotTypeModel.all({}, function (data) {
+                    var html = $.fn.renderTemplate('t-edit-my-shots-dialog', { shots: data.user_types }, true),
+                        edit_my_shots_dialog = $.fn.dialog(html);
+
+                    edit_my_shots_dialog.open();
+                    edit_my_shots_dialog.find('.close').on('click', edit_my_shots_dialog.close);
 
                     // Rebind MLD events
                     componentHandler.upgradeDom();

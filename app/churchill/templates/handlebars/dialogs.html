@@ -13,7 +13,7 @@
             </button>
             <ul id="shot-type-menu" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="shot-type-button">
               <li class="add-shot-type mdl-menu__item">Add new shot type</li>
-              <li class="edit-favourite mdl-menu__item">Edit catalog</li>
+              <li class="edit-my-shots mdl-menu__item">Edit catalog</li>
             </ul>
         </div>
     </div>
@@ -123,6 +123,52 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</script>
+
+<script id="t-edit-my-shots-dialog" type="text/x-handlebars-template">
+    <div class="mdl-layout__header is-casting-shadow">
+        <div class="mdl-layout__drawer-button close">
+            <i class="material-icons">arrow_back</i>
+        </div>
+        <div id="add-shot-header" class="mdl-layout__header-row header">
+            <span class="mdl-layout-title">Your catalog</span>
+        </div>
+    </div>
+    <div class="mdl-layout__content content">
+        <div class="white-plate">
+            <div class="mdl-list">
+                {{#each shots }}
+                    <div class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                            <i class="material-icons  mdl-list__item-avatar">
+                                <img src="{{ thumb }}">
+                            </i>
+                            {{ title }}
+                        </span>
+                        <span class="mdl-list__item-secondary-action">
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+                                <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+                            </label>
+                        </span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="t-error" type="text/x-handlebars-template">
+    <div class="error">
+        <div class="message">
+            <i class="material-icons">error_outline</i>
+            {{ message }}
+        </div>
+        <div class="actions">
+            <button class="close mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Close
+            </button>
         </div>
     </div>
 </script>

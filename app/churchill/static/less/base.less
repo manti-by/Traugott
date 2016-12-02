@@ -23,10 +23,43 @@ body {
     z-index: 1000;
     opacity: 0;
 
+    &.floating {
+        display: flex;
+        width: 90%;
+        max-width: 1000px;
+        height: auto;
+        min-height: 300px;
+        margin: auto;
+        color: #333;
+    }
+
     .actions {
         position: absolute;
         padding: 1em;
         bottom: 0;
+    }
+}
+
+.error {
+    position: absolute;
+    left: 5%;
+    top: 25%;
+    width: 80%;
+    max-width: 1000px;
+    padding: 2em 5%;
+    text-align: center;
+    color: #333;
+    border: 1px solid #EEE;
+    background: #FFF;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    z-index: 1000;
+
+    .message i {
+        vertical-align: bottom;
+    }
+
+    .actions {
+        margin-top: 1em;
     }
 }
 

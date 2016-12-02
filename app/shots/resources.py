@@ -75,7 +75,6 @@ class ShotTypeResource(Resource):
         popular = all_types[0]
         if len(user_types):
             popular = user_types[0]
-            del user_types[0]
         return popular, user_types, all_types
 
     @resource_wrapper
