@@ -41,14 +41,4 @@
         }
     };
 
-    $.fn.showError = function(message) {
-        var dialog = $('#dialog');
-
-        dialog.removeClass('hidden');
-        dialog.find('.content').html(message);
-        dialog.find('.close').on('click', function() {
-            dialog.addClass('hidden');
-        });
-    };
-
 })(jQuery);

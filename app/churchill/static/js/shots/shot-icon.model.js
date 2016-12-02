@@ -15,17 +15,17 @@
                     'X-CSRFToken': $.fn.getCookie('csrftoken')
                 },
                 success: function (response) {
-                    if (response['status'] == 200) {
+                    if (response.status == 200) {
                         if (success) {
-                            success(response['data']);
+                            success(response.data);
                         } else {
-                            dispatcher._success(response['data']);
+                            dispatcher._success(response.data);
                         }
                     } else {
                         if (error) {
-                            error(response['message']);
+                            error(response.message);
                         } else {
-                            dispatcher._error(response['data']);
+                            dispatcher._error(response.message);
                         }
                     }
                 },
@@ -44,7 +44,7 @@
         },
 
         _error: function(message) {
-            $.fn.showError(message);
+            $.fn.error(message);
         },
 
         all: function(data, success, error) {
