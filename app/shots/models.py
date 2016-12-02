@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.conf import settings
@@ -151,15 +151,18 @@ class Shot(models.Model):
 
     @property
     def human_date(self):
-        delta = datetime.now(utc) - self.created
-        if delta.total_seconds() < 60 * 60:
+        delta_now = datetime.now(utc) - self.created
+        delta_midnight = datetime.now(utc).replace(hour=0, minute=0, second=0) + timedelta(days=1) - self.created
+        if delta_now.total_seconds() < 60 * 60:
             return 'just now'
-        elif delta.total_seconds() < 60 * 60 * 5:
-            return '%sh ago' % str(int(delta.total_seconds() / (60 * 60)))
-        elif delta.total_seconds() < 60 * 60 * 24:
+        elif delta_now.total_seconds() < 60 * 60 * 5:
+            return '%sh ago' % str(int(delta_now.total_seconds() / (60 * 60)))
+        elif delta_midnight.total_seconds() < 60 * 60 * 24:
             return 'today'
-        elif delta.total_seconds() < 60 * 60 * 24 * 7:
-            return '%sd ago' % str(int(delta.total_seconds() / (60 * 60 * 24)))
+        elif delta_midnight.total_seconds() < 60 * 60 * 24 * 2:
+            return 'yesterday'
+        elif delta_midnight.total_seconds() < 60 * 60 * 24 * 7:
+            return '%sd ago' % str(int(delta_midnight.total_seconds() / (60 * 60 * 24)))
         else:
             return self.created.strftime('%b %d')
 
