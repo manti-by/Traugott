@@ -25,7 +25,7 @@
         initAddDialog: function() {
             var view = this;
 
-            $('.add-shot').on('click', function () {
+            $('.open-add-shot-form').on('click', function () {
                 $.shotTypeModel.all({}, function (data) {
                     var html = $.fn.renderTemplate('t-add-shot-dialog', data, true),
                         dialog = $.fn.dialog(html);
@@ -41,7 +41,7 @@
 
             dialog.find('.close').on('click', dialog.close);
 
-            dialog.find('.add').on('click', function () {
+            dialog.find('.add-shot').on('click', function () {
                 var result = [];
                 dialog.find('.mdl-tabs__panel.is-active')
                     .find('.volume input').each(function () {

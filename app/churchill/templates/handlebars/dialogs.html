@@ -17,10 +17,10 @@
             </ul>
         </div>
     </div>
-    <div class="container">
-        <div class="mdl-dialog__content content">
+    <div class="mdl-layout__content content">
+        <div class="white-plate">
             <div id="shot-type-tabs" class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-                <div class="mdl-tabs__tab-bar">
+                <div class="mdl-tabs__tab-bar gradient-tabs">
                     <a href="#popular-panel" class="mdl-tabs__tab is-active">
                         <i class="material-icons">view_carousel</i>
                     </a>
@@ -29,53 +29,48 @@
                     </a>
                 </div>
                 <div class="mdl-tabs__panel is-active" id="popular-panel">
-                    <div class="mobile-container">
-                        {{#popular}}
-                            <div class="image"><img src="{{ image }}"></div>
-                            <div class="name">{{ title }} ({{ degree }}%)</div>
-                            <div class="quantity">
-                                <button class="mdl-button mdl-js-button mdl-button--icon decrease popular">
-                                    <i class="material-icons">remove</i>
-                                </button>
-                                <span class="volume non-nullable">
-                                    <input type="text" name="volume" value="{{ volume }}"
-                                           data-type-id="{{ id }}" data-step="{{ volume }}">
-                                    {{ measure }}
-                                </span>
-                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase popular">
-                                    <i class="material-icons">add</i>
-                                </button>
-                            </div>
-                        {{/popular}}
-                    </div>
+                    {{#popular}}
+                        <div class="image"><img src="{{ image }}"></div>
+                        <div class="name">{{ title }} ({{ degree }}%)</div>
+                        <div class="quantity">
+                            <button class="mdl-button mdl-js-button mdl-button--icon decrease popular">
+                                <i class="material-icons">remove</i>
+                            </button>
+                            <span class="volume non-nullable">
+                                <input type="text" name="volume" value="{{ volume }}"
+                                       data-type-id="{{ id }}" data-step="{{ volume }}">
+                                {{ measure }}
+                            </span>
+                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase popular">
+                                <i class="material-icons">add</i>
+                            </button>
+                        </div>
+                    {{/popular}}
                 </div>
                 <div class="mdl-tabs__panel" id="library-panel">
-                    <div class="mobile-container">
-                        {{#if user_types }}
-                            <h5>Your favorite shots</h5>
-                            <ul class="mdl-list">
-                                {{#each user_types }}
-                                    {{>shot-type-item}}
-                                {{/each}}
-                            </ul>
-                            <h5>Other shots</h5>
-                        {{else}}
-                            <h5>Popular shots</h5>
-                        {{/if}}
+                    {{#if user_types }}
+                        <h5>Your favorite shots</h5>
                         <ul class="mdl-list">
-                            {{#each all_types }}
+                            {{#each user_types }}
                                 {{>shot-type-item}}
                             {{/each}}
                         </ul>
-                    </div>
+                        <h5>Other shots</h5>
+                    {{else}}
+                        <h5>Popular shots</h5>
+                    {{/if}}
+                    <ul class="mdl-list">
+                        {{#each all_types }}
+                            {{>shot-type-item}}
+                        {{/each}}
+                    </ul>
                 </div>
              </div>
         </div>
     </div>
-    <div class="mdl-dialog__actions actions">
-        <button type="button" class="mdl-button close">Close</button>
-        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored add">Add</button>
-    </div>
+    <button class="add-shot mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+        <i class="material-icons">add</i>
+    </button>
 </script>
 
 <script id="t-add-shot-type-dialog" type="text/x-handlebars-template">
@@ -85,10 +80,14 @@
         </div>
         <div id="add-shot-header" class="mdl-layout__header-row header">
             <span class="mdl-layout-title">Add shot type</span>
+            <div class="mdl-layout-spacer"></div>
+            <button class="add mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">done</i>
+            </button>
         </div>
     </div>
-    <div class="container">
-        <div class="mdl-dialog__content content">
+    <div class="mdl-layout__content content">
+        <div class="white-plate">
             <form id="add-shot-type-form">
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" id="title">
@@ -125,10 +124,6 @@
                 </div>
             </form>
         </div>
-    </div>
-    <div class="mdl-dialog__actions actions">
-        <button type="button" class="mdl-button close">Close</button>
-        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored add">Add</button>
     </div>
 </script>
 

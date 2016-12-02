@@ -19,6 +19,7 @@ body {
     left: 0;
     height: 100%;
     width: 100%;
+    background: #FFF;
     z-index: 1000;
     opacity: 0;
 
@@ -29,6 +30,7 @@ body {
     }
 }
 
+.open-add-shot-form,
 .add-shot {
     position: fixed;
     display: block;
@@ -37,6 +39,11 @@ body {
     margin-right: 16px;
     margin-bottom: 16px;
     z-index: 900;
+}
+
+.add-shot {
+    left: 50%;
+    margin-left: -28px;
 }
 
 form {
@@ -57,10 +64,6 @@ form {
 .empty {
     padding: 1em 0;
     color: #333;
-}
-
-#add-shot-dialog h5 {
-    margin: 0;
 }
 
 #popular-panel {
@@ -290,4 +293,15 @@ form {
     background: linear-gradient(135deg, @color-primary-dark 0%, @color-accent 100%);
     /* IE6-9 fallback on horizontal gradient */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=@color-primary-dark, endColorstr=@color-accent, GradientType=1);
+}
+
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#330838+0,23395b+100 */
+
+.gradient-tabs {
+    background: #330838; /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  #330838 0%, #23395b 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg,  #330838 0%,#23395b 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg,  #330838 0%,#23395b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#330838', endColorstr='#23395b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
