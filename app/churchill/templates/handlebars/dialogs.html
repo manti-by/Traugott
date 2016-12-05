@@ -138,21 +138,18 @@
     </div>
     <div class="mdl-layout__content content">
         <div class="white-plate">
-            <div>
+            <div class="plate-wrapper">
                 <div class="notice">
                     You can drag and drop items to reorder it.
                 </div>
-                <ul class="mdl-list my-shots">
-                    {{#each shots }}
+                <ul id="my-shots" class="mdl-list my-shots">
+                    {{#each shots}}
                         <li class="mdl-list__item my-shot-item">
                             <span class="mdl-list__item-primary-content">
                                 <i class="material-icons  mdl-list__item-avatar avatar">
                                     <img src="{{ thumb }}">
                                 </i>
                                 {{ title }}, {{ volume }}{{ measure }} ({{ degree }}%)
-                            </span>
-                            <span class="mdl-list__item-secondary-content public{{#if is_public}} active{{/if}}">
-                                <i class="material-icons">public</i>
                             </span>
                             <span class="mdl-list__item-secondary-content enable">
                                 <label class="mdl-switch mdl-js-switch" for="shot-type-{{@index}}">

@@ -21,6 +21,8 @@
                         } else {
                             dispatcher._success(response.data);
                         }
+                    } else if (response.status == 403) {
+                        location.href = '/profiles/login/'
                     } else {
                         if (error) {
                             error(response.message);
