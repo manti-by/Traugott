@@ -59,14 +59,11 @@
                     edit_my_shots_dialog.open();
                     edit_my_shots_dialog.find('.close').on('click', edit_my_shots_dialog.close);
 
+                    // Init sortable widget
+                    $('#my-shots').sortable().disableSelection();
+
                     // Rebind MLD events
                     componentHandler.upgradeDom();
-
-                    $.each(edit_my_shots_dialog.find('.my-shot-item'), function() {
-                        $(this).find('.public').on('click', function() {
-                            $(this).toggleClass('active');
-                        });
-                    });
                 });
             });
         }
