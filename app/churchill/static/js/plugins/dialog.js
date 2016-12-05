@@ -9,7 +9,7 @@
             var width = $(window).width(),
                 height = $(window).height();
 
-            if (height < 769) {
+            if (width < 769) {
                 dialog.find('.content').css('width', width).css('height', height - 56);
                 dialog.css('height', height).animate({ left: 0 }, 250);
             } else {
