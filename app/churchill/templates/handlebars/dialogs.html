@@ -19,52 +19,54 @@
     </div>
     <div class="mdl-layout__content content">
         <div class="white-plate">
-            <div id="shot-type-tabs" class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-                <div class="mdl-tabs__tab-bar gradient-tabs">
-                    <a href="#popular-panel" class="mdl-tabs__tab is-active">
-                        <i class="material-icons">view_carousel</i>
-                    </a>
-                    <a href="#library-panel" class="mdl-tabs__tab">
-                        <i class="material-icons">view_agenda</i>
-                    </a>
-                </div>
-                <div class="mdl-tabs__panel is-active" id="popular-panel">
-                    {{#popular}}
-                        <div class="image"><img src="{{ image }}"></div>
-                        <div class="name">{{ title }} ({{ degree }}%)</div>
-                        <div class="quantity">
-                            <button class="mdl-button mdl-js-button mdl-button--icon decrease popular">
-                                <i class="material-icons">remove</i>
-                            </button>
-                            <span class="volume non-nullable">
-                                <input type="text" name="volume" value="{{ volume }}"
-                                       data-type-id="{{ id }}" data-step="{{ volume }}">
-                                {{ measure }}
-                            </span>
-                            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase popular">
-                                <i class="material-icons">add</i>
-                            </button>
-                        </div>
-                    {{/popular}}
-                </div>
-                <div class="mdl-tabs__panel" id="library-panel">
-                    {{#if user_types }}
-                        <h5>Your favorite shots</h5>
+            <div class="plate-wrapper">
+                <div id="shot-type-tabs" class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs__tab-bar gradient-tabs">
+                        <a href="#popular-panel" class="mdl-tabs__tab is-active">
+                            <i class="material-icons">view_carousel</i>
+                        </a>
+                        <a href="#library-panel" class="mdl-tabs__tab">
+                            <i class="material-icons">view_agenda</i>
+                        </a>
+                    </div>
+                    <div class="mdl-tabs__panel is-active" id="popular-panel">
+                        {{#popular}}
+                            <div class="image"><img src="{{ image }}"></div>
+                            <div class="name">{{ title }} ({{ degree }}%)</div>
+                            <div class="quantity">
+                                <button class="mdl-button mdl-js-button mdl-button--icon decrease popular">
+                                    <i class="material-icons">remove</i>
+                                </button>
+                                <span class="volume non-nullable">
+                                    <input type="text" name="volume" value="{{ volume }}"
+                                           data-type-id="{{ id }}" data-step="{{ volume }}">
+                                    {{ measure }}
+                                </span>
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored increase popular">
+                                    <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                        {{/popular}}
+                    </div>
+                    <div class="mdl-tabs__panel" id="library-panel">
+                        {{#if user_types }}
+                            <h5>Your favorite shots</h5>
+                            <ul class="mdl-list">
+                                {{#each user_types }}
+                                    {{>shot-type-item}}
+                                {{/each}}
+                            </ul>
+                            <h5>Other shots</h5>
+                        {{else}}
+                            <h5>Popular shots</h5>
+                        {{/if}}
                         <ul class="mdl-list">
-                            {{#each user_types }}
+                            {{#each all_types }}
                                 {{>shot-type-item}}
                             {{/each}}
                         </ul>
-                        <h5>Other shots</h5>
-                    {{else}}
-                        <h5>Popular shots</h5>
-                    {{/if}}
-                    <ul class="mdl-list">
-                        {{#each all_types }}
-                            {{>shot-type-item}}
-                        {{/each}}
-                    </ul>
-                </div>
+                    </div>
+                 </div>
              </div>
         </div>
     </div>
@@ -88,38 +90,40 @@
     </div>
     <div class="mdl-layout__content content">
         <div class="white-plate">
-            <form id="add-shot-type-form">
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="title">
-                    <label class="mdl-textfield__label" for="title">Title</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="degree">
-                    <label class="mdl-textfield__label" for="degree">Degree, %</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="volume">
-                    <label class="mdl-textfield__label" for="volume">Volume, ml</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="cost">
-                    <label class="mdl-textfield__label" for="cost">Average Cost, USD</label>
-                </div>
-                <div class="icons">
-                    <span class="mdl-layout-title">Choose shot icon</span>
-                    <div class="mdl-grid icons-grid">
-                        {{#each icons }}
-                            <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
-                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ id }}">
-                                    <input type="radio" id="icon-{{ id }}" class="mdl-radio__button icon" name="icon" value="{{ id }}">
-                                    <span class="mdl-radio__label icon-title">
-                                        <span class="icon-image">
-                                            <img src="{{ thumb }}" title="{{ title }}">
+            <div class="plate-wrapper">
+                <form id="add-shot-type-form">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="title">
+                        <label class="mdl-textfield__label" for="title">Title</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="degree">
+                        <label class="mdl-textfield__label" for="degree">Degree, %</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="volume">
+                        <label class="mdl-textfield__label" for="volume">Volume, ml</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="cost">
+                        <label class="mdl-textfield__label" for="cost">Average Cost, USD</label>
+                    </div>
+                    <div class="icons">
+                        <span class="mdl-layout-title">Choose shot icon</span>
+                        <div class="mdl-grid icons-grid">
+                            {{#each icons }}
+                                <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="icon-{{ id }}">
+                                        <input type="radio" id="icon-{{ id }}" class="mdl-radio__button icon" name="icon" value="{{ id }}">
+                                        <span class="mdl-radio__label icon-title">
+                                            <span class="icon-image">
+                                                <img src="{{ thumb }}" title="{{ title }}">
+                                            </span>
                                         </span>
-                                    </span>
-                                </label>
-                            </div>
-                        {{/each}}
+                                    </label>
+                                </div>
+                            {{/each}}
+                        </div>
                     </div>
                 </div>
             </form>

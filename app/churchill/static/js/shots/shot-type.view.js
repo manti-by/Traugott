@@ -54,13 +54,15 @@
             edit_button.on('click', function () {
                 $.shotTypeModel.all({}, function (data) {
                     var html = $.fn.renderTemplate('t-edit-my-shots-dialog', { shots: data.user_types }, true),
-                        edit_my_shots_dialog = $.fn.dialog(html);
+                        edit_my_shots_dialog = $.fn.dialog(html),
+                        my_shots_list = $('#my-shots');
 
                     edit_my_shots_dialog.open();
                     edit_my_shots_dialog.find('.close').on('click', edit_my_shots_dialog.close);
 
                     // Init sortable widget
-                    $('#my-shots').sortable().disableSelection();
+                    my_shots_list.sortable();
+                    my_shots_list.disableSelection();
 
                     // Rebind MLD events
                     componentHandler.upgradeDom();
