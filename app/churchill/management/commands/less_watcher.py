@@ -12,8 +12,9 @@ from django.core.management.base import BaseCommand
 class AnyChangeHandler(FileSystemEventHandler):
 
     def on_any_event(self, event):
-        print(event)
-        call(['python', 'manage.py', 'collectstatic', '--no-input'])
+        if event.src_path.split('.')[-1] == 'less':
+            print(event)
+            call(['python', 'manage.py', 'collectstatic', '--no-input', '-v 0'])
 
 
 class Command(BaseCommand):
