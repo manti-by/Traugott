@@ -1,13 +1,4 @@
-*~
+#.gitignore
+
 *.pyc
-*.log
-
-.DS_Store
-.idea/
-
-*/static/
-*/media/
-
-deploy/Vagrantfile.local
-app/churchill/settings/local.py
-deploy/.vagrant/
+*~
