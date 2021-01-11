@@ -1,0 +1,7 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__
+    churchill/settings/
+max-line-length = 90
+max-complexity = 14
