@@ -5,8 +5,13 @@ app_name = "v1"
 
 urlpatterns = [
     path(
-        "profiles/",
-        include("churchill.api.v1.profiles.urls"),
-        name="profiles",
-    )
+        "profile/",
+        include("churchill.api.v1.profile.urls"),
+        name="profile",
+    ),
+    path(
+        "user/",
+        include("churchill.api.v1.user.urls"),
+        name="user",
+    ),
 ]

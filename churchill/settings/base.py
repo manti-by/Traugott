@@ -85,6 +85,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "churchill.wsgi.application"
 
+BASE_URL = "http://127.0.0.1"
+
+DEFAULT_EMAIL_FROM = "noreply@churchill.by"
+
 SITE_ID = 1
 
 

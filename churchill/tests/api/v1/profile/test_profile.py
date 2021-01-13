@@ -17,7 +17,7 @@ class TestProfileView:
     @pytest.fixture(autouse=True)
     def setup_method(self):
         self.client = APIClient()
-        self.url = reverse("api:v1:profiles:profile")
+        self.url = reverse("api:v1:profile:profile")
         self.user = UserFactory()
         self.profile_data = ProfileDictFactory()
 
@@ -37,8 +37,9 @@ class TestProfileView:
         response = self.client.get(self.url, format="json")
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.data["email"] == self.user.email
-        assert response.data["image"] == response.wsgi_request.build_absolute_uri(self.user.profile.image.url)
+        assert response.data["image"] == response.wsgi_request.build_absolute_uri(
+            self.user.profile.image.url
+        )
         assert response.data["language"] == self.user.profile.language
         assert response.data["currency"] == self.user.profile.currency.iso3
         assert response.data["avg_consumption"] == self.user.profile.avg_consumption
@@ -60,7 +61,7 @@ class TestProfileImageView:
     @pytest.fixture(autouse=True)
     def setup_method(self):
         self.client = APIClient()
-        self.url = reverse("api:v1:profiles:profile_image")
+        self.url = reverse("api:v1:profile:profile_image")
         self.user = UserFactory()
 
         self.image = io.BytesIO()

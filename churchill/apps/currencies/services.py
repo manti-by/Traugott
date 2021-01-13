@@ -9,6 +9,13 @@ from churchill.apps.currencies.models import CurrencyValue, Currency, CurrencyVa
 logger = logging.getLogger()
 
 
+def get_default_currency_id() -> int:
+    currency, _ = Currency.objects.get_or_create(
+        name="United States dollar", iso3="USD"
+    )
+    return currency.id
+
+
 def create_currency_pair(currency, node):
     CurrencyValue.objects.create(
         currency=currency,
