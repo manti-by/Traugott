@@ -3,5 +3,5 @@ exclude =
     .git,
     __pycache__
     churchill/settings/
-max-line-length = 90
+max-line-length = 120
 max-complexity = 14
