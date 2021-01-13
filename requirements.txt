@@ -1,8 +1,14 @@
 django==3.1.5
+djangorestframework==3.12.2
+django-rest-auth==0.9.5
+django-allauth==0.44.0
 requests==2.25.1
 env_utils==1.2.0
+pillow==8.1.0
 
 pytest>=6.2.1
+pytest-django>=4.1.0
+factory-boy>=3.2.0
 
 black>=20.8b1
 flake8>=3.8.4
