@@ -1,4 +1,3 @@
-import random
 import factory.fuzzy
 from django.conf import settings
 from factory.django import DjangoModelFactory, ImageField
@@ -25,7 +24,7 @@ class ProfileDictFactory(factory.Factory):
     )
 
     @factory.post_generation
-    def companies(self, create, extracted, *args, **kwargs):
+    def generate_currency(self, create, extracted, *args, **kwargs):
         self["currency"] = CurrencyFactory(iso3=self["currency"]).iso3
 
 
