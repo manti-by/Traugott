@@ -1,17 +1,17 @@
 start:
-	docker-compose -f deploy/docker-compose.yml up -d
+	docker-compose -f docker-compose.yml up -d
 
 stop:
-	docker-compose -f deploy/docker-compose.yml stop
+	docker-compose -f docker-compose.yml stop
 
 destroy:
-	docker-compose -f deploy/docker-compose.yml down
+	docker-compose -f docker-compose.yml down
 
 bash:
 	docker exec -it django bash
 
 build:
-	docker build -f churchill/Dockerfile -t mantiby/churchill:latest .
+	docker build -t mantiby/churchill:latest .
 
 pg_dump:
 	pg_dump -U churchill -d churchill > database.sql

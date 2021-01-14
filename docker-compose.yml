@@ -1,15 +1,16 @@
 version: '3.3'
 services:
-  semkov-app:
+  churchill-django:
     network_mode: host
-    image: mantiby/semkov:latest
-    container_name: semkov-app
+    image: mantiby/churchill:latest
+    container_name: churchill-django
     restart: always
     ports:
-      - "8898:8898"
+      - "8000:8000"
     volumes:
-      - /home/manti/www/semkov-gorodok.by/src/:/srv/semkov/src/
-      - /home/manti/www/semkov-gorodok.by/log/:/var/log/semkov/
-      - /home/manti/www/semkov-gorodok.by/static/:/srv/semkov/static/
+      - /home/manti/www/churchill/src/:/srv/churchill/src/
+      - /home/manti/www/churchill/log/:/var/log/churchill/
+      - /home/manti/www/churchill/static/:/srv/churchill/static/
+      - /home/manti/www/churchill/media/:/srv/churchill/media/
     environment:
-      - DJANGO_SETTINGS_MODULE=core.settings.prod
+      - DJANGO_SETTINGS_MODULE=churchill.settings.prod
