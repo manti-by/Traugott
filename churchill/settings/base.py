@@ -41,12 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "allauth",
-    "allauth.account",
     "rest_framework",
-    "rest_framework.authtoken",
-    "rest_auth",
-    "rest_auth.registration",
     "churchill.apps.core",
     "churchill.apps.currencies",
     "churchill.apps.profiles",
@@ -62,8 +57,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
-FIXTURE_DIRS = [os.path.join(BASE_DIR, "fixtures")]
 
 ROOT_URLCONF = "churchill.urls"
 
@@ -83,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "churchill.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
 
 BASE_URL = "http://127.0.0.1"
 
