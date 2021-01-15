@@ -13,6 +13,7 @@ class Shot(BaseModel):
     cost = models.DecimalField(default=0.0, max_digits=5, decimal_places=2)
 
     is_public = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=False)
     created_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,

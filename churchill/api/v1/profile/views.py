@@ -35,6 +35,7 @@ class ProfileImageView(CreateAPIView):
         try:
             image = request.data["image"]
         except KeyError:
+            logger.warning("Request has no image attached")
             raise ValidationError("Request has no image attached")
         request.user.profile.image = image
         request.user.profile.save()
