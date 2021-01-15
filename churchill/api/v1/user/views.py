@@ -1,5 +1,3 @@
-import logging
-
 from django.contrib.auth import authenticate, login
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
@@ -20,8 +18,6 @@ from churchill.apps.users.services import (
     send_reset_password_email,
     reset_user_password,
 )
-
-logger = logging.getLogger()
 
 
 class RegisterView(CreateAPIView):

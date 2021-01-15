@@ -10,6 +10,11 @@ urlpatterns = [
         name="profile",
     ),
     path(
+        "shots/",
+        include("churchill.api.v1.shots.urls"),
+        name="shots",
+    ),
+    path(
         "user/",
         include("churchill.api.v1.user.urls"),
         name="user",
