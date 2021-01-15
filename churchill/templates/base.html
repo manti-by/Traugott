@@ -1,13 +1,27 @@
-{% load static core_tags %}
+{% load i18n static %}
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="no-js" lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %} Welcome {% endblock %} · PINATA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+
+    <meta name="theme-color" content="#ff6f61">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="{% translate 'Churchill' %}">
+    <meta name="description" content="{% translate 'Application for calculation of alcohol consumption' %}">
+
+    <title>{% block title %}{% translate "Churchill" %}{% endblock %}</title>
 
     <link href="{% static 'img/favicon.png' %}" rel="shortcut icon">
+
+    {% block open_graph %}
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="{% translate 'Churchill' %}">
+      <meta property="og:description" content="{% translate 'Application for calculation of alcohol consumption' %}">
+      <meta property="og:image" content="{% static 'img/favicon.png' %}">
+    {% endblock %}
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -19,8 +33,6 @@
   </head>
 
   <body>
-    <div id="loader" class="d-none"></div>
-
     {% block content %}{% endblock content %}
 
     <!-- Bootstrap optional JavaScript -->
@@ -36,8 +48,6 @@
             crossorigin="anonymous"></script>
     <!-- Datepicker JS -->
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>
-
-    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 
     {% block extra_js %}{% endblock %}
   </body>
