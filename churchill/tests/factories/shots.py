@@ -1,7 +1,7 @@
 import factory.fuzzy
 from factory.django import DjangoModelFactory
 
-from churchill.apps.shots.models import Shot
+from churchill.apps.shots.models import Shot, ShotItem
 
 
 class ShotDictFactory(factory.Factory):
@@ -37,3 +37,11 @@ class ShotFactory(DjangoModelFactory):
         max_value=25,
     )
     created_by = factory.SubFactory("churchill.tests.factories.users.UserFactory")
+
+
+class ShotItemFactory(DjangoModelFactory):
+    class Meta:
+        model = ShotItem
+
+    user = factory.SubFactory("churchill.tests.factories.users.UserFactory")
+    shot = factory.SubFactory("churchill.tests.factories.shots.ShotFactory")

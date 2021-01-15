@@ -1,11 +1,10 @@
-from django.db.models import Q
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
 from rest_framework.response import Response
 
-from churchill.api.v1.shots.serializers import ShotSerializer
-from churchill.apps.shots.models import Shot
-from churchill.apps.shots.services import create_shot, delete_shot
+from churchill.api.v1.shots.serializers import ShotSerializer, ShotItemSerializer
+from churchill.apps.shots.models import Shot, ShotItem
+from churchill.apps.shots.services import create_shot, delete_shot, delete_shot_item, create_shot_item
 
 
 class ShotsView(CreateAPIView, DestroyAPIView, ListAPIView):
@@ -13,9 +12,7 @@ class ShotsView(CreateAPIView, DestroyAPIView, ListAPIView):
     serializer_class = ShotSerializer
 
     def get_queryset(self):
-        return Shot.objects.filter(
-            Q(created_by=self.request.user) | Q(is_public=True, is_approved=True)
-        )
+        return Shot.objects.for_user(self.request.user)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -26,4 +23,25 @@ class ShotsView(CreateAPIView, DestroyAPIView, ListAPIView):
 
     def destroy(self, request, *args, **kwargs):
         delete_shot(request.user, request.data["id"])
+        return Response()
+
+
+class ShotsItemView(CreateAPIView, DestroyAPIView, ListAPIView):
+
+    serializer_class = ShotItemSerializer
+
+    def get_queryset(self):
+        return ShotItem.objects.filter(user=self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        try:
+            shot = Shot.objects.for_user(self.request.user).get(id=request.data["id"])
+        except Shot.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        shot_item = create_shot_item(request.user, shot)
+        serializer = self.get_serializer(shot_item)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def destroy(self, request, *args, **kwargs):
+        delete_shot_item(request.user, request.data["id"])
         return Response()

@@ -6,19 +6,19 @@ from rest_framework.test import APIClient
 
 import pytest
 
-from churchill.apps.shots.models import Shot
-from churchill.tests.factories.shots import ShotDictFactory, ShotFactory
+from churchill.apps.shots.models import Shot, ShotItem
+from churchill.tests.factories.shots import ShotFactory, ShotItemFactory
 from churchill.tests.factories.users import UserFactory
 
 
 @pytest.mark.django_db
-class TestShotsView:
+class TestShotsItemView:
     @pytest.fixture(autouse=True)
     def setup_method(self):
         self.client = APIClient()
-        self.url = reverse("api:v1:shots:shots")
+        self.url = reverse("api:v1:shots:item")
         self.user = UserFactory()
-        self.shot_data = ShotDictFactory()
+        self.shot = ShotFactory(created_by=self.user)
 
     def test_anonymous_user(self):
         response = self.client.get(self.url, format="json")
@@ -31,37 +31,28 @@ class TestShotsView:
         response = test_client_callable(self.url, format="json")
         assert response.status_code == status.HTTP_405_METHOD_NOT_ALLOWED
 
-    def test_shot_list(self):
+    def test_shots_item_list(self):
         self.client.force_authenticate(self.user)
 
-        ShotFactory()
+        ShotItemFactory()
         response = self.client.get(self.url, format="json")
         assert response.status_code == status.HTTP_200_OK
         assert response.data["count"] == 0
 
-        ShotFactory(is_public=True, is_approved=True)
+        ShotItemFactory(user=self.user)
         response = self.client.get(self.url, format="json")
         assert response.status_code == status.HTTP_200_OK
         assert response.data["count"] == 1
 
-        ShotFactory(created_by=self.user)
-        response = self.client.get(self.url, format="json")
-        assert response.status_code == status.HTTP_200_OK
-        assert response.data["count"] == 2
-
-    def test_create_and_delete_shot(self):
+    def test_create_and_delete_shot_item(self):
         self.client.force_authenticate(self.user)
-        response = self.client.post(self.url, self.shot_data, format="json")
+        response = self.client.post(self.url, {"id": self.shot.id}, format="json")
 
         assert response.status_code == status.HTTP_201_CREATED
-        assert response.data["title"] == self.shot_data["title"]
-        assert response.data["volume"] == self.shot_data["volume"]
-        assert response.data["volume"] == self.shot_data["volume"]
-        assert Decimal(response.data["cost"]) == self.shot_data["cost"]
-        assert Shot.objects.exists()
+        assert ShotItem.objects.exists()
 
         response = self.client.delete(
             self.url, {"id": [response.data["id"]]}, format="json"
         )
         assert response.status_code == status.HTTP_200_OK
-        assert not Shot.objects.exists()
+        assert not ShotItem.objects.exists()
