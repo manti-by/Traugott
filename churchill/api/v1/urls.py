@@ -5,6 +5,11 @@ app_name = "v1"
 
 urlpatterns = [
     path(
+        "currency/",
+        include("churchill.api.v1.currency.urls"),
+        name="currency",
+    ),
+    path(
         "profile/",
         include("churchill.api.v1.profile.urls"),
         name="profile",
