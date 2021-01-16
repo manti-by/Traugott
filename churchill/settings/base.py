@@ -78,9 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "churchill.wsgi.application"
 
-BASE_URL = "http://127.0.0.1"
-
-DEFAULT_EMAIL_FROM = "noreply@churchill.by"
+BASE_URL = "http://127.0.0.1:8000"
 
 SITE_ID = 1
 
@@ -119,6 +117,19 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+
+# Email settings
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = get_env("EMAIL_HOST", "localhost")
+EMAIL_PORT = get_int("EMAIL_PORT", 25)
+EMAIL_HOST_USER = get_env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = get_bool("EMAIL_USE_TLS", False)
+
+DEFAULT_EMAIL_FROM = "noreply@churchill.by"
 
 
 # Internationalization

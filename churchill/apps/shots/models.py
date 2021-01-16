@@ -7,11 +7,8 @@ from churchill.apps.core.models import BaseModel
 
 
 class ShotManager(models.Manager):
-
     def for_user(self, user: User):
-        return self.filter(
-            Q(created_by=user) | Q(is_public=True, is_approved=True)
-        )
+        return self.filter(Q(created_by=user) | Q(is_public=True, is_approved=True))
 
 
 class Shot(BaseModel):

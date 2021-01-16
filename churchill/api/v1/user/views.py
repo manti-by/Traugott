@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
@@ -27,8 +28,11 @@ class RegisterView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = create_user(**serializer.validated_data)
-        send_verification_email(user)
+        try:
+            user = create_user(**serializer.validated_data)
+            send_verification_email(user)
+        except IntegrityError:
+            return Response(status=status.HTTP_409_CONFLICT)
         return Response(status=status.HTTP_201_CREATED)
 
 
