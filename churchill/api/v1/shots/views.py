@@ -4,7 +4,12 @@ from rest_framework.response import Response
 
 from churchill.api.v1.shots.serializers import ShotSerializer, ShotItemSerializer
 from churchill.apps.shots.models import Shot, ShotItem
-from churchill.apps.shots.services import create_shot, delete_shot, delete_shot_item, create_shot_item
+from churchill.apps.shots.services import (
+    create_shot,
+    delete_shot,
+    delete_shot_item,
+    create_shot_item,
+)
 
 
 class ShotsView(CreateAPIView, DestroyAPIView, ListAPIView):

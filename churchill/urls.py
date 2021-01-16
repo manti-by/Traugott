@@ -5,8 +5,11 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 from django.views.generic import TemplateView
 
+from churchill.apps.core.views import verify_email
+
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="index.html")),
+    path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("verify-email/", verify_email, name="verify_email"),
     path("api/", include("churchill.api.urls")),
     path("admin/", admin.site.urls),
 ]

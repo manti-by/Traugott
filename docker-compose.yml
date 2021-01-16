@@ -1,5 +1,12 @@
 version: '3.3'
 services:
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
   churchill-django:
     network_mode: host
     image: mantiby/churchill:latest
@@ -14,3 +21,5 @@ services:
       - /home/manti/www/churchill/media/:/srv/churchill/media/
     environment:
       - DJANGO_SETTINGS_MODULE=churchill.settings.prod
+      - EMAIL_HOST=mailhog
+      - EMAIL_PORT=1025

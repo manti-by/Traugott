@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n static %}
+{% load i18n static core_tags %}
 
 {% block content %}
   <div id="loader">
@@ -26,7 +26,7 @@
         <input name="password" id="password" type="password" class="form-control" placeholder="{% translate 'Password' %}">
       </div>
       <button id="register" type="submit" class="btn btn-primary">{% translate "Submit" %}</button>
-      <span class="pl-2">
+      <span class="pl-2 text-secondary">
         {% translate "Already have account?" %}
         <a id="show-login-form" href="#login">{% translate "Sign In" %}</a>
       </span>
@@ -43,7 +43,7 @@
         <input name="password" id="password" type="password" class="form-control" placeholder="{% translate 'Password' %}">
       </div>
       <button id="login" type="submit" class="btn btn-primary">{% translate "Submit" %}</button>
-      <span class="pl-2">
+      <span class="pl-2 text-secondary">
         {% translate "New to Churchill?" %}
         <a id="show-registration-form" href="#register">{% translate "Sign Up" %}</a>
       </span>
@@ -56,6 +56,9 @@
 {% endblock %}
 
 {% block extra_js %}
+  <script type="text/javascript">
+    let MESSAGES = JSON.parse('{{ messages|messages_to_json|safe }}')
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.6/dist/handlebars.min.js"></script>
   <script defer src="{% static 'js/widgets/loader.js' %}" type="module"></script>
   <script defer src="{% static 'js/app.js' %}" type="module"></script>

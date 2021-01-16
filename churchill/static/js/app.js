@@ -13,6 +13,8 @@ class App {
     this.update()
     this.render()
 
+    this.checkMessages()
+
     this.loader.hide()
   }
 
@@ -55,6 +57,31 @@ class App {
     this.centered.center(
       document.getElementById("login-form")
     )
+
+    document.getElementById("login").onclick = (event) => {
+      event.preventDefault()
+
+      let data = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+      }
+
+      fetch("/api/v1/user/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+        async: true,
+      }).then((response) => {
+        if (response.status === 201) {
+          this.update()
+          this.renderProfile()
+          return
+        }
+        alert("Can't login with provided email and password, please try again with different credentials")
+      })
+    }
   }
 
   renderRegistration() {
@@ -79,10 +106,12 @@ class App {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        async: true,
       }).then((response) => {
         if (response.status === 201) {
           alert("Account created successfully, please check you email for verification link.")
+          this.renderLogin()
           return
         }
         alert("Can't register with provided email and password, please try again with different credentials")
@@ -92,6 +121,18 @@ class App {
     this.centered.center(
       document.getElementById("registration-form")
     )
+  }
+
+  checkMessages() {
+    if (MESSAGES.length) {
+      let result = ""
+
+      for (let i = 0; i < MESSAGES.length; i++) {
+        result += MESSAGES[i]["message"] + "\n"
+      }
+
+      alert(result)
+    }
   }
 }
 

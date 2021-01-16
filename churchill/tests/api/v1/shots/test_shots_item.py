@@ -1,12 +1,10 @@
-from decimal import Decimal
-
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APIClient
 
 import pytest
 
-from churchill.apps.shots.models import Shot, ShotItem
+from churchill.apps.shots.models import ShotItem
 from churchill.tests.factories.shots import ShotFactory, ShotItemFactory
 from churchill.tests.factories.users import UserFactory
 
