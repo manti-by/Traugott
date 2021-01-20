@@ -1,0 +1,20 @@
+{% verbatim %}
+  <script id="t-login" type="text/x-handlebars-template">
+    <form id="login-form" class="centered">
+      <h3>{{ translate "Login to app" }}</h3>
+      <div class="form-row">
+        <input name="email" id="email" type="email" placeholder="{{ translate 'Email' }}">
+      </div>
+      <div class="form-row">
+        <input name="password" id="password" type="password" placeholder="{{ translate 'Password' }}">
+      </div>
+      <div class="form-row">
+        <button id="login" type="submit">{{ translate "Submit" }}</button>
+        <span class="help-text">
+          {{ translate "New to Churchill" }}?
+          <a id="show-registration-form" href="#register">{{ translate "Sign Up" }}</a>
+        </span>
+      </div>
+    </form>
+  </script>
+{% endverbatim %}

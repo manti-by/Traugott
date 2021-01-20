@@ -6,10 +6,10 @@ export class LoaderWidget {
   }
 
   show() {
-    this.ctl.classList.remove("d-none")
+    this.ctl.classList.remove("hidden")
   }
 
   hide() {
-    this.ctl.classList.add("d-none")
+    this.ctl.classList.add("hidden")
   }
 }

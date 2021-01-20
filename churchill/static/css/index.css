@@ -5,7 +5,7 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.5);
-  z-index: 1000;
+  z-index: 200;
 }
 
 #loader img {
@@ -16,6 +16,36 @@
   height: 100px;
 }
 
-.centered {
-  position: relative;
+#navbar {
+  padding: .5rem 1rem;
+  background: #eeeeee;
+}
+
+#container {
+  padding: 1rem;
+}
+
+#show-add-shot-item-form {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 4rem;
+  height: 4rem;
+  font-size: 2rem;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  background: #064d69;
+  z-index: 100;
+}
+
+#register-form input,
+#login-form input {
+  width: calc(100% - 1.5rem);
+}
+
+#register-form button[type=submit],
+#login-form button[type=submit],
+#add-shot-item-form button[type=submit] {
+  margin-right: .25rem;
 }

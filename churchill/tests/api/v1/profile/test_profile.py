@@ -44,6 +44,7 @@ class TestProfileView:
         assert response.data["currency"] == self.user.profile.currency.iso3
         assert response.data["avg_consumption"] == self.user.profile.avg_consumption
         assert Decimal(response.data["avg_price"]) == self.user.profile.avg_price
+        assert not response.data["stats"]
 
     def test_update_profile(self):
         self.client.force_authenticate(self.user)
