@@ -7,59 +7,19 @@
     <img src="{% static 'img/loader.svg' %}" alt="{% translate 'Loading' %}..." />
   </div>
 
-  <nav id="navbar" class="navbar navbar-light bg-light">
-    <a id="show-settings" class="navbar-brand" href="#settings">
-      <img src="{% static 'img/favicon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="Ch" />
+  <nav id="navbar">
+    <a id="show-settings" href="#settings">
+      <img src="{% static 'img/favicon.png' %}" width="30" height="30" />
       {% translate "Churchill" %}
     </a>
   </nav>
 
   <div id="container" class="container"></div>
 
-  <script id="t-registration" type="text/x-handlebars-template">
-    <form id="registration-form" class="centered">
-      <h3>{% translate "Create new account" %}</h3>
-      <div class="form-group">
-        <input name="email" id="email" type="email" class="form-control" placeholder="{% translate 'Email' %}">
-      </div>
-      <div class="form-group">
-        <input name="password" id="password" type="password" class="form-control" placeholder="{% translate 'Password' %}">
-      </div>
-      <button id="register" type="submit" class="btn btn-primary">{% translate "Submit" %}</button>
-      <span class="pl-2 text-secondary">
-        {% translate "Already have account?" %}
-        <a id="show-login-form" href="#login">{% translate "Sign In" %}</a>
-      </span>
-    </form>
-  </script>
+  <button id="show-add-shot-item-form">+</button>
 
-  <script id="t-login" type="text/x-handlebars-template">
-    <form id="login-form" class="centered">
-      <h3>{% translate "Login to app" %}</h3>
-      <div class="form-group">
-        <input name="email" id="email" type="email" class="form-control" placeholder="{% translate 'Email' %}">
-      </div>
-      <div class="form-group">
-        <input name="password" id="password" type="password" class="form-control" placeholder="{% translate 'Password' %}">
-      </div>
-      <button id="login" type="submit" class="btn btn-primary">{% translate "Submit" %}</button>
-      <span class="pl-2 text-secondary">
-        {% translate "New to Churchill?" %}
-        <a id="show-registration-form" href="#register">{% translate "Sign Up" %}</a>
-      </span>
-    </form>
-  </script>
-
-  <script id="t-profile" type="text/x-handlebars-template">
-    <h3>{% translate "Your profile" %}</h3>
-  </script>
-{% endblock %}
-
-{% block extra_js %}
-  <script type="text/javascript">
-    let MESSAGES = JSON.parse('{{ messages|messages_to_json|safe }}')
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.6/dist/handlebars.min.js"></script>
-  <script defer src="{% static 'js/widgets/loader.js' %}" type="module"></script>
-  <script defer src="{% static 'js/app.js' %}" type="module"></script>
+  {% include "handlebars/register.html" %}
+  {% include "handlebars/login.html" %}
+  {% include "handlebars/dashboard.html" %}
+  {% include "handlebars/add_shot.html" %}
 {% endblock %}
