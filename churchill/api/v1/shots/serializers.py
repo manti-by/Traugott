@@ -14,3 +14,8 @@ class ShotItemSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     shot = ShotSerializer()
     created_at = serializers.DateTimeField(read_only=True)
+
+
+class ShotDateSerializer(serializers.Serializer):
+    date = serializers.DateField()
+    is_drunk = serializers.BooleanField()

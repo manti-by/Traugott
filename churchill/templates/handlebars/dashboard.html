@@ -1,7 +1,7 @@
 {% verbatim %}
   <script id="t-dashboard" type="text/x-handlebars-template">
     <div id="dashboard">
-      {{# if profile.stats }}
+      {{#if profile.stats}}
         <div class="timedelta-last-shot row">
           <div class="value">{{ profile.stats.timedelta_last_shot_repr }}</div>
           <label>{{ translate "You don't drink" }}</label>
@@ -20,9 +20,15 @@
           </div>
           <label>{{ translate "Saved money" }}</label>
         </div>
+        <div id="calendar-container"></div>
       {{ else }}
         {{ translate "You haven't added any shots yet" }}
       {{/if}}
     </div>
+  </script>
+  <script id="t-calendar" type="text/x-handlebars-template">
+    {{#each calendar }}
+      <div class="date{{#if this.is_drunk}} drunk{{/if}}" title="{{ this.date }}"></div>
+    {{/each}}
   </script>
 {% endverbatim %}
