@@ -1,0 +1,25 @@
+{% verbatim %}
+  <script id="t-settings" type="text/x-handlebars-template">
+    <div id="settings">
+      <h3>{{ translate "Your settings" }}</h3>
+      <div class="settings">
+        <div class="form-row">
+          <input name="currency" id="currency" type="text" value="{{ profile.currency }}"
+                 placeholder="{{ translate 'Currency' }}">
+        </div>
+        <div class="form-row">
+          <input name="language" id="language" type="text" value="{{ profile.language }}"
+                 placeholder="{{ translate 'Language' }}">
+        </div>
+        <div class="form-row">
+          <input name="avg_consumption" id="avg_consumption" type="text" value="{{ profile.avg_consumption }}"
+                 placeholder="{{ translate 'Average consumption' }}">
+        </div>
+        <div class="form-row">
+          <input name="avg_price" id="avg_price" type="text" value="{{ profile.avg_price }}"
+                 placeholder="{{ translate 'Average price' }}">
+        </div>
+      </div>
+    </div>
+  </script>
+{% endverbatim %}

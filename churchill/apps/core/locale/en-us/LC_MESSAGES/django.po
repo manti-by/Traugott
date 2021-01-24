@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 20:02+0000\n"
+"POT-Creation-Date: 2021-01-24 10:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: churchill/apps/core/views.py:14
+msgid "Your email verified successfully, now you can login"
+msgstr ""
+
+#: churchill/apps/core/views.py:17
+msgid "Can't verify you account, please try again"
+msgstr ""
+
+#: churchill/apps/currencies/models.py:13
+msgid "Currency"
+msgstr ""
+
 #: churchill/apps/currencies/models.py:14
+msgid "Currencies"
+msgstr ""
+
+#: churchill/apps/currencies/models.py:21
 msgid "Buy"
 msgstr ""
 
-#: churchill/apps/currencies/models.py:15
+#: churchill/apps/currencies/models.py:22
 msgid "Sell"
 msgstr ""
 
-#: churchill/apps/currencies/services.py:26
+#: churchill/apps/currencies/models.py:33
+msgid "Currency Value"
+msgstr ""
+
+#: churchill/apps/currencies/models.py:34
+msgid "Currency Values"
+msgstr ""
+
+#: churchill/apps/currencies/services.py:37
 msgid "No currencies are setup"
 msgstr ""
 
-#: churchill/apps/profiles/models.py:22
+#: churchill/apps/profiles/models.py:11
+msgid "From the last shot"
+msgstr ""
+
+#: churchill/apps/profiles/models.py:12
+msgid "Weekly"
+msgstr ""
+
+#: churchill/apps/profiles/models.py:13
+msgid "Monthly"
+msgstr ""
+
+#: churchill/apps/profiles/models.py:14
+msgid "For the all time"
+msgstr ""
+
+#: churchill/apps/profiles/models.py:45
 msgid "Average alcohol consumption in ml per year"
 msgstr ""
 
-#: churchill/apps/profiles/models.py:26
+#: churchill/apps/profiles/models.py:52
 msgid "Average alcohol price for 1000 ml"
 msgstr ""
 
-#: churchill/apps/shots/models.py:11
+#: churchill/apps/shots/models.py:17
 msgid "Volume in ml"
 msgstr ""
 
-#: churchill/apps/shots/models.py:12
+#: churchill/apps/shots/models.py:18
 msgid "The strength of alcohol"
 msgstr ""
 
-#: churchill/settings/base.py:130
+#: churchill/apps/users/services.py:34
+msgid "Verify your email address"
+msgstr ""
+
+#: churchill/apps/users/services.py:53
+msgid "Reset password request"
+msgstr ""
+
+#: churchill/settings/base.py:148
 msgid "Russian"
 msgstr ""
 
-#: churchill/settings/base.py:131
+#: churchill/settings/base.py:149
 msgid "English"
 msgstr ""
 
-#: churchill/templates/index.html:4
-msgid "Homepage"
+#: churchill/templates/base.html:12 churchill/templates/base.html:15
+#: churchill/templates/base.html:21 churchill/templates/index.html:13
+msgid "Churchill"
+msgstr ""
+
+#: churchill/templates/base.html:13 churchill/templates/base.html:22
+msgid "Application for calculation of alcohol consumption"
+msgstr ""
+
+#: churchill/templates/index.html:7
+msgid "Loading"
 msgstr ""

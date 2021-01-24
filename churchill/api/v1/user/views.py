@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.db.utils import IntegrityError
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -61,9 +62,8 @@ class LoginView(CreateAPIView):
         )
         if user is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        login(request, user)
-        serializer = self.get_serializer(request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({"token": token.key}, status=status.HTTP_201_CREATED)
 
 
 class ResetPasswordView(CreateAPIView):
