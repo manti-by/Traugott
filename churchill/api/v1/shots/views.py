@@ -41,7 +41,7 @@ class ShotsItemView(CreateAPIView, DestroyAPIView, ListAPIView):
     def create(self, request, *args, **kwargs):
         try:
             shot = Shot.objects.for_user(self.request.user).get(id=request.data["id"])
-        except Shot.DoesNotExist:
+        except (KeyError, Shot.DoesNotExist):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         shot_item = create_shot_item(request.user, shot)
         serializer = self.get_serializer(shot_item)

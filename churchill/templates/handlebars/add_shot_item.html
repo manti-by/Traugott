@@ -3,7 +3,12 @@
     <form id="add-shot-item-form" class="centered">
       <h3>{{ translate "Add shot item" }}</h3>
       <div class="form-row">
-        add shots here
+        {{#each shots}}
+          <div class="form-row">
+            <input name="id" type="radio" value="{{ this.id }}">
+            <label>{{ this.title }} {{ this.volume }}{{ translate "ml" }}</label>
+          </div>
+        {{/each}}
       </div>
       <div class="form-row">
         <button id="add-shot" type="submit">{{ translate "Submit" }}</button>

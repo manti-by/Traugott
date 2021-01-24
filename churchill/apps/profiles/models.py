@@ -7,6 +7,13 @@ from churchill.apps.core.models import BaseModel
 from churchill.apps.currencies.services import get_default_currency_id
 
 
+class StatsCalculationStrategy(models.TextChoices):
+    LAST_SHOT = "LAST_SHOT", _("From the last shot")
+    WEEKLY = "WEEKLY", _("Weekly")
+    MONTHLY = "MONTHLY", _("Monthly")
+    ALL_TIME = "ALL_TIME", _("For the all time")
+
+
 class Profile(BaseModel):
     user = models.OneToOneField(
         User,
@@ -43,6 +50,11 @@ class Profile(BaseModel):
         blank=True,
         default=settings.AVG_ALCOHOL_PRICE,
         help_text=_("Average alcohol price for 1000 ml"),
+    )
+    stats_calculation_strategy = models.CharField(
+        max_length=20,
+        choices=StatsCalculationStrategy.choices,
+        default=StatsCalculationStrategy.MONTHLY
     )
     verification_token = models.CharField(max_length=16, null=True, blank=True)
 

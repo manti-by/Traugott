@@ -49,3 +49,27 @@
 #add-shot-item-form button[type=submit] {
   margin-right: .25rem;
 }
+
+#dashboard {
+  padding: .5rem 0;
+  text-align: center;
+}
+
+#dashboard .row {
+  margin-bottom: 1rem;
+}
+
+#dashboard .value {
+  margin-bottom: .25rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+#dashboard label {
+  color: #636363;
+}
+
+#add-shot-item-form .form-row label {
+  margin-left: .25rem;
+  font-size: 1.25rem;
+}

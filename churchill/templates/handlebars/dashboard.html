@@ -1,25 +1,24 @@
 {% verbatim %}
   <script id="t-dashboard" type="text/x-handlebars-template">
     <div id="dashboard">
-      <h3>{{ translate "Your dashboard" }}</h3>
       {{# if profile.stats }}
-        <div class="timedelta-last-shot">
-          <h3>{{ translate "You don't drink" }}</h3>
-          <div class="value">{{ profile.stats.timedelta_last_shot }}</div>
+        <div class="timedelta-last-shot row">
+          <div class="value">{{ profile.stats.timedelta_last_shot_repr }}</div>
+          <label>{{ translate "You don't drink" }}</label>
         </div>
-        <div class="skipped-volume-last-shot">
-          <h3>{{ translate "You didn't drink" }}</h3>
+        <div class="skipped-volume-last-shot row">
           <div class="value">
             {{ profile.stats.skipped_volume_last_shot }}
             {{ translate "ml of alcohol" }}
           </div>
+          <label>{{ translate "You haven't drunk" }}</label>
         </div>
-        <div class="money-saved-last-shot">
-          <h3>{{ translate "Saved money" }}</h3>
+        <div class="money-saved-last-shot row">
           <div class="value">
             {{ profile.stats.money_saved_last_shot }}
             {{ profile.currency }}
           </div>
+          <label>{{ translate "Saved money" }}</label>
         </div>
       {{ else }}
         {{ translate "You haven't added any shots yet" }}
