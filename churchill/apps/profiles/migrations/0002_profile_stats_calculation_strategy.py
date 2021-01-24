@@ -6,13 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('profiles', '0001_initial'),
+        ("profiles", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='stats_calculation_strategy',
-            field=models.CharField(choices=[('LAST_SHOT', 'From the last shot'), ('WEEKLY', 'Weekly'), ('MONTHLY', 'Monthly'), ('ALL_TIME', 'For the all time')], default='MONTHLY', max_length=20),
+            model_name="profile",
+            name="stats_calculation_strategy",
+            field=models.CharField(
+                choices=[
+                    ("LAST_SHOT", "From the last shot"),
+                    ("WEEKLY", "Weekly"),
+                    ("MONTHLY", "Monthly"),
+                    ("ALL_TIME", "For the all time"),
+                ],
+                default="MONTHLY",
+                max_length=20,
+            ),
         ),
     ]

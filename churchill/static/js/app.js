@@ -10,6 +10,9 @@ class App {
     if (localStorage.getItem("token")) {
       this.token = localStorage.getItem("token")
     }
+    if (localStorage.getItem("calendar")) {
+      this.calendar = localStorage.getItem("calendar")
+    }
 
     this.container = document.getElementById("container")
 
@@ -50,6 +53,25 @@ class App {
       document.getElementById("t-dashboard").innerHTML,
     )({ profile: this.profile })
 
+    if (!this.calendar) {
+      fetch("/api/v1/shots/calendar/", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + this.token
+        },
+        async: true,
+      }).then((response) => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            this.calendar = data.results
+            document.getElementById("calendar-container").innerHTML = Handlebars.compile(
+              document.getElementById("t-calendar").innerHTML,
+            )({ calendar: this.calendar })
+          })
+        }
+      })
+    }
 
     document.getElementById("show-add-shot-item-form").onclick = event => {
       this.container.innerHTML = Handlebars.compile(

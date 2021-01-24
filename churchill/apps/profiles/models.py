@@ -54,7 +54,7 @@ class Profile(BaseModel):
     stats_calculation_strategy = models.CharField(
         max_length=20,
         choices=StatsCalculationStrategy.choices,
-        default=StatsCalculationStrategy.MONTHLY
+        default=StatsCalculationStrategy.MONTHLY,
     )
     verification_token = models.CharField(max_length=16, null=True, blank=True)
 

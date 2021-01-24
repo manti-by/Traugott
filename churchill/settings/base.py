@@ -187,7 +187,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-    )
+    ),
 }
 
 # App settings
@@ -195,4 +195,6 @@ REST_FRAMEWORK = {
 PROFILE_IMAGE_DIRECTORY = "profile"
 
 AVG_ALCOHOL_CONSUMPTION = get_int("AVG_ALCOHOL_CONSUMPTION", 6400)
-AVG_ALCOHOL_PRICE = get_decimal("AVG_ALCOHOL_PRICE", Decimal("10"))
+AVG_ALCOHOL_PRICE = get_decimal("AVG_ALCOHOL_PRICE", Decimal("20"))
+
+CALENDAR_WEEK_SIZE = 5

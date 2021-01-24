@@ -46,7 +46,9 @@ def get_profile_stats(profile: Profile) -> Optional[dict]:
         }
 
 
-def get_drunk_and_all_days_count(profile: Profile, from_date: datetime) -> Tuple[int, int]:
+def get_drunk_and_all_days_count(
+    profile: Profile, from_date: datetime
+) -> Tuple[int, int]:
     drunk_days = profile.user.shot_items.filter(created_at__gte=from_date).count()
     all_days = int((timezone.now() - from_date).days)
     return drunk_days, all_days
@@ -68,7 +70,9 @@ def get_all_time_stats(profile: Profile, *args) -> Tuple[int, int]:
     return get_drunk_and_all_days_count(profile, profile.created_at)
 
 
-def calculate_consuming_stats(profile: Profile, last_shot: ShotItem) -> Tuple[int, Decimal]:
+def calculate_consuming_stats(
+    profile: Profile, last_shot: ShotItem
+) -> Tuple[int, Decimal]:
     switcher = {
         "LAST_SHOT": get_last_shot_stats,
         "WEEKLY": get_weekly_stats,

@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.authtoken.models import Token

@@ -1,14 +1,20 @@
-from rest_framework import status
+from django.conf import settings
+from rest_framework import status, pagination
 from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
 from rest_framework.response import Response
 
-from churchill.api.v1.shots.serializers import ShotSerializer, ShotItemSerializer
+from churchill.api.v1.shots.serializers import (
+    ShotSerializer,
+    ShotItemSerializer,
+    ShotDateSerializer,
+)
 from churchill.apps.shots.models import Shot, ShotItem
 from churchill.apps.shots.services import (
     create_shot,
     delete_shot,
     delete_shot_item,
     create_shot_item,
+    get_shots_calendar,
 )
 
 
@@ -50,3 +56,16 @@ class ShotsItemView(CreateAPIView, DestroyAPIView, ListAPIView):
     def destroy(self, request, *args, **kwargs):
         delete_shot_item(request.user, request.data["id"])
         return Response()
+
+
+class CalendarPagination(pagination.PageNumberPagination):
+    page_size = settings.CALENDAR_WEEK_SIZE * 7
+
+
+class ShotsItemCalendarView(ListAPIView):
+
+    serializer_class = ShotDateSerializer
+    pagination_class = CalendarPagination
+
+    def get_queryset(self):
+        return get_shots_calendar(self.request.user)
