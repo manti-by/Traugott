@@ -18,8 +18,8 @@ def get_dates_for_weeks_count(
     user: User, weeks_count: int = settings.CALENDAR_WEEK_SIZE
 ) -> Iterable[datetime]:
     first_day_offset = get_first_week_day_offset(user)
-    end_date = datetime.now() - timedelta(
-        days=((datetime.now().isoweekday() + first_day_offset) % 7)
+    end_date = datetime.now() + timedelta(
+        days=6 - datetime.now().isoweekday() + first_day_offset
     )
     start_date = end_date - timedelta(weeks=weeks_count)
     return date_range(start_date, end_date)

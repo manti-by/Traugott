@@ -22,7 +22,7 @@ class TestShotsView:
 
     def test_anonymous_user(self):
         response = self.client.get(self.url, format="json")
-        assert response.status_code == status.HTTP_403_FORBIDDEN
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
     @pytest.mark.parametrize("method", ["put", "patch"])
     def test_not_allowed_methods(self, method):

@@ -20,6 +20,8 @@ class TestUserAccount:
             reverse("api:v1:user:login"), data=data, format="json"
         )
         assert response.status_code == status.HTTP_201_CREATED
+        assert response.json()["token"]
 
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {response.json()['token']}")
         response = self.client.get(reverse("api:v1:profile:profile"), format="json")
         assert response.status_code == status.HTTP_200_OK
