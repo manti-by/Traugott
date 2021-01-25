@@ -51,7 +51,6 @@
 }
 
 #dashboard {
-  padding: .5rem 0;
   text-align: center;
 }
 
@@ -69,14 +68,35 @@
   color: #636363;
 }
 
-#calendar-container {
+#dashboard .block {
+  padding: .5rem 0;
+}
+
+#calendar-container.block {
+  padding: 1rem .5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: .5rem;
+}
+
+#calendar-container h4 {
+  margin: 0 0 .75rem .75rem;
+  text-align: left;
+}
+
+#calendar-container .table {
   display: flex;
   flex-flow: row wrap;
 }
 
+#calendar-container .day,
 #calendar-container .date {
   width: calc(100% / 7);
   text-align: center;
+}
+
+#calendar-container .day {
+  margin-bottom: .5rem;
+  color: #636363;
 }
 
 #calendar-container .date:after {
@@ -90,6 +110,10 @@
 
 #calendar-container .date.drunk:after {
   background-color: red;
+}
+
+#calendar-container .date.disabled:after {
+  background-color: #cccccc;
 }
 
 #add-shot-item-form .form-row label {

@@ -45,5 +45,6 @@ class TestResetPassword:
         )
         assert response.status_code == status.HTTP_201_CREATED
 
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {response.json()['token']}")
         response = self.client.get(reverse("api:v1:profile:profile"))
         assert response.status_code == status.HTTP_200_OK

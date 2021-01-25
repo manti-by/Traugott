@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from dateutil.tz import UTC
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.reverse import reverse
@@ -39,9 +40,13 @@ class TestShotsCalendarView:
         start_date = timezone.now() - timedelta(weeks=4)
         for _ in range(7):
             shot_item = ShotItemFactory(user=self.user)
-            shot_item.created_at = self.faker.date_between(start_date=start_date)
+            shot_item.created_at = self.faker.date_time_between(
+                start_date=start_date, tzinfo=UTC
+            )
             shot_item.save()
 
         response = self.client.get(self.url, format="json")
         assert response.status_code == status.HTTP_200_OK
-        assert len(list(filter(lambda x: x["is_drunk"], response.json()["results"]))) == 7
+        assert (
+            len(list(filter(lambda x: x["is_drunk"], response.json()["results"]))) == 7
+        )

@@ -2,33 +2,43 @@
   <script id="t-dashboard" type="text/x-handlebars-template">
     <div id="dashboard">
       {{#if profile.stats}}
-        <div class="timedelta-last-shot row">
-          <div class="value">{{ profile.stats.timedelta_last_shot_repr }}</div>
-          <label>{{ translate "You don't drink" }}</label>
-        </div>
-        <div class="skipped-volume-last-shot row">
-          <div class="value">
-            {{ profile.stats.skipped_volume_last_shot }}
-            {{ translate "ml of alcohol" }}
+        <div id="stats-container" class="block">
+          <div class="timedelta-last-shot row">
+            <div class="value">{{ profile.stats.timedelta_last_shot_repr }}</div>
+            <label>{{ translate "You don't drink" }}</label>
           </div>
-          <label>{{ translate "You haven't drunk" }}</label>
-        </div>
-        <div class="money-saved-last-shot row">
-          <div class="value">
-            {{ profile.stats.money_saved_last_shot }}
-            {{ profile.currency }}
+          <div class="skipped-volume-last-shot row">
+            <div class="value">
+              {{ profile.stats.skipped_volume_last_shot }}
+              {{ translate "ml of alcohol" }}
+            </div>
+            <label>{{ translate "You haven't drunk" }}</label>
           </div>
-          <label>{{ translate "Saved money" }}</label>
+          <div class="money-saved-last-shot row">
+            <div class="value">
+              {{ profile.stats.money_saved_last_shot }}
+              {{ profile.currency }}
+            </div>
+            <label>{{ translate "Saved money" }}</label>
+          </div>
         </div>
-        <div id="calendar-container"></div>
+        <div id="calendar-container" class="block"></div>
       {{ else }}
         {{ translate "You haven't added any shots yet" }}
       {{/if}}
     </div>
   </script>
   <script id="t-calendar" type="text/x-handlebars-template">
-    {{#each calendar }}
-      <div class="date{{#if this.is_drunk}} drunk{{/if}}" title="{{ this.date }}"></div>
-    {{/each}}
+    <h4>{{ translate "Monthly stats" }}</h4>
+    <div class="headers">
+      <div class="table">
+      {{#each daysOfWeek }}
+        <div class="day">{{ this }}</div>
+      {{/each}}
+      {{#each calendar }}
+        <div class="date{{#if this.is_drunk}} drunk{{/if}}{{#if (gt this.date ../today)}} disabled{{/if}}"></div>
+      {{/each}}
+      </div>
+    </div>
   </script>
 {% endverbatim %}
