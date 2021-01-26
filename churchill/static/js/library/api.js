@@ -8,6 +8,11 @@ export class Api {
   }
 
   getProfile(on_success, on_error) {
+    if (!this.token) {
+      on_error()
+      console.log("Call api.login() first before calling api.getProfile()")
+      return
+    }
     fetch("/api/v1/profile/", {
       method: "GET",
       headers: {
