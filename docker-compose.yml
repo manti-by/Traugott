@@ -9,11 +9,11 @@ services:
     ports:
       - "8053:8053"
     volumes:
-      - /home/manti/www/churchill/src/:/srv/churchill/src/
-      - /home/manti/www/churchill/data/:/srv/churchill/data/
-      - /home/manti/www/churchill/log/:/var/log/churchill/
-      - /home/manti/www/churchill/static/:/srv/churchill/static/
-      - /home/manti/www/churchill/media/:/srv/churchill/media/
+      - /home/manti/www/churchill.manti.by/src/:/srv/churchill/src/
+      - /home/manti/www/churchill.manti.by/data/:/srv/churchill/data/
+      - /home/manti/www/churchill.manti.by/log/:/var/log/churchill/
+      - /home/manti/www/churchill.manti.by/static/:/srv/churchill/static/
+      - /home/manti/www/churchill.manti.by/media/:/srv/churchill/media/
     environment:
       - DJANGO_SETTINGS_MODULE=churchill.settings.prod
       - EMAIL_HOST=localhost

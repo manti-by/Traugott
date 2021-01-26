@@ -12,9 +12,6 @@ class App {
   constructor (api) {
     this.api = api
 
-    if (localStorage.getItem("token")) {
-      this.token = localStorage.getItem("token")
-    }
     if (localStorage.getItem("profile")) {
       this.profile = localStorage.getItem("profile")
     }
@@ -38,6 +35,7 @@ class App {
       this.loader.hide()
     }, () => {
       this.renderLogin()
+      this.loader.hide()
     })
   }
 
@@ -134,7 +132,7 @@ class App {
         password: document.getElementById("password").value
       }
 
-      this.api.login(data, () => {
+      this.api.register(data, () => {
         alert(_("Account created successfully, please check you email for verification link."))
         this.renderLogin()
       }, () => {
