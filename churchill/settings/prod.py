@@ -50,7 +50,7 @@ LOGGING = {
             "formatter": "verbose",
         },
         "django": {
-            "handlers": ["file"],
+            "handlers": ["django"],
             "level": "WARNING",
             "propagate": True,
             "formatter": "simple",

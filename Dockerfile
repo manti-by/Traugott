@@ -3,6 +3,7 @@ FROM python:3.8-slim
 
 # Add directories
 RUN mkdir -p /srv/churchill/src/ && \
+    mkdir -p /srv/churchill/data/ && \
     mkdir -p /srv/churchill/static/ && \
     mkdir -p /srv/churchill/media/ && \
     mkdir -p /var/log/churchill/

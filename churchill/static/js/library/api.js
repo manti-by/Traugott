@@ -97,7 +97,6 @@ export class Api {
       body: JSON.stringify(data),
       async: true,
     }).then(response => {
-      this.loader.hide()
       if (response.status === 201) {
         on_success()
         return

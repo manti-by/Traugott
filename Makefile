@@ -8,19 +8,16 @@ destroy:
 	docker-compose -f docker-compose.yml down
 
 bash:
-	docker exec -it django bash
+	docker exec -it churchill-django bash
 
 build:
 	docker build -t mantiby/churchill:latest .
 
-pg_dump:
-	pg_dump -U churchill -d churchill > database.sql
-
 migrate:
-	python manage.py migrate
+	docker exec -it churchill-django python manage.py migrate
 
 static:
-	python churchill/manage.py collectstatic --no-input
+	docker exec -it churchill-django python manage.py collectstatic --no-input
 
 messages:
 	python manage.py makemessages -a
