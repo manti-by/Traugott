@@ -19,4 +19,4 @@ WORKDIR /srv/churchill/src/
 
 # Run
 ENV DJANGO_SETTINGS_MODULE=churchill.settings.prod
-CMD exec gunicorn churchill.wsgi:application --bind 0.0.0.0:8000 --workers 2
+CMD exec gunicorn churchill.wsgi:application --bind 0.0.0.0:8053 --workers 2
