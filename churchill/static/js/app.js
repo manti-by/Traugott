@@ -24,7 +24,17 @@ class App {
     this.loader = new LoaderWidget()
     this.centered = new CenteredWidget()
 
-    this.update()
+    if (this.api.token) {
+      if (this.profile) {
+        this.renderDashboard()
+      } else {
+        this.update()
+      }
+    } else {
+      this.renderLogin()
+    }
+    this.loader.hide()
+
     this.checkMessages()
   }
 
@@ -32,10 +42,8 @@ class App {
     this.api.getProfile((data) => {
       this.profile = data
       this.renderDashboard()
-      this.loader.hide()
     }, () => {
       this.renderLogin()
-      this.loader.hide()
     })
   }
 
