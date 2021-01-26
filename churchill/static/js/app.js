@@ -1,10 +1,10 @@
+import { Api } from "./library/api.js"
 import { _ } from "./library/translate.js"
-import { today, registerHandlebarsHelpers } from "./library/utils.js"
+import { today, registerHandlebarsHelpers, installServiceWorker } from "./library/utils.js"
 
 import { CenteredWidget } from "./widgets/centered.js"
 import { LoaderWidget } from "./widgets/loader.js"
 
-import { Api } from "./api.js"
 
 "user strict"
 
@@ -161,6 +161,7 @@ class App {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
+  installServiceWorker()
   registerHandlebarsHelpers()
 
   let api = new Api(),

@@ -2,6 +2,16 @@ import { _ } from "./translate.js"
 
 "use strict"
 
+export function installServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register('./library/worker.js', {scope: './'}).then((reg) => {
+      console.debug("Registration succeeded. Scope is " + reg.scope);
+    }).catch((error) => {
+      console.error("Registration failed with " + error);
+    });
+  }
+}
+
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     "translate": (string) => _(string),
