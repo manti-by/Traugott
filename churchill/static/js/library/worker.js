@@ -1,5 +1,6 @@
 self.addEventListener("activate", (event) => {
-  const cacheWhitelist = [APP_VERSION]
+  const CACHE = new URL(location).searchParams.get("app_version"),
+    cacheWhitelist = [CACHE]
 
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -15,8 +16,10 @@ self.addEventListener("activate", (event) => {
 })
 
 self.addEventListener("install", (event) => {
+  const CACHE = new URL(location).searchParams.get("app_version")
+
   event.waitUntil(
-    caches.open(APP_VERSION).then((cache) => {
+    caches.open(CACHE).then((cache) => {
       cache.addAll([
         "/static/css/reset.css",
         "/static/css/base.css",
@@ -36,6 +39,8 @@ self.addEventListener("install", (event) => {
 })
 
 self.addEventListener("fetch", (event) => {
+  const CACHE = new URL(location).searchParams.get("app_version")
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
@@ -47,7 +52,7 @@ self.addEventListener("fetch", (event) => {
           return response
         }
 
-        caches.open(APP_VERSION).then((cache) => {
+        caches.open(CACHE).then((cache) => {
           cache.put(event.request, response)
         })
 
