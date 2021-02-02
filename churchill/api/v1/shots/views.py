@@ -42,7 +42,7 @@ class ShotsItemView(CreateAPIView, DestroyAPIView, ListAPIView):
     serializer_class = ShotItemSerializer
 
     def get_queryset(self):
-        return ShotItem.objects.filter(user=self.request.user)
+        return ShotItem.objects.filter(user=self.request.user).order_by("-created_at")
 
     def create(self, request, *args, **kwargs):
         try:
