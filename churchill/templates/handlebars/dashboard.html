@@ -49,7 +49,7 @@
       {{#each shotList }}
         <div class="shot-item">
           <div class="date">{{ formatDate this.created_at }} - </div>
-          <div class="shot">{{ this.volume }}{{ translate "ml of" }} {{ this.title }}</div>
+          <div class="shot">{{ this.shot.volume }}{{ translate "ml of" }} {{ this.shot.title }}</div>
         </div>
       {{/each}}
       </div>
