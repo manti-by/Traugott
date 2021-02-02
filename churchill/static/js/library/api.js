@@ -35,6 +35,25 @@ export class Api {
     })
   }
 
+  getShotList(on_success, on_error) {
+    fetch("/api/v1/shots/", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Token " + this.token
+      },
+      async: true,
+    }).then((response) => {
+      if (response.status === 200) {
+        response.json().then(data => {
+          on_success(data.results)
+        })
+        return
+      }
+      on_error()
+    })
+  }
+
   getCalendar(on_success, on_error) {
     fetch("/api/v1/shots/calendar/", {
       method: "get",

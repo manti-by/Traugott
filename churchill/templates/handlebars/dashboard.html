@@ -23,6 +23,7 @@
           </div>
         </div>
         <div id="calendar-container" class="block"></div>
+        <div id="shot-list-container" class="block"></div>
       {{ else }}
         {{ translate "You haven't added any shots yet" }}
       {{/if}}
@@ -37,6 +38,19 @@
       {{/each}}
       {{#each calendar }}
         <div class="date{{#if this.is_drunk}} drunk{{/if}}{{#if (gt this.date ../today)}} disabled{{/if}}"></div>
+      {{/each}}
+      </div>
+    </div>
+  </script>
+  <script id="t-shot-list" type="text/x-handlebars-template">
+    <h4>{{ translate "Latest shots" }}</h4>
+    <div class="headers">
+      <div class="table">
+      {{#each shotList }}
+        <div class="shot-item">
+          <div class="date">{{ formatDate this.created_at }} - </div>
+          <div class="shot">{{ this.volume }}{{ translate "ml of" }} {{ this.title }}</div>
+        </div>
       {{/each}}
       </div>
     </div>

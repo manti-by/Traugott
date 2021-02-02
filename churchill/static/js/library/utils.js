@@ -26,6 +26,11 @@ export function registerHandlebarsHelpers() {
     },
     or() {
         return Array.prototype.slice.call(arguments, 0, -1).some(Boolean)
+    },
+    "formatDate": (string) => {
+      let datetime = new Date(Date.parse(string)),
+        options = { weekday: "short", month: "short", day: "numeric" }
+      return new Intl.DateTimeFormat("en-US", options).format(datetime)
     }
   })
 }
