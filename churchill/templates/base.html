@@ -32,7 +32,8 @@
     {% block content %}{% endblock content %}
 
     <script type="text/javascript">
-      let MESSAGES = JSON.parse('{{ messages|messages_to_json|safe }}')
+      let APP_VERSION = "{% app_version %}",
+        MESSAGES = JSON.parse('{{ messages|messages_to_json|safe }}')
     </script>
     <script defer src="{% static 'js/external/handlebars.min.js' %}"></script>
     <script defer src="{% static 'js/app.js' %}" type="module"></script>
