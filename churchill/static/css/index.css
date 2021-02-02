@@ -51,7 +51,6 @@
 }
 
 #dashboard {
-  text-align: center;
 }
 
 #dashboard .row {
@@ -70,6 +69,10 @@
 
 #dashboard .block {
   padding: .5rem 0;
+}
+
+#stats-container {
+  text-align: center;
 }
 
 #calendar-container.block {
@@ -114,6 +117,24 @@
 
 #calendar-container .date.disabled:after {
   background-color: #cccccc;
+}
+
+#shot-list-container.block {
+  margin: .75rem 0;
+  padding: .75rem 1rem;
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: .5rem;
+}
+
+#shot-list-container .shot-item {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: .25rem;
+}
+
+#shot-list-container .shot-item .date {
+  margin-right: .5rem;
 }
 
 #add-shot-item-form .form-row label {

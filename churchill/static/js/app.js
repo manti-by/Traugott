@@ -18,6 +18,9 @@ class App {
     if (localStorage.getItem("calendar")) {
       this.calendar = localStorage.getItem("calendar")
     }
+    if (localStorage.getItem("shotList")) {
+      this.shotList = localStorage.getItem("shotList")
+    }
 
     this.container = document.getElementById("container")
 
@@ -67,6 +70,17 @@ class App {
       this.renderCalendar()
     }
 
+    if (!this.shotList) {
+      this.api.getShotList((data) => {
+        this.shotList = data
+        this.renderShotList()
+      }, () => {
+        console.error("Can't get shot list data")
+      })
+    } else {
+      this.renderShotList()
+    }
+
     document.getElementById("show-add-shot-item-form").onclick = event => {
       this.render("t-add-shot-item", { shots: this.profile.shots })
 
@@ -96,6 +110,12 @@ class App {
     document.getElementById("calendar-container").innerHTML = Handlebars.compile(
       document.getElementById("t-calendar").innerHTML,
     )({ calendar: this.calendar, today: today(), daysOfWeek: daysOfWeek })
+  }
+
+  renderShotList() {
+    document.getElementById("shot-list-container").innerHTML = Handlebars.compile(
+      document.getElementById("t-shot-list").innerHTML,
+    )({ shotList: this.shotList.slice(0, 7) })
   }
 
   renderLogin() {
