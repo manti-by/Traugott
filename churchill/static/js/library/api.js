@@ -36,7 +36,7 @@ export class Api {
   }
 
   getShotList(on_success, on_error) {
-    fetch("/api/v1/shots/", {
+    fetch("/api/v1/shots/item/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
