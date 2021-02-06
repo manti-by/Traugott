@@ -17,8 +17,11 @@
 }
 
 #navbar {
-  padding: .5rem 1rem;
-  background: #eeeeee;
+  padding: 1rem;
+  font-family: Times New Roman, serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 #container {
@@ -57,12 +60,6 @@
   margin-bottom: 1rem;
 }
 
-#dashboard .value {
-  margin-bottom: .25rem;
-  font-size: 1.75rem;
-  font-weight: 500;
-}
-
 #dashboard label {
   color: #636363;
 }
@@ -72,13 +69,40 @@
 }
 
 #stats-container {
+  margin-bottom: 1rem;
   text-align: center;
+}
+
+#dashboard .timedelta-last-shot {
+  margin-bottom: 2rem;
+}
+
+#dashboard .timedelta-last-shot .value {
+  margin-bottom: .25rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+#dashboard .skipped-volume-last-shot,
+#dashboard .money-saved-last-shot {
+  display: inline-block;
+  width: 45%;
+}
+
+#dashboard .skipped-volume-last-shot .value,
+#dashboard .money-saved-last-shot .value {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+#dashboard .skipped-volume-last-shot label,
+#dashboard .money-saved-last-shot label {
+  font-size: .85rem;
 }
 
 #calendar-container.block {
   padding: 1rem .5rem;
   background-color: rgba(0, 0, 0, 0.05);
-  border-radius: .5rem;
 }
 
 #calendar-container h4 {
@@ -86,7 +110,8 @@
   text-align: left;
 }
 
-#calendar-container .table {
+#calendar-container .table,
+#calendar-container .days {
   display: flex;
   flex-flow: row wrap;
 }
@@ -94,37 +119,43 @@
 #calendar-container .day,
 #calendar-container .date {
   width: calc(100% / 7);
+  height: 1rem;
   text-align: center;
+  color: #636363;
 }
 
 #calendar-container .day {
   margin-bottom: .5rem;
-  color: #636363;
 }
 
-#calendar-container .date:after {
+#calendar-container .date {
+  padding: .375rem 0;
+}
+
+#calendar-container .date.drunk {
+  position: relative;
+  color: #ffffff;
+}
+
+#calendar-container .date.drunk:before {
   content: " ";
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  border-radius: .5rem;
-  background-color: green;
+  position: absolute;
+  left: .59rem;
+  top: -.05rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: rgba(255, 0, 0, .7);
+  border-radius: 1rem;
+  z-index: -1;
 }
 
-#calendar-container .date.drunk:after {
-  background-color: red;
-}
-
-#calendar-container .date.disabled:after {
+#calendar-container .date.disabled {
   background-color: #cccccc;
 }
 
 #shot-list-container.block {
   margin: .75rem 0;
   padding: .75rem 1rem;
-  background-color: rgba(0, 0, 0, 0.0);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: .5rem;
 }
 
 #shot-list-container .shot-item {

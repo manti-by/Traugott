@@ -1,23 +1,8 @@
-self.addEventListener("activate", (event) => {
-  const CACHE = new URL(location).searchParams.get("app_version"),
-    cacheWhitelist = [CACHE]
+{% load core_tags %}
 
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName)
-          }
-        })
-      )
-    })
-  )
-})
+const CACHE = "{% app_version %}"
 
 self.addEventListener("install", (event) => {
-  const CACHE = new URL(location).searchParams.get("app_version")
-
   event.waitUntil(
     caches.open(CACHE).then((cache) => {
       cache.addAll([
@@ -38,9 +23,25 @@ self.addEventListener("install", (event) => {
   )
 })
 
-self.addEventListener("fetch", (event) => {
-  const CACHE = new URL(location).searchParams.get("app_version")
+self.addEventListener("activate", (event) => {
+  const cacheWhitelist = [CACHE]
 
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter(function (key) {
+          return !cacheWhitelist.includes(key)
+        }).map(function (key) {
+          return caches.delete(key)
+        })
+      );
+    }).then(() => {
+      self.clients.claim()
+    })
+  )
+})
+
+self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {

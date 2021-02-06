@@ -9,6 +9,7 @@ from churchill.apps.core.views import verify_email
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("worker.js", TemplateView.as_view(template_name="worker.js"), name="worker"),
     path("verify-email/", verify_email, name="verify_email"),
     path("api/", include("churchill.api.urls")),
     path("admin/", admin.site.urls),

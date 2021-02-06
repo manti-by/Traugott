@@ -31,6 +31,10 @@ export function registerHandlebarsHelpers() {
       let datetime = new Date(Date.parse(string)),
         options = { weekday: "short", month: "short", day: "numeric" }
       return new Intl.DateTimeFormat("en-US", options).format(datetime)
+    },
+    "getDay": (string) => {
+      let datetime = new Date(Date.parse(string))
+      return datetime.getDate()
     }
   })
 }
