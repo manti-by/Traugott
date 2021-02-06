@@ -10,16 +10,16 @@
           <div class="skipped-volume-last-shot row">
             <div class="value">
               {{ profile.stats.skipped_volume_last_shot }}
-              {{ translate "ml of alcohol" }}
+              {{ translate "ml" }}
             </div>
-            <label>{{ translate "You haven't drunk" }}</label>
+            <label>{{ translate "You've not drunk" }}</label>
           </div>
           <div class="money-saved-last-shot row">
             <div class="value">
               {{ profile.stats.money_saved_last_shot }}
               {{ profile.currency }}
             </div>
-            <label>{{ translate "Saved money" }}</label>
+            <label>{{ translate "Money saved" }}</label>
           </div>
         </div>
         <div id="calendar-container" class="block"></div>
@@ -31,13 +31,15 @@
   </script>
   <script id="t-calendar" type="text/x-handlebars-template">
     <h4>{{ translate "Monthly stats" }}</h4>
-    <div class="headers">
-      <div class="table">
+    <div class="table">
+      <div class="days">
       {{#each daysOfWeek }}
         <div class="day">{{ this }}</div>
       {{/each}}
       {{#each calendar }}
-        <div class="date{{#if this.is_drunk}} drunk{{/if}}{{#if (gt this.date ../today)}} disabled{{/if}}"></div>
+        <div class="date{{#if this.is_drunk}} drunk{{/if}}{{#if (gt this.date ../today)}} disabled{{/if}}">
+          {{ getDay this.date }}
+        </div>
       {{/each}}
       </div>
     </div>

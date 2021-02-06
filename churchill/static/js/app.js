@@ -5,6 +5,7 @@ import { today, registerHandlebarsHelpers, installServiceWorker } from "./librar
 import { CenteredWidget } from "./widgets/centered.js"
 import { LoaderWidget } from "./widgets/loader.js"
 
+import { daysOfWeek } from "./const.js"
 
 "user strict"
 
@@ -105,8 +106,6 @@ class App {
   }
 
   renderCalendar() {
-    let daysOfWeek = [_("Su"), _("Mo"), _("Tu"), _("We"), _("Th"), _("Fr"), _("Sa")]
-
     document.getElementById("calendar-container").innerHTML = Handlebars.compile(
       document.getElementById("t-calendar").innerHTML,
     )({ calendar: this.calendar, today: today(), daysOfWeek: daysOfWeek })
