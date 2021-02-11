@@ -46,28 +46,30 @@ def get_profile_stats(profile: Profile) -> Optional[dict]:
         }
 
 
-def get_drunk_and_all_days_count(
+def get_consumption_for_period(
     profile: Profile, from_date: datetime
-) -> Tuple[int, int]:
-    drunk_days = profile.user.shot_items.filter(created_at__gte=from_date).count()
-    all_days = int((timezone.now() - from_date).days)
-    return drunk_days, all_days
+) -> Tuple[float, float]:
+    drunk_days_consumption = 0
+    for shot_item in profile.user.shot_items.filter(created_at__gte=from_date):
+        drunk_days_consumption += shot_item.spirit_volume
+    all_days_consumption = (timezone.now() - from_date).days * profile.avg_consumption / 365
+    return drunk_days_consumption, all_days_consumption
 
 
-def get_last_shot_stats(profile: Profile, last_shot: ShotItem) -> Tuple[int, int]:
-    return get_drunk_and_all_days_count(profile, last_shot.created_at)
+def get_last_shot_stats(profile: Profile, last_shot: ShotItem) -> Tuple[float, float]:
+    return get_consumption_for_period(profile, last_shot.created_at)
 
 
-def get_weekly_stats(profile: Profile, *args) -> Tuple[int, int]:
-    return get_drunk_and_all_days_count(profile, timezone.now() - timedelta(days=7))
+def get_weekly_stats(profile: Profile, *args) -> Tuple[float, float]:
+    return get_consumption_for_period(profile, timezone.now() - timedelta(days=7))
 
 
-def get_monthly_stats(profile: Profile, *args) -> Tuple[int, int]:
-    return get_drunk_and_all_days_count(profile, timezone.now() - timedelta(days=30))
+def get_monthly_stats(profile: Profile, *args) -> Tuple[float, float]:
+    return get_consumption_for_period(profile, timezone.now() - timedelta(days=30))
 
 
-def get_all_time_stats(profile: Profile, *args) -> Tuple[int, int]:
-    return get_drunk_and_all_days_count(profile, profile.created_at)
+def get_all_time_stats(profile: Profile, *args) -> Tuple[float, float]:
+    return get_consumption_for_period(profile, profile.created_at)
 
 
 def calculate_consuming_stats(
@@ -82,7 +84,7 @@ def calculate_consuming_stats(
     func = switcher.get(profile.stats_calculation_strategy)
     if func is None:
         raise InvalidStatsCalculationStrategyException
-    drunk_days, all_days = func(profile, last_shot)
-    skipped_volume = Decimal((all_days - drunk_days) * profile.avg_consumption / 365)
+    drunk_days_consumption, all_days_consumption = func(profile, last_shot)
+    skipped_volume = Decimal(all_days_consumption - drunk_days_consumption)
     skipped_money = round(skipped_volume * profile.avg_price / 1000, 2)
     return int(skipped_volume), Decimal(skipped_money)
