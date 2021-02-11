@@ -112,9 +112,29 @@ class App {
   }
 
   renderShotList() {
+    let shotList = [], check = null
+
+    for (let i = 0; i < this.shotList.length; i++) {
+      if (i > 0) {
+        if (check === null) {
+          check = this.shotList[i - 1]
+          check["count"] = 1
+        }
+        if (
+          this.shotList[i]["shot"]["volume"] === check["shot"]["volume"] &&
+          this.shotList[i]["shot"]["title"] === check["shot"]["title"]
+        ) {
+          check["count"]++
+        } else {
+          shotList.push(check)
+          check = null
+        }
+      }
+    }
+
     document.getElementById("shot-list-container").innerHTML = Handlebars.compile(
       document.getElementById("t-shot-list").innerHTML,
-    )({ shotList: this.shotList.slice(0, 7) })
+    )({ shotList: shotList.slice(0, 7) })
   }
 
   renderLogin() {

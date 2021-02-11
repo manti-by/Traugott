@@ -22,6 +22,9 @@ static:
 messages:
 	python manage.py makemessages -a
 
+update-db:
+	scp amon-ra:/home/manti/www/churchill.manti.by/data/db.sqlite3 /srv/churchill/db.sqlite3
+
 check:
 	black --target-version py38 churchill/
 	isort churchill/*.py

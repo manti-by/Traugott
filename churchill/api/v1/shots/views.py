@@ -37,9 +37,14 @@ class ShotsView(CreateAPIView, DestroyAPIView, ListAPIView):
         return Response()
 
 
+class ShotsItemPagination(pagination.PageNumberPagination):
+    page_size = 100
+
+
 class ShotsItemView(CreateAPIView, DestroyAPIView, ListAPIView):
 
     serializer_class = ShotItemSerializer
+    pagination_class = ShotsItemPagination
 
     def get_queryset(self):
         return ShotItem.objects.filter(user=self.request.user).order_by("-created_at")

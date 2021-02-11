@@ -8,14 +8,14 @@
             <label>{{ translate "You don't drink" }}</label>
           </div>
           <div class="skipped-volume-last-shot row">
-            <div class="value">
+            <div class="value{{#if (lt profile.stats.skipped_volume_last_shot 0) }} overflow{{/if}}">
               {{ profile.stats.skipped_volume_last_shot }}
               {{ translate "ml" }}
             </div>
             <label>{{ translate "You've not drunk" }}</label>
           </div>
           <div class="money-saved-last-shot row">
-            <div class="value">
+            <div class="value{{#if (lt profile.stats.money_saved_last_shot 0) }} overflow{{/if}}">
               {{ profile.stats.money_saved_last_shot }}
               {{ profile.currency }}
             </div>
@@ -52,6 +52,9 @@
         <div class="shot-item">
           <div class="date">{{ formatDate this.created_at }} - </div>
           <div class="shot">{{ this.shot.volume }}{{ translate "ml of" }} {{ this.shot.title }}</div>
+          {{#if (gt this.count 1) }}
+            <div class="count">&nbsp;&times;&nbsp;{{ this.count }}</div>
+          {{/if}}
         </div>
       {{/each}}
       </div>
