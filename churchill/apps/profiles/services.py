@@ -52,7 +52,9 @@ def get_consumption_for_period(
     drunk_days_consumption = 0
     for shot_item in profile.user.shot_items.filter(created_at__gte=from_date):
         drunk_days_consumption += shot_item.spirit_volume
-    all_days_consumption = (timezone.now() - from_date).days * profile.avg_consumption / 365
+    all_days_consumption = (
+        (timezone.now() - from_date).days * profile.avg_consumption / 365
+    )
     return drunk_days_consumption, all_days_consumption
 
 
