@@ -206,7 +206,6 @@ class App {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  installServiceWorker()
   registerHandlebarsHelpers()
 
   let api = new Api(),
