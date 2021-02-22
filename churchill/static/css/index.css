@@ -42,6 +42,17 @@
   z-index: 100;
 }
 
+#show-settings {
+  position: fixed;
+  top: -.25rem;
+  left: 0rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 2rem;
+  color: #000000;
+  z-index: 100;
+}
+
 #register-form input,
 #login-form input {
   width: calc(100% - 1.5rem);
@@ -145,7 +156,7 @@
 #calendar-container .date.drunk:before {
   content: " ";
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
   bottom: 0;
   right: 0;
