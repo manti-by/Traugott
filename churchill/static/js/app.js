@@ -28,6 +28,13 @@ class App {
     this.loader = new LoaderWidget()
     this.centered = new CenteredWidget()
 
+    this.route()
+    this.loader.hide()
+
+    this.checkMessages()
+  }
+
+  route() {
     if (this.api.token) {
       if (this.profile) {
         this.renderDashboard()
@@ -37,9 +44,6 @@ class App {
     } else {
       this.renderLogin()
     }
-    this.loader.hide()
-
-    this.checkMessages()
   }
 
   update() {
@@ -103,6 +107,34 @@ class App {
         this.renderDashboard()
       }
     }
+
+    this.showSettingsButton()
+
+    document.getElementById("show-settings").onclick = event => {
+      this.render("t-settings", { profile: this.profile })
+
+      document.getElementById("update-settings-form").onsubmit = event => {
+        event.preventDefault()
+
+        let formData = new FormData(event.currentTarget), data = {}
+        formData.forEach((value, key) => data[key] = value)
+
+        this.api.updateSettings(data, () => {
+          this.update()
+        }, () => {
+          alert(_("Can't update your settings, please try again later"))
+        })
+      }
+
+      document.getElementById("close-update-settings-form").onclick = event => {
+        event.preventDefault()
+        this.renderDashboard()
+      }
+    }
+  }
+
+  showSettingsButton() {
+    document.getElementById("show-settings").classList.remove("hidden")
   }
 
   renderCalendar() {
@@ -213,6 +245,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   document.getElementById("show-dashboard").onclick = event => {
     event.preventDefault()
-    app.renderDashboard()
+    app.route()
   }
 })

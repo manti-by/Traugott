@@ -91,6 +91,24 @@ export class Api {
     })
   }
 
+  updateSettings(data, on_success, on_error) {
+    fetch("/api/v1/profile/", {
+      method: "patch",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Token " + this.token
+      },
+      body: JSON.stringify(data),
+      async: true,
+    }).then((response) => {
+      if (response.status === 200) {
+        on_success()
+        return
+      }
+      on_error()
+    })
+  }
+
   login(data, on_success, on_error) {
     fetch("/api/v1/user/login/", {
       method: "POST",

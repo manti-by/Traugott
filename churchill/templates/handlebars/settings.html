@@ -1,25 +1,44 @@
 {% verbatim %}
   <script id="t-settings" type="text/x-handlebars-template">
-    <div id="settings">
+    <form id="update-settings-form" class="centered">
       <h3>{{ translate "Your settings" }}</h3>
       <div class="settings">
         <div class="form-row">
+          <label for="currency">{{ translate "Currency" }}</label>
           <input name="currency" id="currency" type="text" value="{{ profile.currency }}"
                  placeholder="{{ translate 'Currency' }}">
+          <div class="help-text">{{ translate "Calculation currency." }}</div>
         </div>
         <div class="form-row">
+          <label for="language">{{ translate "Language" }}</label>
           <input name="language" id="language" type="text" value="{{ profile.language }}"
                  placeholder="{{ translate 'Language' }}">
+          <div class="help-text">{{ translate "Interface language." }}</div>
         </div>
         <div class="form-row">
+          <label for="avg_consumption">{{ translate "Average consumption" }}</label>
           <input name="avg_consumption" id="avg_consumption" type="text" value="{{ profile.avg_consumption }}"
                  placeholder="{{ translate 'Average consumption' }}">
+          <div class="help-text">
+            {{ translate "Average consumption in milliliters per year." }}<br>
+            {{ translate "Default value is recommended by WHO." }}
+          </div>
         </div>
         <div class="form-row">
+          <label for="avg_price">{{ translate "Average price" }}</label>
           <input name="avg_price" id="avg_price" type="text" value="{{ profile.avg_price }}"
                  placeholder="{{ translate 'Average price' }}">
+          <div class="help-text">
+            {{ translate "Average price per 1000 milliliters of spirit." }}
+          </div>
+        </div>
+        <div class="form-row">
+          <button id="update-settings" type="submit">{{ translate "Update" }}</button>
+          <span class="help-text">
+            <a id="close-update-settings-form" href="#close">{{ translate "Cancel" }}</a>
+          </span>
         </div>
       </div>
-    </div>
+    </form>
   </script>
 {% endverbatim %}

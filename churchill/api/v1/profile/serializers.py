@@ -21,8 +21,8 @@ class ProfileSerializer(serializers.Serializer):
     currency = SlugRelatedField(queryset=Currency.objects.all(), slug_field="iso3")
     avg_consumption = serializers.IntegerField()
     avg_price = serializers.DecimalField(max_digits=5, decimal_places=2)
-    stats = serializers.SerializerMethodField()
-    shots = serializers.SerializerMethodField()
+    stats = serializers.SerializerMethodField(read_only=True)
+    shots = serializers.SerializerMethodField(read_only=True)
 
     def get_stats(self, obj):
         profile_stats = get_profile_stats(obj)
