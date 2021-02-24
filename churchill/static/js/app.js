@@ -144,7 +144,8 @@ class App {
   }
 
   renderShotList() {
-    let shotList = [], check = null
+    let shotList = [], check = null,
+      curr_created_at, check_created_at
 
     for (let i = 0; i < this.shotList.length; i++) {
       if (i > 0) {
@@ -152,9 +153,13 @@ class App {
           check = this.shotList[i - 1]
           check["count"] = 1
         }
+
+        curr_created_at = new Date(Date.parse(this.shotList[i]["created_at"]))
+        check_created_at = new Date(Date.parse(check["created_at"]))
         if (
-          this.shotList[i]["shot"]["volume"] === check["shot"]["volume"] &&
-          this.shotList[i]["shot"]["title"] === check["shot"]["title"]
+          curr_created_at.getDate() === check_created_at.getDate() &&
+          curr_created_at.getMonth() === check_created_at.getMonth() &&
+          this.shotList[i]["shot"]["id"] === check["shot"]["id"]
         ) {
           check["count"]++
         } else {

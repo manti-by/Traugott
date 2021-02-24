@@ -12,14 +12,26 @@
               {{ profile.stats.skipped_volume_last_shot }}
               {{ translate "ml" }}
             </div>
-            <label>{{ translate "You've not drunk" }}</label>
+            <label>
+              {{#if (gte profile.stats.skipped_volume_last_shot 0) }}
+                {{ translate "You've not drunk" }}
+              {{ else }}
+                {{ translate "Had too much alcohol" }}
+              {{/if}}
+            </label>
           </div>
           <div class="money-saved-last-shot row">
             <div class="value{{#if (lt profile.stats.money_saved_last_shot 0) }} overflow{{/if}}">
               {{ profile.stats.money_saved_last_shot }}
               {{ profile.currency }}
             </div>
-            <label>{{ translate "Money saved" }}</label>
+            <label>
+              {{#if (gte profile.stats.money_saved_last_shot 0) }}
+                {{ translate "Money saved" }}
+              {{ else }}
+                {{ translate "Spent more than others" }}
+              {{/if}}
+            </label>
           </div>
         </div>
         <div id="calendar-container" class="block"></div>
