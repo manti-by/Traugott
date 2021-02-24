@@ -45,11 +45,13 @@
 #show-settings {
   position: fixed;
   top: -.25rem;
-  left: 0rem;
+  left: .375rem;
   width: 2rem;
   height: 2rem;
   font-size: 2rem;
   color: #000000;
+  background: none;
+  border: none;
   z-index: 100;
 }
 
@@ -60,11 +62,13 @@
 
 #register-form button[type=submit],
 #login-form button[type=submit],
-#add-shot-item-form button[type=submit] {
+#add-shot-item-form button[type=submit],
+#update-settings-form button[type=submit] {
   margin-right: .25rem;
 }
 
-#dashboard {
+#add-shot-item-form label {
+  display: inline-block;
 }
 
 #dashboard .row {
