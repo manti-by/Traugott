@@ -11,9 +11,13 @@ logger = logging.getLogger()
 
 def get_default_currency_id() -> int:
     currency, _ = Currency.objects.get_or_create(
-        name="United States dollar", iso3="USD"
+        name="United States Dollar", iso3="USD"
     )
     return currency.id
+
+
+def get_currency_options() -> dict:
+    return {c.iso3: c.name for c in Currency.objects.all()}
 
 
 def create_currency_pair(currency, node):

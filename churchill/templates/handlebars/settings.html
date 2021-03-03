@@ -5,29 +5,38 @@
       <div class="settings">
         <div class="form-row">
           <label for="currency">{{ translate "Currency" }}</label>
-          <input name="currency" id="currency" type="text" value="{{ profile.currency }}"
-                 placeholder="{{ translate 'Currency' }}">
+          <select name="currency" id="currency">
+            {{#each options.currencies}}
+              <option value="{{ @key }}" {{#if (eq @key profile.currency)}}selected{{/if}}>{{ this }}</option>
+            {{/each}}
+          </select>
           <div class="help-text">{{ translate "Stats calculation currency" }}</div>
         </div>
         <div class="form-row">
           <label for="language">{{ translate "Language" }}</label>
-          <input name="language" id="language" type="text" value="{{ profile.language }}"
-                 placeholder="{{ translate 'Language' }}">
+          <select name="language" id="language">
+            {{#each options.languages}}
+              <option value="{{ @key }}" {{#if (eq @key profile.language)}}selected{{/if}}>{{ this }}</option>
+            {{/each}}
+          </select>
           <div class="help-text">{{ translate "Interface language" }}</div>
         </div>
         <div class="form-row">
           <label for="avg_consumption">{{ translate "Average consumption" }}</label>
-          <input name="avg_consumption" id="avg_consumption" type="text" value="{{ profile.avg_consumption }}"
-                 placeholder="{{ translate 'Average consumption' }}">
+          <input name="avg_consumption" id="avg_consumption" type="number" value="{{ profile.avg_consumption }}"
+                 placeholder="{{ translate 'Average consumption' }}" min="100" step="100">
           <div class="help-text">
             {{ translate "Average consumption of spirit in milliliters per year" }}<br>
-            {{ translate "Default value is recommended by WHO" }}
+            {{ translate "Default value is got from" }}
+            <a href="https://www.who.int/substance_abuse/publications/alcohol/en/">
+              {{ translate "WHO status report 2018" }}
+            </a>
           </div>
         </div>
         <div class="form-row">
           <label for="avg_price">{{ translate "Average price" }}</label>
-          <input name="avg_price" id="avg_price" type="text" value="{{ profile.avg_price }}"
-                 placeholder="{{ translate 'Average price' }}">
+          <input name="avg_price" id="avg_price" type="number" value="{{ profile.avg_price }}"
+                 placeholder="{{ translate 'Average price' }}" min="1" step="1">
           <div class="help-text">
             {{ translate "Average price per 1000 milliliters of spirit" }}
           </div>
