@@ -111,7 +111,7 @@ class App {
     this.showSettingsButton()
 
     document.getElementById("show-settings").onclick = event => {
-      this.render("t-settings", { profile: this.profile })
+      this.render("t-settings", { profile: this.profile, options: OPTIONS })
 
       document.getElementById("update-settings-form").onsubmit = event => {
         event.preventDefault()
@@ -171,7 +171,7 @@ class App {
 
     document.getElementById("shot-list-container").innerHTML = Handlebars.compile(
       document.getElementById("t-shot-list").innerHTML,
-    )({ shotList: shotList.slice(0, 7) })
+    )({ shotList: shotList.slice(0, 12) })
   }
 
   renderLogin() {

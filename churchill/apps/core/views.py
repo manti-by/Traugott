@@ -1,9 +1,17 @@
+from django.conf import settings
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_http_methods
 
+from churchill.apps.currencies.services import get_currency_options
 from churchill.apps.users.services import verify_user
+
+
+@require_http_methods(["GET"])
+def index_view(request):
+    options = {"currencies": get_currency_options(), "languages": dict(settings.LANGUAGES)}
+    return render(request, "index.html", {"options": options})
 
 
 @require_http_methods(["GET"])

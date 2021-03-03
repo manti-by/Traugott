@@ -52,6 +52,14 @@ input, select, textarea, button {
   border-radius: .25rem;
 }
 
+input, textarea {
+  min-width: 200px;
+}
+
+select {
+  min-width: 222px;
+}
+
 button[type=submit] {
   color: #ffffff;
   border-color: #064d69;

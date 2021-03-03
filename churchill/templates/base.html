@@ -40,7 +40,8 @@
   <body>
     {% block content %}{% endblock content %}
     <script type="text/javascript">
-      let MESSAGES = JSON.parse('{{ messages|messages_to_json|safe }}')
+      let MESSAGES = JSON.parse('{{ messages|jsonify_messages }}'),
+        OPTIONS = JSON.parse('{{ options|jsonify }}')
     </script>
     <script defer src="{% static 'js/external/handlebars.min.js' %}"></script>
     <script defer src="{% static 'js/app.js' %}" type="module"></script>
