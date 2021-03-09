@@ -17,6 +17,11 @@
                 {{ translate "You've not drunk" }}
               {{ else }}
                 {{ translate "Had too much alcohol" }}
+                {{#if (gt profile.stats.days_to_balance 0) }}
+                  <span class="days-to-the-balance">
+                    {{ profile.stats.days_to_balance }} {{ translate "days to the balance" }}
+                  </span>
+                {{/if}}
               {{/if}}
             </label>
           </div>
@@ -30,6 +35,11 @@
                 {{ translate "Money saved" }}
               {{ else }}
                 {{ translate "Spent more than others" }}
+                {{#if profile.stats.popular_drink }}
+                  <span class="popular-drink">
+                    {{ profile.stats.popular_drink }}
+                  </span>
+                {{/if}}
               {{/if}}
             </label>
           </div>

@@ -12,6 +12,8 @@ class StatsSerializer(serializers.Serializer):
     timedelta_last_shot = serializers.DurationField()
     timedelta_last_shot_repr = serializers.CharField()
     skipped_volume_last_shot = serializers.IntegerField()
+    days_to_balance = serializers.IntegerField()
+    popular_drink = serializers.CharField(required=False)
     money_saved_last_shot = serializers.DecimalField(max_digits=5, decimal_places=2)
 
 

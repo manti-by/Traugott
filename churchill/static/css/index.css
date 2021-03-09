@@ -195,3 +195,9 @@
   margin-left: .25rem;
   font-size: 1.25rem;
 }
+
+.days-to-the-balance,
+.popular-drink {
+  display: block;
+  padding: .25rem;
+}
