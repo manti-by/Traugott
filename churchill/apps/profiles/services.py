@@ -40,7 +40,12 @@ def get_days_to_balance_count(profile: Profile, volume: int) -> int:
 def get_popular_drink_string(profile: Profile, money: Decimal) -> str:
     if money >= 0:
         return ""
-    shot = Shot.objects.for_user(profile.user).annotate(items_count=Count("items")).order_by("-items_count").first()
+    shot = (
+        Shot.objects.for_user(profile.user)
+        .annotate(items_count=Count("items"))
+        .order_by("-items_count")
+        .first()
+    )
     return f"{round(-1 * money / shot.cost, 1)} shots of {shot.title}"
 
 

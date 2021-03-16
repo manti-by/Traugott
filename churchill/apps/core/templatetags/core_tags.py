@@ -12,6 +12,7 @@ register = template.Library()
 def app_version():
     return VERSION
 
+
 @register.filter(is_safe=True)
 def jsonify(data):
     return mark_safe(json.dumps(data))
@@ -19,4 +20,6 @@ def jsonify(data):
 
 @register.filter(is_safe=True)
 def jsonify_messages(messages):
-    return mark_safe(json.dumps([{"level": m.level_tag, "message": m.message} for m in messages]))
+    return mark_safe(
+        json.dumps([{"level": m.level_tag, "message": m.message} for m in messages])
+    )
