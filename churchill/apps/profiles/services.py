@@ -33,8 +33,15 @@ def update_profile(
     return profile
 
 
-def get_days_to_balance_count(profile: Profile, volume: int) -> int:
-    return int(volume / (profile.avg_consumption / 365) * -1) if volume < 0 else 0
+def get_days_to_balance_count(profile: Profile) -> int:
+    days = 30
+    while True:
+        from_date = timezone.now() - timedelta(days=days)
+        drunk_days_consumption, all_days_consumption = get_consumption_for_period(profile, from_date)
+        skipped_volume = Decimal(all_days_consumption - drunk_days_consumption)
+        if skipped_volume >= 0:
+            return 30 - days
+        days -= 1
 
 
 def get_popular_drink_string(profile: Profile, money: Decimal) -> str:
@@ -54,7 +61,7 @@ def get_profile_stats(profile: Profile) -> Optional[dict]:
     if last_shot:
         volume, money = calculate_consuming_stats(profile, last_shot)
         timedelta_last_shot = timezone.now() - last_shot.created_at
-        days_to_balance = get_days_to_balance_count(profile, volume)
+        days_to_balance = get_days_to_balance_count(profile)
         popular_drink_string = get_popular_drink_string(profile, money)
         return {
             "last_shot_at": last_shot.created_at,
