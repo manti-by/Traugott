@@ -37,7 +37,9 @@ def get_days_to_balance_count(profile: Profile) -> int:
     days = 30
     while True:
         from_date = timezone.now() - timedelta(days=days)
-        drunk_days_consumption, all_days_consumption = get_consumption_for_period(profile, from_date)
+        drunk_days_consumption, all_days_consumption = get_consumption_for_period(
+            profile, from_date
+        )
         skipped_volume = Decimal(all_days_consumption - drunk_days_consumption)
         if skipped_volume >= 0:
             return 30 - days
