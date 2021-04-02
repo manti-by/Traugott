@@ -28,7 +28,7 @@ def delete_shot_item(user: User, id_list: list):
     ShotItem.objects.filter(id__in=id_list, user=user).delete()
 
 
-def get_shots_calendar(user: User) -> list:
+def get_shots_calendar(user: User, weeks_offset: int = 0) -> list:
     result = []
     shot_item_dates = list(
         map(
@@ -38,7 +38,9 @@ def get_shots_calendar(user: User) -> list:
             .distinct(),
         )
     )
-    for date in get_dates_for_weeks_count(user, settings.CALENDAR_WEEK_SIZE):
+    for date in get_dates_for_weeks_count(
+        user, settings.CALENDAR_WEEK_SIZE, weeks_offset
+    ):
         result.append(
             {"date": date.date(), "is_drunk": bool(date.date() in shot_item_dates)}
         )

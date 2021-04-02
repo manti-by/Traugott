@@ -79,4 +79,5 @@ class ShotsItemCalendarView(ListAPIView):
     pagination_class = CalendarPagination
 
     def get_queryset(self):
-        return get_shots_calendar(self.request.user)
+        weeks_offset = int(self.request.query_params.get("weeks_offset", 0))
+        return get_shots_calendar(self.request.user, weeks_offset)
