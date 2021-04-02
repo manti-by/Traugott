@@ -2,6 +2,7 @@ import { _ } from "./translate.js"
 
 "use strict"
 
+
 export function installServiceWorker() {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./worker.js", {scope: "./"}).then((reg) => {

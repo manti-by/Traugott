@@ -54,8 +54,8 @@ export class Api {
     })
   }
 
-  getCalendar(on_success, on_error) {
-    fetch("/api/v1/shots/calendar/", {
+  getCalendar(weeks_offset, on_success, on_error) {
+    fetch("/api/v1/shots/calendar/?weeks_offset=" + weeks_offset, {
       method: "get",
       headers: {
         "Content-Type": "application/json",

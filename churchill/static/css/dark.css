@@ -29,6 +29,14 @@
   }
 
   #calendar-container .date.disabled {
-      color: #333333;
+    color: #333333;
+  }
+
+  #calendar-container .control.up {
+    background-image: url(/static/img/icons/up-white.svg);
+  }
+
+  #calendar-container .control.down {
+    background-image: url(/static/img/icons/down-white.svg);
   }
 }

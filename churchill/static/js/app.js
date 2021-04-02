@@ -5,7 +5,7 @@ import { today, registerHandlebarsHelpers, installServiceWorker } from "./librar
 import { CenteredWidget } from "./widgets/centered.js"
 import { LoaderWidget } from "./widgets/loader.js"
 
-import { daysOfWeek } from "./const.js"
+import { daysOfWeek, monthNames } from "./const.js"
 
 "user strict"
 
@@ -32,6 +32,8 @@ class App {
     this.loader.hide()
 
     this.checkMessages()
+
+    this.calendar_offset = 0
   }
 
   route() {
@@ -65,7 +67,7 @@ class App {
     this.render("t-dashboard", { profile: this.profile })
 
     if (!this.calendar) {
-      this.api.getCalendar((data) => {
+      this.api.getCalendar(this.calendar_offset, (data) => {
         this.calendar = data
         this.renderCalendar()
       }, () => {
@@ -138,9 +140,58 @@ class App {
   }
 
   renderCalendar() {
+    let month_name
+
+    let first_date = new Date(Date.parse(
+        this.calendar[0]["date"]
+      )),
+      last_date = new Date(Date.parse(
+        this.calendar[this.calendar.length - 1]["date"]
+      ))
+
+    first_date = monthNames[first_date.getMonth()]
+    last_date = monthNames[last_date.getMonth()]
+
+    month_name = first_date
+    if (first_date != last_date) {
+      month_name = first_date + " - " + last_date
+    }
+
     document.getElementById("calendar-container").innerHTML = Handlebars.compile(
       document.getElementById("t-calendar").innerHTML,
-    )({ calendar: this.calendar, today: today(), daysOfWeek: daysOfWeek })
+    )({
+      calendar: this.calendar,
+      today: today(),
+      title: month_name,
+      daysOfWeek: daysOfWeek,
+      showNextMonth: this.calendar_offset > 0
+    })
+
+    document.getElementById("previous-month").onclick = event => {
+      event.preventDefault()
+
+      this.calendar_offset = this.calendar_offset + 4
+      this.api.getCalendar(this.calendar_offset, (data) => {
+        this.calendar = data
+        this.renderCalendar()
+      }, () => {
+        console.error("Can't get calendar data")
+      })
+    }
+
+    if (document.getElementById("next-month")) {
+      document.getElementById("next-month").onclick = event => {
+        event.preventDefault()
+
+        this.calendar_offset = this.calendar_offset - 4
+        this.api.getCalendar(this.calendar_offset, (data) => {
+          this.calendar = data
+          this.renderCalendar()
+        }, () => {
+          console.error("Can't get calendar data")
+        })
+      }
+    }
   }
 
   renderShotList() {

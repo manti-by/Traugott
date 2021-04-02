@@ -52,7 +52,11 @@ input, select, textarea, button {
   border-radius: .25rem;
 }
 
-input, textarea {
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=email],
+textarea {
   min-width: 200px;
 }
 
