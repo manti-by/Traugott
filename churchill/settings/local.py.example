@@ -1,0 +1,46 @@
+from .base import *
+
+DEBUG = True
+
+TEMPLATE_DEBUG = False
+
+COMPRESS_ENABLED = False
+
+SECRET_KEY = ""
+
+ALLOWED_HOSTS = ["*"]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+STATIC_ROOT = "/home/manti/www/churchill/static/"
+
+MEDIA_ROOT = "/home/manti/www/churchill/media/"
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "/home/manti/www/churchill/db.sqlite3",
+    }
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {"level": "DEBUG", "class": "logging.StreamHandler"},
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": True,
+            "formatter": "verbose",
+        },
+        "django": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": True,
+            "formatter": "simple",
+        },
+    },
+}

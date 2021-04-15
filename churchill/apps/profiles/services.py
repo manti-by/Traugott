@@ -55,6 +55,8 @@ def get_popular_drink_string(profile: Profile, money: Decimal) -> str:
         .order_by("-items_count")
         .first()
     )
+    if shot is None:
+        return ""
     return f"{round(-1 * money / shot.cost, 1)} shots of {shot.title}"
 
 

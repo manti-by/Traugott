@@ -1,23 +1,18 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Add directories
-RUN mkdir -p /srv/churchill/src/ && \
-    mkdir -p /srv/churchill/data/ && \
-    mkdir -p /srv/churchill/static/ && \
-    mkdir -p /srv/churchill/media/ && \
-    mkdir -p /var/log/churchill/
-
-# Install any needed packages specified in requirements
+# Install python packages specified in requirements
 COPY requirements/base.txt /tmp/base.txt
 COPY requirements/prod.txt /tmp/prod.txt
 RUN pip install --trusted-host pypi.org --no-cache-dir --upgrade pip && \
     pip install --trusted-host pypi.org --no-cache-dir -r /tmp/prod.txt
 
-# Run gunicorn
-EXPOSE 8000
-WORKDIR /srv/churchill/src/
+# Add base user
+RUN useradd -m -s /bin/bash -d /home/manti manti && \
+    mkdir -p /srv/churchill/src/ /var/lib/churchill/static/ /var/lib/churchill/media/ /var/lib/churchill/data/ /var/log/churchill/ && \
+    chown -R manti:manti /srv/churchill/src/ /var/lib/churchill/ /var/log/churchill/
 
-# Run
-ENV DJANGO_SETTINGS_MODULE=churchill.settings.prod
-CMD exec gunicorn churchill.wsgi:application --bind 0.0.0.0:8053 --workers 2
+# Select user, set working directory and run server
+USER manti
+WORKDIR /srv/churchill/src/
+CMD python manage.py runserver

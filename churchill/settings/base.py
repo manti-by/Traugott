@@ -91,7 +91,7 @@ SITE_ID = 1
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "/srv/churchill/db.sqlite3",
+        "NAME": "/var/lib/churchill/data/db.sqlite3",
     }
 }
 
@@ -131,7 +131,7 @@ EMAIL_HOST_USER = get_env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = get_env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = get_bool("EMAIL_USE_TLS", False)
 
-DEFAULT_EMAIL_FROM = "noreply@churchill.by"
+DEFAULT_EMAIL_FROM = "churchill@manti.by"
 
 
 # Internationalization
@@ -170,10 +170,10 @@ STATICFILES_FINDERS = [
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
-STATIC_ROOT = "/srv/churchill/static/"
+STATIC_ROOT = "/var/lib/churchill/static/"
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = "/srv/churchill/media/"
+MEDIA_ROOT = "/var/lib/churchill/media/"
 MEDIA_URL = "/media/"
 
 
