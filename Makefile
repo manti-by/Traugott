@@ -11,7 +11,7 @@ bash:
 	docker exec -it churchill-django bash
 
 update-db:
-	scp amon-ra:/home/manti/www/churchill.manti.by/data/db.sqlite3 /var/lib/churchill/data/db.sqlite3
+	scp amon-ra:/home/manti/www/churchill.manti.by/data/db.sqlite3 /home/manti/www/churchill/db.sqlite3
 
 check:
 	flake8 churchill/

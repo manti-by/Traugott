@@ -22,6 +22,7 @@ class ProfileSerializer(serializers.Serializer):
     language = serializers.CharField(max_length=5)
     currency = SlugRelatedField(queryset=Currency.objects.all(), slug_field="iso3")
     avg_consumption = serializers.IntegerField()
+    next_day_offset = serializers.IntegerField()
     avg_price = serializers.DecimalField(max_digits=5, decimal_places=2)
     stats = serializers.SerializerMethodField(read_only=True)
     shots = serializers.SerializerMethodField(read_only=True)

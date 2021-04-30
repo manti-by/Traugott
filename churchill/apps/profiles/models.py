@@ -38,6 +38,11 @@ class Profile(BaseModel):
         blank=True,
         default=get_default_currency_id,
     )
+    next_day_offset = models.IntegerField(
+        blank=True,
+        default=settings.NEXT_DAY_OFFSET,
+        help_text=_("Offset in hours for the next day"),
+    )
 
     avg_consumption = models.IntegerField(
         blank=True,

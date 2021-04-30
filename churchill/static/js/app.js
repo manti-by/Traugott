@@ -51,7 +51,7 @@ class App {
   update() {
     this.api.getProfile((data) => {
       this.profile = data
-      this.renderDashboard()
+      this.renderDashboard(true)
     }, () => {
       this.renderLogin()
     })
@@ -63,10 +63,10 @@ class App {
     )(data)
   }
 
-  renderDashboard() {
+  renderDashboard(force = false) {
     this.render("t-dashboard", { profile: this.profile })
 
-    if (!this.calendar) {
+    if (!this.calendar || force) {
       this.api.getCalendar(this.calendar_offset, (data) => {
         this.calendar = data
         this.renderCalendar()
@@ -77,7 +77,7 @@ class App {
       this.renderCalendar()
     }
 
-    if (!this.shotList) {
+    if (!this.shotList || force) {
       this.api.getShotList((data) => {
         this.shotList = data
         this.renderShotList()
@@ -195,34 +195,47 @@ class App {
   }
 
   renderShotList() {
-    let shotList = [], check = null,
-      curr_created_at, check_created_at
+    let shotList = [],
+      previousItem = null,
+      currentItem = null,
+      previousCreatedAt = null,
+      currentCreatedAt = null
 
-    for (let i = 0; i < this.shotList.length; i++) {
-      if (i > 0) {
-        if (check === null) {
-          check = this.shotList[i - 1]
-          check["count"] = 1
-        }
+    for (let i = this.shotList.length - 1; i >= 0; i--) {
+      currentItem = this.shotList[i]
+      currentCreatedAt = new Date(Date.parse(currentItem["created_at"]))
+      currentCreatedAt.setHours(currentCreatedAt.getHours() - this.profile.next_day_offset)
 
-        curr_created_at = new Date(Date.parse(this.shotList[i]["created_at"]))
-        check_created_at = new Date(Date.parse(check["created_at"]))
+      if (i < this.shotList.length - 1 && previousItem === null) {
+        previousItem = this.shotList[i + 1]
+        previousCreatedAt = new Date(Date.parse(previousItem["created_at"]))
+        previousCreatedAt.setHours(previousCreatedAt.getHours() - this.profile.next_day_offset)
+
+        previousItem["count"] = 1
+        previousItem["created_at"] = previousCreatedAt
+      }
+
+      if (previousItem !== null) {
         if (
-          curr_created_at.getDate() === check_created_at.getDate() &&
-          curr_created_at.getMonth() === check_created_at.getMonth() &&
-          this.shotList[i]["shot"]["id"] === check["shot"]["id"]
+          previousCreatedAt.getDate() === currentCreatedAt.getDate() &&
+          previousCreatedAt.getMonth() === currentCreatedAt.getMonth() &&
+          previousItem["shot"]["id"] === currentItem["shot"]["id"]
         ) {
-          check["count"]++
+          previousItem["count"]++
         } else {
-          shotList.push(check)
-          check = null
+          shotList.push(previousItem)
+          previousItem = null
         }
+      }
+
+      if (i == 0) {
+        shotList.push(previousItem)
       }
     }
 
     document.getElementById("shot-list-container").innerHTML = Handlebars.compile(
       document.getElementById("t-shot-list").innerHTML,
-    )({ shotList: shotList.slice(0, 12) })
+    )({ shotList: shotList.reverse().slice(0, 12) })
   }
 
   renderLogin() {
