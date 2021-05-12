@@ -8,5 +8,7 @@ churchill/settings/prod.py
 static/
 media/
 
+package-lock.json
+
 *.pyc
 *~

@@ -22,6 +22,7 @@ class ProfileDictFactory(factory.Factory):
         min_value=5,
         max_value=25,
     )
+    next_day_offset = factory.Faker("pyint", min_value=2, max_value=8)
 
     @factory.post_generation
     def generate_currency(self, create, extracted, *args, **kwargs):

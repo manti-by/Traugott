@@ -1,0 +1,18 @@
+{
+  "name": "churchill",
+  "version": "0.4.1",
+  "description": "Application for calculation of alcohol consumption",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manti-by/churchill.git"
+  },
+  "author": "Alexander Chaika",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/manti-by/churchill/issues"
+  },
+  "homepage": "https://github.com/manti-by/churchill#readme",
+  "dependencies": {
+    "handlebars": "4.7.6"
+  }
+}

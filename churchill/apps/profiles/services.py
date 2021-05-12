@@ -16,6 +16,7 @@ def update_profile(
     currency: Optional[str] = None,
     avg_consumption: Optional[int] = None,
     avg_price: Optional[Decimal] = None,
+    next_day_offset: Optional[int] = None,
 ) -> Profile:
     if language is not None:
         profile.language = language
@@ -28,6 +29,9 @@ def update_profile(
 
     if avg_price is not None:
         profile.avg_price = avg_price
+
+    if next_day_offset is not None:
+        profile.next_day_offset = next_day_offset
 
     profile.save()
     return profile
