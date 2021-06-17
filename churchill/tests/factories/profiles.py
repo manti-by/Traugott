@@ -13,6 +13,7 @@ class ProfileDictFactory(factory.Factory):
     email = factory.Faker("email")
     language = factory.fuzzy.FuzzyChoice(settings.LANGUAGES, lambda x: x[0])
     currency = factory.Faker("currency_code")
+    timezone = factory.Faker("timezone")
     avg_consumption = factory.Faker("pyint", min_value=3000, max_value=10000)
     avg_price = factory.Faker(
         "pydecimal",

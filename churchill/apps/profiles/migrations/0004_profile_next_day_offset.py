@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('profiles', '0003_auto_20210316_1402'),
+        ("profiles", "0003_auto_20210316_1402"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='next_day_offset',
-            field=models.IntegerField(blank=True, default=8, help_text='Offset in hours for the next day'),
+            model_name="profile",
+            name="next_day_offset",
+            field=models.IntegerField(
+                blank=True, default=8, help_text="Offset in hours for the next day"
+            ),
         ),
     ]

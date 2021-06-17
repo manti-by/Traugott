@@ -14,6 +14,7 @@ def update_profile(
     profile: Profile,
     language: Optional[str] = None,
     currency: Optional[str] = None,
+    timezone: Optional[str] = None,
     avg_consumption: Optional[int] = None,
     avg_price: Optional[Decimal] = None,
     next_day_offset: Optional[int] = None,
@@ -23,6 +24,9 @@ def update_profile(
 
     if currency is not None:
         profile.currency = currency
+
+    if timezone is not None:
+        profile.timezone = timezone
 
     if avg_consumption is not None:
         profile.avg_consumption = avg_consumption
@@ -68,11 +72,13 @@ def get_profile_stats(profile: Profile) -> Optional[dict]:
     last_shot = ShotItem.objects.filter(user=profile.user).order_by("created_at").last()
     if last_shot:
         volume, money = calculate_consuming_stats(profile, last_shot)
-        timedelta_last_shot = timezone.now() - last_shot.created_at
+        timedelta_last_shot = timezone.now() - last_shot.created_at.replace(
+            tzinfo=profile.tzinfo
+        )
         days_to_balance = get_days_to_balance_count(profile)
         popular_drink_string = get_popular_drink_string(profile, money)
         return {
-            "last_shot_at": last_shot.created_at,
+            "last_shot_at": last_shot.created_at.replace(tzinfo=profile.tzinfo),
             "timedelta_last_shot": timedelta_last_shot,
             "timedelta_last_shot_repr": str(timedelta_last_shot).split(".")[0],
             "skipped_volume_last_shot": volume,
@@ -86,6 +92,7 @@ def get_consumption_for_period(
     profile: Profile, from_date: datetime
 ) -> Tuple[float, float]:
     drunk_days_consumption = 0
+    from_date = from_date.replace(tzinfo=profile.tzinfo)
     for shot_item in profile.user.shot_items.filter(created_at__gte=from_date):
         drunk_days_consumption += shot_item.spirit_volume
     all_days_consumption = (

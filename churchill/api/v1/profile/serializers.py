@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
 
 from churchill.api.v1.shots.serializers import ShotSerializer
+from churchill.apps.core.services import get_timezone_choices
 from churchill.apps.currencies.models import Currency
 from churchill.apps.profiles.services import get_profile_stats
 from churchill.apps.shots.models import Shot
@@ -21,6 +22,7 @@ class ProfileSerializer(serializers.Serializer):
     image = serializers.ImageField(read_only=True)
     language = serializers.CharField(max_length=5)
     currency = SlugRelatedField(queryset=Currency.objects.all(), slug_field="iso3")
+    timezone = serializers.ChoiceField(choices=get_timezone_choices())
     avg_consumption = serializers.IntegerField()
     next_day_offset = serializers.IntegerField(required=False)
     avg_price = serializers.DecimalField(max_digits=5, decimal_places=2)

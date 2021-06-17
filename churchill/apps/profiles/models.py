@@ -1,9 +1,15 @@
+from datetime import datetime
+
+import pytz
+
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from churchill.apps.core.models import BaseModel
+from churchill.apps.core.services import get_timezone_choices
 from churchill.apps.currencies.services import get_default_currency_id
 
 
@@ -62,6 +68,18 @@ class Profile(BaseModel):
         default=StatsCalculationStrategy.MONTHLY,
     )
     verification_token = models.CharField(max_length=16, null=True, blank=True)
+    timezone = models.CharField(
+        max_length=100,
+        choices=get_timezone_choices(),
+        default=settings.TIME_ZONE,
+    )
 
     def __str__(self):
         return self.user.email
+
+    @property
+    def tzinfo(self) -> datetime.tzinfo:
+        return pytz.timezone(self.timezone)
+
+    def now(self):
+        return timezone.now().replace(tzinfo=self.tzinfo)

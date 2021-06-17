@@ -4,22 +4,26 @@
       <h3>{{ translate "Your settings" }}</h3>
       <div class="settings">
         <div class="form-row">
-          <label for="currency">{{ translate "Currency" }}</label>
+          <label for="currency">{{ translate "Stats calculation currency" }}</label>
           <select name="currency" id="currency">
             {{#each options.currencies}}
               <option value="{{ @key }}" {{#if (eq @key profile.currency)}}selected{{/if}}>{{ this }}</option>
             {{/each}}
           </select>
-          <div class="help-text">{{ translate "Stats calculation currency" }}</div>
         </div>
         <div class="form-row">
-          <label for="language">{{ translate "Language" }}</label>
+          <label for="language">{{ translate "Interface Language" }}</label>
           <select name="language" id="language">
             {{#each options.languages}}
               <option value="{{ @key }}" {{#if (eq @key profile.language)}}selected{{/if}}>{{ this }}</option>
             {{/each}}
           </select>
-          <div class="help-text">{{ translate "Interface language" }}</div>
+        </div>
+        <div class="form-row">
+          <label for="timezone">{{ translate "Timezone" }}</label>
+          <input name="timezone" id="timezone" type="text" value="{{ profile.timezone }}"
+                 placeholder="{{ translate 'Your timezone' }}">
+          <div class="help-text">{{ translate "Will be used for daily stats calculation" }}</div>
         </div>
         <div class="form-row">
           <label for="avg_consumption">{{ translate "Average consumption" }}</label>

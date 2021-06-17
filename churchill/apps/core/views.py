@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_http_methods
 
+from churchill.apps.core.services import get_timezone_list
 from churchill.apps.currencies.services import get_currency_options
 from churchill.apps.users.services import verify_user
 
@@ -13,6 +14,7 @@ def index_view(request):
     options = {
         "currencies": get_currency_options(),
         "languages": dict(settings.LANGUAGES),
+        "timezones": get_timezone_list(),
     }
     return render(request, "index.html", {"options": options})
 

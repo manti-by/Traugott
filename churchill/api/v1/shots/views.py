@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.conf import settings
-from django.utils.timezone import now
+from django.utils import timezone
 from rest_framework import status, pagination
 from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
 from rest_framework.response import Response
@@ -50,7 +50,7 @@ class ShotsItemView(CreateAPIView, DestroyAPIView, ListAPIView):
     pagination_class = ShotsItemPagination
 
     def get_queryset(self):
-        default_offset = now() - timedelta(weeks=4)
+        default_offset = timezone.now() - timedelta(weeks=4)
         return ShotItem.objects.filter(
             user=self.request.user, created_at__gte=default_offset
         ).order_by("-created_at")
